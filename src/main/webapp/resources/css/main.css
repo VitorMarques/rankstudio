@@ -1,0 +1,11 @@
+.form-control {
+	margin-bottom: 5px;
+}
+
+.align-center {
+	text-align: center;
+}
+
+.no-padding {
+	padding: 0 !important;
+}

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <%@include file="/WEB-INF/views/app/menu.jsp"%>
+                <%@include file="/WEB-INF/views/painel/menu.jsp"%>
 
                 <div class="col-md-9 col-md-offset-2" style="margin-top: 100px;">
 

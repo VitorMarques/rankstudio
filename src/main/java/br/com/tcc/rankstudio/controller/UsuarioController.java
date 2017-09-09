@@ -79,7 +79,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/realizar-registro", method = RequestMethod.POST)
 	public ModelAndView registrar(Usuario usuario, HttpServletRequest request) {
 
-		ModelAndView modelAndView = new ModelAndView("app/painel");
+		ModelAndView modelAndView = new ModelAndView("painel/painel");
 
 		//validar dados do formulario - email ja existe?
 		try {
@@ -110,7 +110,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/app", method = RequestMethod.GET)
 	public ModelAndView painelDeControle(HttpServletRequest request) {
 
-		ModelAndView modelAndView = new ModelAndView("app/painel");
+		ModelAndView modelAndView = new ModelAndView("painel/painel");
 
 		Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
 

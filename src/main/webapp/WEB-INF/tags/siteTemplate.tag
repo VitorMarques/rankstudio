@@ -1,16 +1,13 @@
 <%@include file="/WEB-INF/views/includes/header.jsp" %>
 
+<body class="cyan" <%--background="<c:url value="/resources/images/login-bg.jpg"/>"--%>>
+
 <div id="app">
-
-    <%@include file="/WEB-INF/views/includes/navigation.jsp" %>
-
-    <div class="container-fluid" style="padding-left: 0px">
-        <div class="row">
-            <div class="col-md-12">
+    <div id="login-page" class="row">
+        <div class="col s12 z-depth-4 card-panel">
 
                 <jsp:doBody />
 
-            </div>
         </div>
     </div>
 </div>

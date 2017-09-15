@@ -28,7 +28,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView formLogin(Usuario usuario) {
-		return new ModelAndView("index");
+		return new ModelAndView("login");
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -57,8 +57,8 @@ public class UsuarioController {
 		} catch (Exception ex) {
 
 			modelAndView.addObject("usuario", usuario);
-			modelAndView.addObject("erro", ex.getMessage());
-			modelAndView.setViewName("index");
+			modelAndView.addObject("mensagem", ex.getMessage());
+			modelAndView.setViewName("login");
 			
 		}
 		
@@ -73,7 +73,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/registrar", method = RequestMethod.GET)
 	public ModelAndView formRegistrar(Usuario usuario) {
-		return new ModelAndView("usuario/form-registrar");
+		return new ModelAndView("cadastro");
 	}
 	
 	@RequestMapping(value = "/realizar-registro", method = RequestMethod.POST)
@@ -93,13 +93,13 @@ public class UsuarioController {
 				usuarioService.registrar(usuario);
 
 				request.getSession().setAttribute("authUser", usuarioService.buscaPorEmail(usuario.getEmail()));
-				modelAndView.addObject("sucesso", environment.getProperty("cadastro.realizado.sucesso"));
+				modelAndView.addObject("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 			}
 
 		} catch (Exception ex) {
 
 			modelAndView.addObject("usuario", usuario);
-			modelAndView.addObject("erro", ex.getMessage());
+			modelAndView.addObject("mensagem", ex.getMessage());
 			modelAndView.setViewName("usuario/form-registrar");
 
 		}

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class UsuarioDao extends AbstractDao implements IDao {
 
 	public Usuario findByEmail(String email) {
-		return (Usuario) super.getSession().createSQLQuery(" SELECT * FROM TB_USUARIO WHERE EMAIL = :email").addEntity(Usuario.class).setParameter("email", email).uniqueResult();
+		return (Usuario) super.getSession().createSQLQuery(" SELECT * FROM tb_usuario WHERE EMAIL = :email").addEntity(Usuario.class).setParameter("email", email).uniqueResult();
 	}
 	
 }

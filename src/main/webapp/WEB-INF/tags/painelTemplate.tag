@@ -14,7 +14,7 @@
 
                 <div class="col-md-9 col-md-offset-2" style="margin-top: 100px;">
 
-                    <%@include file="/WEB-INF/views/includes/flash-messages.jsp"%>
+                    <%@include file="/WEB-INF/views/includes/toast.jsp"%>
 
                     <div class="panel panel-default">
                         <div class="panel-heading">

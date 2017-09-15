@@ -3,7 +3,7 @@
         <div class="navbar-header">
             <!-- Branding Image -->
             <a class="navbar-brand" href="<c:url value="/app" />" title="Sistema de Cadastro de Clientes BVRIO">
-                <strong>BVRIO - Cadastro de Clientes </strong>
+                <strong>RankStudio</strong>
             </a>
         </div>
     </div>

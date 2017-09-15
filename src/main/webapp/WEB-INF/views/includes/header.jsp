@@ -7,12 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>BVRIO - Cadastro de Clientes</title>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<title>RankStudio</title>
 
 	<link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>">
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>">
-	<link rel="stylesheet" href="<c:url value="/resources/css/painel-menu.css"/>">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<c:url value="/resources/css/materialize.min.css"/>">
+	<link rel="stylesheet" href="<c:url value="/resources/css/style.min.css"/>">
+	<link rel="stylesheet" href="<c:url value="/resources/css/page-center.css"/>">
 
 </head>
-<body>

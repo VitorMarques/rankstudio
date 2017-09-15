@@ -1,4 +1,3 @@
 target
 .idea
 rankstudio.iml
-src/main/resources/datasource.properties

@@ -1,5 +1,6 @@
 package br.com.tcc.rankstudio.service;
 
+import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +32,16 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Override
 	public Usuario buscaPorId(Long id) {
-		return (Usuario) usuarioDao.findById(Usuario.class, id);
+		return (Usuario) usuarioDao.findById(id);
 	}
 
 	@Override
 	public Usuario buscaPorEmail(String email) {
 		return (Usuario) usuarioDao.findByEmail(email);
+	}
+
+	public Perfil buscaPerfil(Usuario usuario) {
+		return usuarioDao.getPerfil(usuario);
 	}
 		
 }

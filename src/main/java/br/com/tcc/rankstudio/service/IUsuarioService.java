@@ -1,5 +1,6 @@
 package br.com.tcc.rankstudio.service;
 
+import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
 
 /**
@@ -15,5 +16,6 @@ public interface IUsuarioService {
 	void registrar(Usuario usuario);
 	Usuario buscaPorId(Long id);
 	Usuario buscaPorEmail(String email);
+	Perfil buscaPerfil(Usuario usuario);
 	
 }

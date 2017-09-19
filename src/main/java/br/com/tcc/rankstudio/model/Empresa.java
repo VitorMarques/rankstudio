@@ -3,13 +3,16 @@
  */
 package br.com.tcc.rankstudio.model;
 
-import java.io.Serializable;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name="tb_usuario")
-public class Usuario implements Serializable {
+@Table(name="tb_empresa")
+public class Empresa implements Serializable {
 
 	private static final long serialVersionUID = -8073046649171797385L;
 	
@@ -18,13 +21,10 @@ public class Usuario implements Serializable {
 	
 	@Column(nullable=false, length=40)
 	private String nome;
+
+	@Column(nullable=false, length=25)
+	private String cnpj;
 	
-	@Column(nullable=false, unique=true, length=40)
-	private String email;
-
-	@Column(nullable=false)
-	private String senha;
-
 	@Column(nullable = false)
 	private String endereco;
 
@@ -35,11 +35,11 @@ public class Usuario implements Serializable {
 	private String cidade;
 
 	@OneToOne
-	@JoinColumn(name = "perfil_id")
-	private Perfil perfil;
+	private Usuario representante;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "representante")
-	private Empresa empresa;
+	@OneToMany(mappedBy = "empresa")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Estudio> estudios;
 
 	public Long getId() {
 		return id;
@@ -50,29 +50,17 @@ public class Usuario implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+	public void setNome(String nome) { this.nome = nome; }
 	public String getEndereco() { return endereco; }
 	public void setEndereco(String endereco) { this.endereco = endereco; }
 	public String getBairro() { return bairro; }
 	public void setBairro(String bairro) { this.bairro = bairro; }
 	public String getCidade() { return cidade; }
 	public void setCidade(String cidade) { this.cidade = cidade; }
-	public Perfil getPerfil() { return perfil; }
-	public void setPerfil(Perfil perfil) { this.perfil = perfil; }
-	public Empresa getEmpresa() { return empresa; }
-	public void setEmpresa(Empresa empresa) { this.empresa = empresa; }
+	public Usuario getRepresentante() { return representante; }
+	public void setRepresentante(Usuario representante) { this.representante = representante; }
+	public String getCnpj() { return cnpj; }
+	public void setCnpj(String cnpj) { this.cnpj = cnpj; }
+	public List<Estudio> getEstudios() { return estudios; }
+	public void setEstudios(List<Estudio> estudios) { this.estudios = estudios; }
 }

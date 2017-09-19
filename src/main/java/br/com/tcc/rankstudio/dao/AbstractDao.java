@@ -28,14 +28,6 @@ public abstract class AbstractDao {
 	public void delete(Object entity) {
 		getSession().delete(entity);
 	}
-	
-	public Object findById(Object entity, Long id) {
-		return getSession().load(entity.getClass(), id);
-	}
-
-/*	public List<?> listaTodos(Object entity) {
-		return getSession().createCriteria(entity.getClass()).list();
-	}*/
 
 	public List<?> listaTodos(Object entity) {
 		return getSession().createCriteria(entity.getClass()).list();

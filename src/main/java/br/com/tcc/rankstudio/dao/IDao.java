@@ -8,5 +8,6 @@ package br.com.tcc.rankstudio.dao;
  */
 public interface IDao {
 
-	public void persist(Object entity);
+	void persist(Object entity);
+	void delete(Object entity);
 }

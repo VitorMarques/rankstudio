@@ -38,7 +38,11 @@ public class EstudioController {
 
 		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("authUser");
 		Empresa empresa = usuarioService.buscaPorId(usuarioLogado.getId()).getEmpresa();
-		List<Estudio> estudios = empresa.getEstudios();
+		List<Estudio> estudios = null;
+
+		if(empresa!=null) {
+			estudios = empresa.getEstudios();
+		}
 
 		ModelAndView modelAndView = new ModelAndView("estudio/lista");
 		modelAndView.addObject("empresa", empresa);

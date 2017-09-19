@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,7 +39,7 @@ public class EstudioController {
 
 		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("authUser");
 		Empresa empresa = usuarioService.buscaPorId(usuarioLogado.getId()).getEmpresa();
-		List<Estudio> estudios = null;
+		List<Estudio> estudios = new ArrayList<Estudio>();
 
 		if(empresa!=null) {
 			estudios = empresa.getEstudios();

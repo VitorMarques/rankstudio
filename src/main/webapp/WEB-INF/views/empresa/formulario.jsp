@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Formul&aacute;rio de cadastro de Empresa" pagina="empresa">
+<customTags:painelTemplate title="Formul&aacute;rio de cadastro de Empresa" pagina="empresa" tamanhoColunas="s6 offset-s3">
 
     <c:url var="adicionaEmpresaUrl" value="/empresa/"/>
 

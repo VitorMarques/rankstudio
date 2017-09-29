@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Dados do Usu&aacute;rio" pagina="usuario">
+<customTags:painelTemplate title="Dados do Usu&aacute;rio" pagina="usuario" tamanhoColunas="s12">
 
 	<c:if test="${usuario!=null}">
 

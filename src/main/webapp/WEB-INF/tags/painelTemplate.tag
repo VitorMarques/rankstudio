@@ -20,6 +20,7 @@
 </head>
 <%@attribute name="title" required="true" %>
 <%@attribute name="pagina" required="true" %>
+<%@attribute name="tamanhoColunas" required="true" %>
 
 <body onload="definePaginaAtiva('${pagina}')">
 
@@ -29,7 +30,7 @@
 
     <div class="container white card-panel" style="margin-top: 104px">
         <div class="row">
-            <div class="col s12" style="padding: 25px">
+            <div class="col ${tamanhoColunas}" style="padding: 25px">
                 <blockquote>${title}</blockquote>
                 <jsp:doBody />
             </div>
@@ -42,6 +43,11 @@
 <script type="text/javascript" src="<c:url value="/resources/js/lib/materialize.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery.maskedinput.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
 
 <%@include file="/WEB-INF/views/includes/toast.jsp"%>
 

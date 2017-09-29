@@ -8,6 +8,8 @@ $(document).ready(function() {
     $('#cpf').mask('999.999.999-99');
     $('#telefone').mask('(99)9999-9999?9');
     $('#dataAquisicao').mask('99/99/9999');
+    $('#dataInicio').mask('99/99/9999');
+    $('#dataFim').mask('99/99/9999');
     $('#numeroSerie').mask('9999999');
 });
 

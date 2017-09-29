@@ -44,6 +44,14 @@ public class Estudio implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Equipamento> equipamentos;
 
+	@OneToMany(mappedBy = "estudio")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Agenda> agendas;
+
+	@OneToOne
+	@JoinColumn(name = "condicao_comercial_id")
+	private CondicaoComercial condicaoComercial;
+
 	public Long getId() {
 		return id;
 	}
@@ -114,5 +122,21 @@ public class Estudio implements Serializable {
 
 	public void setEquipamentos(List<Equipamento> equipamentos) {
 		this.equipamentos = equipamentos;
+	}
+
+	public List<Agenda> getAgendas() {
+		return agendas;
+	}
+
+	public void setAgendas(List<Agenda> agendas) {
+		this.agendas = agendas;
+	}
+
+	public CondicaoComercial getCondicaoComercial() {
+		return condicaoComercial;
+	}
+
+	public void setCondicaoComercial(CondicaoComercial condicaoComercial) {
+		this.condicaoComercial = condicaoComercial;
 	}
 }

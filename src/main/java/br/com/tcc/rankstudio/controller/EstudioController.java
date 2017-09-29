@@ -1,8 +1,6 @@
 package br.com.tcc.rankstudio.controller;
 
-import br.com.tcc.rankstudio.model.Empresa;
-import br.com.tcc.rankstudio.model.Estudio;
-import br.com.tcc.rankstudio.model.Usuario;
+import br.com.tcc.rankstudio.model.*;
 import br.com.tcc.rankstudio.service.IEmpresaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import br.com.tcc.rankstudio.service.IUsuarioService;
@@ -35,7 +33,7 @@ public class EstudioController {
 	public EstudioController() {}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public ModelAndView detalhes(HttpServletRequest request) {
+	public ModelAndView info(HttpServletRequest request) {
 
 		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("authUser");
 		Empresa empresa = usuarioService.buscaPorId(usuarioLogado.getId()).getEmpresa();
@@ -59,6 +57,24 @@ public class EstudioController {
 
 		return modelAndView;
 	}
+
+	@RequestMapping(value = "/{id}/detalhes", method = RequestMethod.GET)
+	public ModelAndView detalhes(@PathVariable Long id,  HttpServletRequest request) {
+
+		Estudio estudio = estudioService.buscaPorId(id);
+		List<Equipamento> equipamentos = estudio.getEquipamentos();
+		List<Agenda> agendas = estudio.getAgendas();
+		CondicaoComercial condicaoComercial = estudio.getCondicaoComercial();
+
+		ModelAndView modelAndView = new ModelAndView("estudio/detalhes");
+		modelAndView.addObject("estudio", estudio);
+		modelAndView.addObject("equipamentos", equipamentos);
+		modelAndView.addObject("agendas", agendas);
+		modelAndView.addObject("condicaoComercial", condicaoComercial);
+
+		return modelAndView;
+	}
+
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.GET)
 	public ModelAndView novo(Estudio estudio, HttpServletRequest request) {
@@ -96,7 +112,7 @@ public class EstudioController {
 
 		}
 
-		return detalhes(request);
+		return info(request);
 	}
 
 	@RequestMapping(value = "/{id}/edita", method = RequestMethod.GET)

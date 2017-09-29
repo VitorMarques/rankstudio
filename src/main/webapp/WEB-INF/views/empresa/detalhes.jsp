@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Informa&ccedil;&otilde;es da Empresa" pagina="empresa">
+<customTags:painelTemplate title="Informa&ccedil;&otilde;es da Empresa" pagina="empresa" tamanhoColunas="s12">
 
 	<c:if test="${empresa==null}">
 

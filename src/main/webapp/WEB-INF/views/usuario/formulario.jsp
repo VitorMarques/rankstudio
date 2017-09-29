@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Atualizar informa&ccedil;&atilde;oes do Usu&aacute;rio" pagina="usuario">
+<customTags:painelTemplate title="Atualizar informa&ccedil;&atilde;oes do Usu&aacute;rio" pagina="usuario" tamanhoColunas="s6 offset-s3">
 
     <c:url var="editaUsuarioUrl" value="/usuario/atualiza"/>
 

@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Informa&ccedil;&otilde;es dos Est&uacute;dios Cadastrados" pagina="estudio">
+<customTags:painelTemplate title="Informa&ccedil;&otilde;es dos Est&uacute;dios Cadastrados" pagina="estudio" tamanhoColunas="s12">
 
 	<c:if test="${empresa==null}">
 		<c:url var="urlFormularioEmpresa" value="/empresa/nova"/>
@@ -19,7 +19,7 @@
 	<c:if test="${empresa!=null}">
 
 		<c:forEach var="estudio" items="${estudios}">
-			<div class="col s6 m6 l6" style="margin-bottom: 10px !important;">
+			<div class="col s3 m3 l3" style="margin-bottom: 10px !important;">
 				<div class="card-panel hoverable">
 
 					<ul>
@@ -34,11 +34,14 @@
 					<div id="actions">
 
 						<c:url var="urlEditarEstudio" value="/estudio/${estudio.id}/edita"/>
+						<c:url var="urlDetalhesEstudio" value="/estudio/${estudio.id}/detalhes"/>
 						<c:url var="urlListaEquipamentos" value="/estudio/${estudio.id}/equipamento/info"/>
+						<c:url var="urlListaAgendas" value="/estudio/${estudio.id}/agenda/info"/>
+						<c:url var="urlCondicaoComercial" value="/estudio/${estudio.id}/condicao-comercial/info"/>
 
 						<ul>
 							<li class="inline">
-								<a href="#" class="btn btn-floating btn-medium blue tooltipped hoverable" data-position="top" data-tooltip="Ver Detalhes" data-delay="50">
+								<a href="${urlDetalhesEstudio}" class="btn btn-floating btn-medium blue tooltipped hoverable" data-position="top" data-tooltip="Ver Detalhes" data-delay="50">
 									<i class="material-icons large">search</i>
 								</a>
 							</li>
@@ -48,17 +51,17 @@
 								</a>
 							</li>
 							<li class="inline">
-								<a href="${urlListaEquipamentos}" class="btn btn-floating btn-medium green tooltipped hoverable" data-position="top" data-tooltip="Gerenciar Equipamentos" data-delay="50">
+								<a href="${urlListaEquipamentos}" class="btn btn-floating btn-medium green tooltipped hoverable" data-position="top" data-tooltip="Equipamentos" data-delay="50">
 									<i class="material-icons large">build</i>
 								</a>
 							</li>
 							<li class="inline">
-								<a href="#" class="btn btn-floating btn-medium red darken-1 tooltipped hoverable" data-position="top" data-tooltip="Incluir Condi&ccedil;&otilde;es Comerciais" data-delay="50">
+								<a href="${urlCondicaoComercial}" class="btn btn-floating btn-medium red darken-1 tooltipped hoverable" data-position="top" data-tooltip="Condi&ccedil;&otilde;es Comerciais" data-delay="50">
 									<i class="material-icons large">description</i>
 								</a>
 							</li>
 							<li class="inline">
-								<a href="#" class="btn btn-floating btn-medium pink lighten-2 tooltipped hoverable" data-position="top" data-tooltip="Cadastrar Agenda" data-delay="50">
+								<a href="${urlListaAgendas}" class="btn btn-floating btn-medium pink lighten-2 tooltipped hoverable" data-position="top" data-tooltip="Agenda" data-delay="50">
 									<i class="material-icons large">event</i>
 								</a>
 							</li>

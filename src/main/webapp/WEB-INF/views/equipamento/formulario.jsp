@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Formul&aacute;rio de cadastro de Equipamentos" pagina="estudio">
+<customTags:painelTemplate title="Formul&aacute;rio de cadastro de Equipamentos" pagina="estudio" tamanhoColunas="s6 offset-s3">
 
     <c:url var="adicionaEquipamentoUrl" value="/estudio/${estudio.id}/equipamento/"/>
 
@@ -23,18 +23,24 @@
         <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">build</i>
-                <form:input path="tipoEquipamento" required="required"/>
+                <%--<form:input path="tipoEquipamento" required="required"/>--%>
+                <form:select path="tipoEquipamento" required="required">
+                    <form:option value="" label="--- Selecionar ---"/>
+                    <c:forEach items="${tiposEquipamento}" var="tipoEquipamento">
+                        <form:option value="${tipoEquipamento.descricao}" label="${tipoEquipamento.descricao}"/>
+                    </c:forEach>
+                </form:select>
                 <label for="tipoEquipamento" class="center-align">Tipo de Equipamento</label>
             </div>
         </div>
 
-        <div class="row margin">
+<%--        <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">looks_one</i>
                 <form:input path="numeroSerie" required="required" max="7"/>
                 <label for="numeroSerie" class="center-align">N&uacute;mero de Serie</label>
             </div>
-        </div>
+        </div>--%>
 
         <div class="row margin">
             <div class="input-field col s12">
@@ -60,5 +66,6 @@
         </c:if>
 
     </form:form>
+
 
 </customTags:painelTemplate>

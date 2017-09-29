@@ -1,13 +1,11 @@
 package br.com.tcc.rankstudio.controller;
 
-import br.com.tcc.rankstudio.model.Empresa;
+import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.Equipamento;
 import br.com.tcc.rankstudio.model.Estudio;
-import br.com.tcc.rankstudio.model.Usuario;
-import br.com.tcc.rankstudio.service.IEmpresaService;
+import br.com.tcc.rankstudio.service.IAgendaService;
 import br.com.tcc.rankstudio.service.IEquipamentoService;
 import br.com.tcc.rankstudio.service.IEstudioService;
-import br.com.tcc.rankstudio.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -21,30 +19,30 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/estudio/{estudioId}/equipamento")
-public class EquipamentoController {
+@RequestMapping(value = "/estudio/{estudioId}/agenda")
+public class AgendaController {
 
 	@Autowired
 	private IEstudioService estudioService;
 	@Autowired
-	private IEquipamentoService equipamentoService;
+	private IAgendaService agendaService;
 
 	@Autowired
 	private Environment environment;
 
-	public EquipamentoController() {}
+	public AgendaController() {}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView detalhes(@PathVariable Long estudioId, HttpServletRequest request) {
 
 		Estudio estudio = estudioService.buscaPorId(estudioId);
-		List<Equipamento> equipamentos = estudio.getEquipamentos();
+		List<Agenda> agendas = estudio.getAgendas();
 
-		ModelAndView modelAndView = new ModelAndView("equipamento/lista");
+		ModelAndView modelAndView = new ModelAndView("agenda/lista");
 		modelAndView.addObject("estudio", estudio);
 
-		if(!equipamentos.isEmpty() && equipamentos.size() > 0) {
-			modelAndView.addObject("equipamentos", equipamentos);
+		if(!agendas.isEmpty() && agendas.size() > 0) {
+			modelAndView.addObject("agendas", agendas);
 		}
 
 		if(request.getSession().getAttribute("mensagem")!=null) {
@@ -56,36 +54,35 @@ public class EquipamentoController {
 	}
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.GET)
-	public ModelAndView novo(@PathVariable Long estudioId, Equipamento equipamento) {
+	public ModelAndView novo(@PathVariable Long estudioId, Agenda agenda) {
 
 		boolean edita = false;
 
-		if(null!=equipamento.getId()) {
+		if(null!=agenda.getId()) {
 			edita = true;
 		}
 
-		ModelAndView modelAndView = new ModelAndView("equipamento/formulario");
+		ModelAndView modelAndView = new ModelAndView("agenda/formulario");
 		modelAndView.addObject("estudio", estudioService.buscaPorId(estudioId));
-		modelAndView.addObject("equipamento", equipamento);
-		modelAndView.addObject("tiposEquipamento", equipamentoService.listaTiposEquipamento());
+		modelAndView.addObject("agenda", agenda);
 		modelAndView.addObject("edita", edita);
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ModelAndView adiciona(@PathVariable Long estudioId, Equipamento equipamento, HttpServletRequest request) {
+	public ModelAndView adiciona(@PathVariable Long estudioId, Agenda agenda, HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
-			equipamentoService.save(equipamento);
+			agendaService.save(agenda);
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
 
 			modelAndView.addObject("mensagem", ex.getMessage());
-			modelAndView.addObject("equipamento", equipamento);
-			modelAndView.setViewName("equipamento/formulario");
+			modelAndView.addObject("agenda", agenda);
+			modelAndView.setViewName("agenda/formulario");
 
 		}
 
@@ -94,27 +91,12 @@ public class EquipamentoController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView edita(@PathVariable Long estudioId, @PathVariable Long id) {
-		return novo(estudioId, equipamentoService.buscaPorId(id));
+		return novo(estudioId, agendaService.buscaPorId(id));
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView atualiza(@PathVariable Long estudioId, Equipamento equipamento, HttpServletRequest request) {
-		return adiciona(estudioId, equipamento, request);
-	}
-
-	@RequestMapping(value = "/{id}/excluir", method = RequestMethod.GET)
-	public ModelAndView excluir(@PathVariable Long estudioId, @PathVariable Long id, HttpServletRequest request) {
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		try {
-			equipamentoService.delete(equipamentoService.buscaPorId(id));
-			request.getSession().setAttribute("mensagem", environment.getProperty("Equipamento removido com sucesso!"));
-		} catch (Exception ex) {
-			request.getSession().setAttribute("mensagem", environment.getProperty("Erro ao tentar excluir o equipamento.\n" +ex.getMessage()+"\n  Favor tentar novamente!"));
-		}
-
-		return detalhes(estudioId,request);
+	public ModelAndView atualiza(@PathVariable Long estudioId, Agenda agenda, HttpServletRequest request) {
+		return adiciona(estudioId, agenda, request);
 	}
 
 }

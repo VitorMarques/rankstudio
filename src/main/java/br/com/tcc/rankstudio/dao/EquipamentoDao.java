@@ -2,7 +2,10 @@ package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Equipamento;
 import br.com.tcc.rankstudio.model.Estudio;
+import br.com.tcc.rankstudio.model.TipoEquipamento;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Classe responsavel por realizar as operacoes na base de dados para o objeto de modelo SMS
@@ -21,5 +24,13 @@ public class EquipamentoDao extends AbstractDao implements IDao {
                 .addEntity(Equipamento.class)
                 .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    public List<TipoEquipamento> listaTiposEquipamento() {
+        String query = "SELECT * FROM tb_tipo_equipamento";
+        return (List<TipoEquipamento>) super.getSession()
+                .createSQLQuery(query)
+                .addEntity(TipoEquipamento.class)
+                .list();
     }
 }

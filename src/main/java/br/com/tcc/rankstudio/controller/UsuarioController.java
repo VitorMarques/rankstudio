@@ -149,6 +149,7 @@ public class UsuarioController {
 
 				request.getSession().setAttribute("authUser", usuarioService.buscaPorEmail(usuario.getEmail()));
 				modelAndView.addObject("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
+				modelAndView.addObject("estudios", estudioService.listaTodos());
 			}
 
 		} catch (Exception ex) {

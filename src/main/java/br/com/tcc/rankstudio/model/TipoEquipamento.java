@@ -6,8 +6,8 @@ package br.com.tcc.rankstudio.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/*@Entity
-@Table(name="tb_tipo_equipamento")*/
+@Entity
+@Table(name="tb_tipo_equipamento")
 public class TipoEquipamento implements Serializable {
 
 	private static final long serialVersionUID = -8073046649173497385L;

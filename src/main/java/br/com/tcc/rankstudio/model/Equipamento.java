@@ -18,8 +18,8 @@ public class Equipamento implements Serializable {
 	@Column(nullable=false)
 	private String dataAquisicao;
 
-	@Column(nullable=false)
-	private Long numeroSerie;
+/*	@Column(nullable=false)
+	private Long numeroSerie;*/
 	
 	@Column(nullable = false)
 	private String nome;
@@ -51,13 +51,13 @@ public class Equipamento implements Serializable {
 		this.dataAquisicao = dataAquisicao;
 	}
 
-	public Long getNumeroSerie() {
+/*	public Long getNumeroSerie() {
 		return numeroSerie;
 	}
 
 	public void setNumeroSerie(Long numeroSerie) {
 		this.numeroSerie = numeroSerie;
-	}
+	}*/
 
 	public String getNome() {
 		return nome;

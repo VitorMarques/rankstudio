@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="" pagina="Painel de Controle">
+<customTags:painelTemplate title="" pagina="Painel de Controle" tamanhoColunas="s12">
 
 	<c:if test="${empty estudios}">
 		<h5 class="text-field deep-purple-text center-align" style="text-transform: uppercase">Ainda n&atilde;o existem Est&uacute;dios cadastrados no sistema!</h5>
@@ -28,35 +28,15 @@
 
 					<div id="actions">
 
-						<c:url var="urlEditarEstudio" value="/estudio/${estudio.id}/edita"/>
-						<c:url var="urlListaEquipamentos" value="/estudio/${estudio.id}/equipamento/info"/>
+						<c:url var="urlDetalhesEstudio" value="/estudio/${estudio.id}/detalhes"/>
 
 						<ul>
 							<li class="inline">
-								<a href="#" class="btn btn-floating btn-medium blue tooltipped hoverable" data-position="top" data-tooltip="Ver Detalhes" data-delay="50">
+								<a href="${urlDetalhesEstudio}" class="btn btn-floating btn-medium blue tooltipped hoverable" data-position="top" data-tooltip="Ver Detalhes" data-delay="50">
 									<i class="material-icons large">search</i>
 								</a>
 							</li>
-								<%--						<li class="inline">
-                                                            <a href="${urlEditarEstudio}" class="btn btn-floating btn-medium orange lighten-1 tooltipped hoverable" data-position="top" data-tooltip="Editar Informa&ccedil;&otilde;es" data-delay="50">
-                                                                <i class="material-icons large">edit</i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="inline">
-                                                            <a href="${urlListaEquipamentos}" class="btn btn-floating btn-medium green tooltipped hoverable" data-position="top" data-tooltip="Gerenciar Equipamentos" data-delay="50">
-                                                                <i class="material-icons large">build</i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="inline">
-                                                            <a href="#" class="btn btn-floating btn-medium red darken-1 tooltipped hoverable" data-position="top" data-tooltip="Incluir Condi&ccedil;&otilde;es Comerciais" data-delay="50">
-                                                                <i class="material-icons large">description</i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="inline">
-                                                            <a href="#" class="btn btn-floating btn-medium pink lighten-2 tooltipped hoverable" data-position="top" data-tooltip="Cadastrar Agenda" data-delay="50">
-                                                                <i class="material-icons large">event</i>
-                                                            </a>
-                                                        </li>--%>
+
 						</ul>
 					</div>
 

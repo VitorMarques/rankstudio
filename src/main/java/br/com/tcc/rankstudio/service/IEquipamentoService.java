@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.service;
 
 import br.com.tcc.rankstudio.model.Equipamento;
+import br.com.tcc.rankstudio.model.FotoEquipamento;
 import br.com.tcc.rankstudio.model.TipoEquipamento;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface IEquipamentoService {
 	Equipamento buscaPorId(Long id);
 	List<TipoEquipamento> listaTiposEquipamento();
     void delete(Equipamento equipamento);
+    FotoEquipamento saveFotoEquipamento(String fileName);
 }

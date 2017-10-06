@@ -1,13 +1,11 @@
 package br.com.tcc.rankstudio.controller;
 
-import br.com.tcc.rankstudio.model.Empresa;
-import br.com.tcc.rankstudio.model.Equipamento;
-import br.com.tcc.rankstudio.model.Estudio;
-import br.com.tcc.rankstudio.model.Usuario;
+import br.com.tcc.rankstudio.model.*;
 import br.com.tcc.rankstudio.service.IEmpresaService;
 import br.com.tcc.rankstudio.service.IEquipamentoService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import br.com.tcc.rankstudio.service.IUsuarioService;
+import br.com.tcc.rankstudio.util.AmazonS3FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -15,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,12 +73,19 @@ public class EquipamentoController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ModelAndView adiciona(@PathVariable Long estudioId, Equipamento equipamento, HttpServletRequest request) {
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
+	public ModelAndView adiciona(@PathVariable Long estudioId, @RequestParam("file") MultipartFile file, Equipamento equipamento, HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
+
+			if(file!=null) {
+				String fileName = AmazonS3FileUpload.uploadFile(file);
+				FotoEquipamento fotoEquipamento = equipamentoService.saveFotoEquipamento(fileName);
+				equipamento.setFotoEquipamento(fotoEquipamento);
+			}
+
 			equipamentoService.save(equipamento);
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
@@ -99,7 +106,7 @@ public class EquipamentoController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ModelAndView atualiza(@PathVariable Long estudioId, Equipamento equipamento, HttpServletRequest request) {
-		return adiciona(estudioId, equipamento, request);
+		return adiciona(estudioId, null, equipamento, request);
 	}
 
 	@RequestMapping(value = "/{id}/excluir", method = RequestMethod.GET)

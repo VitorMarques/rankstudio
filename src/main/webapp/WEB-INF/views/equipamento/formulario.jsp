@@ -5,9 +5,9 @@
 
 <customTags:painelTemplate title="Formul&aacute;rio de cadastro de Equipamentos" pagina="estudio" tamanhoColunas="s6 offset-s3">
 
-    <c:url var="adicionaEquipamentoUrl" value="/estudio/${estudio.id}/equipamento/"/>
+    <c:url var="adicionaEquipamentoUrl" value="/estudio/${estudio.id}/equipamento/adiciona"/>
 
-    <form:form cssClass="cadastro-form" action="${adicionaEquipamentoUrl}" method="post" modelAttribute="equipamento">
+    <form:form cssClass="cadastro-form" action="${adicionaEquipamentoUrl}" method="post" modelAttribute="equipamento" enctype="multipart/form-data">
 
         <form:input path="id" type="hidden" value="${equipamento.id}"/>
         <form:input path="estudio.id" type="hidden" value="${estudio.id}"/>
@@ -47,6 +47,14 @@
                 <i class="material-icons prefix small">date_range</i>
                 <form:input path="dataAquisicao" required="required"/>
                 <label for="dataAquisicao" class="center-align">Data de Aquisi&ccedil;&atilde;o</label>
+            </div>
+        </div>
+
+        <div class="row margin">
+            <div class="input-field col s12">
+                <i class="material-icons prefix small">add_a_photo</i>
+                <input type="file" name="file" id="file" />
+                <%--<label for="file" class="center-align">Foto</label>--%>
             </div>
         </div>
 

@@ -31,6 +31,10 @@ public class Equipamento implements Serializable {
 	@JoinColumn(name = "tipo_equipamento_id")
 	private TipoEquipamento tipoEquipamento;*/
 
+	@OneToOne
+	@JoinColumn(name = "foto_equipamento_id")
+	private FotoEquipamento fotoEquipamento;
+
 	@ManyToOne
 	@JoinColumn(name = "estudio_id")
 	private Estudio estudio;
@@ -81,5 +85,13 @@ public class Equipamento implements Serializable {
 
 	public void setTipoEquipamento(String tipoEquipamento) {
 		this.tipoEquipamento = tipoEquipamento;
+	}
+
+	public FotoEquipamento getFotoEquipamento() {
+		return fotoEquipamento;
+	}
+
+	public void setFotoEquipamento(FotoEquipamento fotoEquipamento) {
+		this.fotoEquipamento = fotoEquipamento;
 	}
 }

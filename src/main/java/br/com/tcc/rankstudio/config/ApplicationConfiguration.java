@@ -8,6 +8,7 @@ import br.com.tcc.rankstudio.util.DataUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @EnableWebMvc
 @ComponentScan(basePackageClasses = {UsuarioController.class, UsuarioServiceImpl.class, UsuarioDao.class, Usuario.class, DataUtils.class})
-@PropertySource(value = {"classpath:messages.properties"})
+@PropertySource(value = {"classpath:messages.properties", "classpath:app.properties"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -33,5 +34,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
+    @Bean(name = "multipartResolver")
+    public StandardServletMultipartResolver resolver() {
+        return new StandardServletMultipartResolver();
+    }
+
 
 }

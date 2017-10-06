@@ -2,6 +2,7 @@ package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Equipamento;
 import br.com.tcc.rankstudio.model.Estudio;
+import br.com.tcc.rankstudio.model.FotoEquipamento;
 import br.com.tcc.rankstudio.model.TipoEquipamento;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,9 @@ public class EquipamentoDao extends AbstractDao implements IDao {
                 .createSQLQuery(query)
                 .addEntity(TipoEquipamento.class)
                 .list();
+    }
+
+    public Long saveFotoEquipamento(FotoEquipamento fotoEquipamento) {
+        return (Long) super.getSession().save(fotoEquipamento);
     }
 }

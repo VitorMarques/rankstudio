@@ -1,0 +1,14 @@
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Amplificador');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Baixo');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Bateria');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Direct-Box');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Guitarra');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Headphone');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Interface de Audio');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Mesa Analógica');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Mesa Digital');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Microfone Condensador');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Microfone Dinâmico');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Outro(a)');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Pré-Amplificador');
+INSERT INTO heroku_7deecc6c9284999.tb_tipo_equipamento (descricao) VALUES ('Violão');

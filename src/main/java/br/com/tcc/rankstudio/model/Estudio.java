@@ -34,7 +34,8 @@ public class Estudio implements Serializable {
 	@Column(nullable = false)
 	private String cidade;
 
-	private Integer rank;
+	@Column(precision = 2)
+	private Double rank;
 
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
@@ -51,6 +52,14 @@ public class Estudio implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "condicao_comercial_id")
 	private CondicaoComercial condicaoComercial;
+
+	@OneToMany(mappedBy = "estudio", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<FotoEstudio> fotosEstudio;
+
+	@OneToMany(mappedBy = "estudio")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Avaliacao> avaliacoes;
 
 	public Long getId() {
 		return id;
@@ -100,11 +109,11 @@ public class Estudio implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public Integer getRank() {
+	public Double getRank() {
 		return rank;
 	}
 
-	public void setRank(Integer rank) {
+	public void setRank(Double rank) {
 		this.rank = rank;
 	}
 
@@ -139,4 +148,20 @@ public class Estudio implements Serializable {
 	public void setCondicaoComercial(CondicaoComercial condicaoComercial) {
 		this.condicaoComercial = condicaoComercial;
 	}
+
+    public List<FotoEstudio> getFotosEstudio() {
+        return fotosEstudio;
+    }
+
+    public void setFotosEstudio(List<FotoEstudio> fotosEstudio) {
+        this.fotosEstudio = fotosEstudio;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
 }

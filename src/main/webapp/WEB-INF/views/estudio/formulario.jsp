@@ -7,7 +7,7 @@
 
     <c:url var="adicionaEstudioUrl" value="/estudio/"/>
 
-    <form:form cssClass="cadastro-form" action="${adicionaEstudioUrl}" method="post" modelAttribute="estudio">
+    <form:form cssClass="cadastro-form" action="${adicionaEstudioUrl}" method="post" modelAttribute="estudio" enctype="multipart/form-data">
 
         <form:input path="id" type="hidden" value="${estudio.id}"/>
         <form:input path="empresa.id" type="hidden" value="${empresa.id}"/>
@@ -36,6 +36,18 @@
 
                 <form:input path="bairro" required="required" placeholder="Bairro"/>
                 <form:input path="cidade" required="required" placeholder="Cidade"/>
+            </div>
+        </div>
+
+        <div class="row margin">
+            <div class="input-field col s12 file-field">
+                <div class="btn">
+                    <span><i class="material-icons small">add_a_photo</i></span>
+                    <input type="file" name="files" multiple value="${estudio.fotosEstudio}" />
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Selecione um ou mais arquivos. No m&aacute;ximo 4!">
+                </div>
             </div>
         </div>
 

@@ -11,7 +11,9 @@
 
 		<div class="row">
 			<div class="input-field col s12 center">
-				<img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="" class="circle responsive-img valign profile-image-login">
+				<a href="<c:url value='/'/>">
+					<img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="" class="circle responsive-img valign profile-image-login">
+				</a>
 				<h2 class="center login-form-text">Preencha os dados abaixo para se cadastrar!</h2>
 			</div>
 		</div>
@@ -69,7 +71,7 @@
 			<div class="input-field col s12">
 				<i class="material-icons prefix small">lock_outline</i>
 				<input id="confirmar-senha" name="confirmar-senha" type="password" required>
-				<label for="confirmar-senha">Confirmar</label>
+				<label for="confirmar-senha">Confirmar Senha</label>
 			</div>
 		</div>
 
@@ -83,7 +85,11 @@
 
 	<div class="row">
 		<div class="input-field col s12 m12 l12">
-			<p class="margin medium-small">J&aacute; possui cadastro? <a href="<c:url value="/" />">&nbsp;Entrar</a></p>
+			<p class="margin medium-small">J&aacute; possui cadastro? <a href="<c:url value="/loginPage" />">&nbsp;Entrar</a>
+				<a href="<c:url value='/'/>" class="right">
+					Voltar
+				</a>
+			</p>
 		</div>
 	</div>
 

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,12 +26,16 @@ public abstract class AbstractDao {
 		getSession().saveOrUpdate(entity);
 	}
 
+	public Object save(Object entity) {
+		return getSession().save(entity);
+	}
+
 	public void delete(Object entity) {
 		getSession().delete(entity);
 	}
 
-	public List<?> listaTodos(Object entity) {
-		return getSession().createCriteria(entity.getClass()).list();
+	public List<?> listaTodos(Class classz) {
+		return getSession().createCriteria(classz).list();
 	}
 	
 }

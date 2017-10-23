@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="Detalhes do Estudio" pagina="estudio" tamanhoColunas="s12">
+<customTags:indexTemplate title="Detalhes do Estudio" pagina="estudio" tamanhoColunas="s12">
 
 	<spring:eval expression="@environment.getProperty('amazons3context')" var="amazons3context" />
 
@@ -98,20 +98,23 @@
 	</div>
 
 	<%-- Action Buttons--%>
+	<c:if test="${authUser!=null}">
+		<div class="fixed-action-btn horizontal" style="bottom: 90px">
+			<a class="btn-floating btn-large deep-purple">
+				<i class="large material-icons">menu</i>
+			</a>
+			<ul>
+				<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>
+				<li><a class="btn-floating amber accent-2 modal-trigger" href="#modalAvaliacao"><i class="material-icons tooltipped" data-position="top" data-tooltip="Avaliar Estudio" data-delay="50">format_quote</i></a></li>
+			</ul>
+		</div>
+	</c:if>
+
 	<div class="fixed-action-btn horizontal">
 		<a class="btn btn-large white black-text">
 			<i class="material-icons amber-text accent-2">star</i>
 			<span>Rank do Studio: <span class="red-text"><strong>${estudio.rank}</strong></span><span style="font-size: 20px"> / 5.0</span></span>
 		</a>
-	</div>
-	<div class="fixed-action-btn horizontal" style="bottom: 90px">
-		<a class="btn-floating btn-large deep-purple">
-			<i class="large material-icons">menu</i>
-		</a>
-		<ul>
-			<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>
-			<li><a class="btn-floating amber accent-2 modal-trigger" href="#modalAvaliacao"><i class="material-icons tooltipped" data-position="top" data-tooltip="Avaliar Estudio" data-delay="50">format_quote</i></a></li>
-		</ul>
 	</div>
 
 	<%-- Modal Div--%>
@@ -145,8 +148,9 @@
 			<input type="hidden" id="estudioId" value="${estudio.id}">
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Avalia&ccedil;&atilde;o</a>
+			<a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="javascript:enviaAvaliacao('${pageContext.request.contextPath}');">Enviar Avalia&ccedil;&atilde;o</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
 		</div>
 	</div>
 
-</customTags:painelTemplate>
+</customTags:indexTemplate>

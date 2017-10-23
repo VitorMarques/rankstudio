@@ -26,7 +26,7 @@
 
 <div id="app">
 
-    <%@include file="/WEB-INF/views/includes/navigation.jsp" %>
+    <%@include file="/WEB-INF/views/includes/navigation-site.jsp" %>
 
     <div class="container white card-panel" style="margin-top: 104px">
         <div class="row">
@@ -47,25 +47,7 @@
     $(document).ready(function() {
         $('select').material_select();
         $('.materialboxed').materialbox();
-        $('#modalAvaliacao').modal({
-            complete: function () {
-                var nota = $('#nota').val();
-                var comentario = $('#comentario').val();
-                var estudioId = $('#estudioId').val();
-                var data = {nota:nota, comentario:comentario};
-
-                $.ajax({
-                  type: 'POST',
-                  url: 'avaliacao',
-                  data: data,
-                  success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(reloadAvaliacoes(), 4000)},
-                  error: function (data) {
-                      Materialize.toast(data.error, 4000);
-                  }
-                });
-
-            },
-        });
+        $('#modalAvaliacao').modal({dismissible: false});
         $('#modalAgendamento').modal({
             complete: realizarAgendamento(),
         });

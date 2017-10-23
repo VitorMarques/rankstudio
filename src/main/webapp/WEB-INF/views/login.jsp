@@ -7,7 +7,9 @@
     <form:form cssClass="login-form" action="${pageContext.request.contextPath}/login" method="post" modelAttribute="usuario">
         <div class="row">
             <div class="input-field col s12 center">
-                <img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="" class="circle responsive-img valign profile-image-login">
+                <a href="<c:url value='/'/>">
+                    <img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="" class="circle responsive-img valign profile-image-login">
+                </a>
                 <h2 class="center login-form-text">Seja Bem-Vindo a Plataforma RankStudio</h2>
             </div>
         </div>
@@ -32,7 +34,11 @@
         </div>
         <div class="row">
             <div class="input-field col s12 m12 l12">
-                <p class="margin medium-small">N&atilde;o possui cadastro?<a href="<c:url value="/registrar" />">&nbsp;Registre-se!</a></p>
+                <p class="margin medium-small">N&atilde;o possui cadastro?<a href="<c:url value="/registrar" />">&nbsp;Registre-se!</a>
+                <a href="<c:url value='/'/>" class="right">
+                    Voltar
+                </a>
+                </p>
             </div>
         </div>
     </form:form>

@@ -71,6 +71,7 @@ public class HibernateConfiguration {
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory factory) {
        HibernateTransactionManager txManager = new HibernateTransactionManager();
+       txManager.setAllowResultAccessAfterCompletion(true);
        txManager.setSessionFactory(factory);
        return txManager;
     }

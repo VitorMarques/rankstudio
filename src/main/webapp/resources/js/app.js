@@ -29,3 +29,33 @@ function confirmarExclusao(nomeCliente, urlExclusao) {
         window.location = urlExclusao;
     }
 }
+
+function enviaAvaliacao(pageContext) {
+    var nota = $('#nota').val();
+    var comentario = $('#comentario').val();
+    var estudioId = $('#estudioId').val();
+    var data = {nota:nota, comentario:comentario};
+    var url = pageContext + "/estudio/" + estudioId + "/avaliacao";
+
+    if((nota==undefined || nota=='' || nota==null) || (comentario==undefined || comentario=='' || comentario==null)) {
+        alert('Favor preencher as informacoes necessarias!');
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(reloadAvaliacoes(), 4000)},
+            error: function (data) {
+                Materialize.toast(data.error, 4000);
+            }
+        });
+    }
+}
+
+function realizarAgendamento() {
+
+}
+
+function reloadAvaliacoes() {
+    window.location.reload();
+}

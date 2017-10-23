@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<customTags:painelTemplate title="" pagina="Painel de Controle" tamanhoColunas="s12">
+<customTags:indexTemplate title="" pagina="Painel de Controle" tamanhoColunas="s12">
 
 	<spring:eval expression="@environment.getProperty('amazons3context')" var="amazons3context" />
 
@@ -12,12 +12,10 @@
 	</c:if>
 
 	<c:if test="${!empty estudios}">
-		<h5 class="text-field deep-purple-text center-align" style="text-transform: uppercase">Est&uacute;dios cadastrados recentemente</h5>
-		<div class="divider"></div>
-		<br>
+
 		<c:forEach var="estudio" items="${estudios}">
 
-			<c:url var="urlDetalhesEstudio" value="/estudio/${estudio.id}/detalhes"/>
+			<c:url var="urlDetalhesEstudio" value="../../site/estudio/${estudio.id}/detalhes"/>
 
 			<div class="col s3 m3 l3" style="margin-bottom: 10px !important; cursor: pointer" onclick="window.location.href='${urlDetalhesEstudio}'">
 				<div class="card hoverable">
@@ -58,4 +56,4 @@
 			</div>
 		</c:forEach>
 	</c:if>
-</customTags:painelTemplate>
+</customTags:indexTemplate>

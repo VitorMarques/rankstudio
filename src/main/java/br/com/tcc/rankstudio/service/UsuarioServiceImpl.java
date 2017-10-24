@@ -1,5 +1,6 @@
 package br.com.tcc.rankstudio.service;
 
+import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tcc.rankstudio.dao.UsuarioDao;
+
+import java.util.List;
 
 /**
  *
@@ -43,5 +46,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public Perfil buscaPerfil(Usuario usuario) {
 		return usuarioDao.getPerfil(usuario);
 	}
-		
+
+	@Override
+	public List<Avaliacao> buscaAvaliacoesPorUsuario(String nome) {
+		return usuarioDao.buscaAvaliacoesPorUsuario(nome);
+	}
+
 }

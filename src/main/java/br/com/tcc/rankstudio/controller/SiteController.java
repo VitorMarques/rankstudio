@@ -134,26 +134,18 @@ public class SiteController {
 	public ModelAndView painelDeControle(HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView("painel/painel");
-		List<Estudio> estudios = new ArrayList<Estudio>();
 
 		Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
 
 		if(authUser == null) {
 			modelAndView.setViewName("redirect:/");
 		} else {
-
 			if(authUser.getPerfil() != null) {
-				if (authUser.getPerfil().getId() == 1) {//1 cliente, 2 proprietario
-					estudios = estudioService.listaTodos(); //redireciona para pagina inicial do site com todos os saloes listados
-				} else {
-					//estudios = estudioService.listaEstudiosPorProprietario(authUser.getId());
+				if (authUser.getPerfil().getId() == 2) {//1 cliente, 2 proprietario
 					modelAndView.addObject("request", request);
 					modelAndView.setViewName("redirect:/estudio/info");
 				}
 			}
-
-			modelAndView.addObject("estudios", estudios);
-
 		}
 
 		return modelAndView;

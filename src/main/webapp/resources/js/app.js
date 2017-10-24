@@ -20,6 +20,10 @@ function definePaginaAtiva(nomeDaPagina) {
         $('#link-empresa').addClass('item-menu-ativo');
     } else if(nomeDaPagina=='estudio') {
         $('#link-estudio').addClass('item-menu-ativo');
+    } else if(nomeDaPagina=='avaliacao') {
+        $('#link-avaliacao').addClass('item-menu-ativo');
+    } else if(nomeDaPagina=='agendamento') {
+        $('#link-agendamento').addClass('item-menu-ativo');
     }
 }
 

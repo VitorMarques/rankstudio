@@ -104,49 +104,6 @@
 			<span>Rank do Studio: <span class="red-text"><strong>${estudio.rank}</strong></span><span style="font-size: 20px"> / 5.0</span></span>
 		</a>
 	</div>
-	<div class="fixed-action-btn horizontal" style="bottom: 90px">
-		<a class="btn-floating btn-large deep-purple">
-			<i class="large material-icons">menu</i>
-		</a>
-		<ul>
-			<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>
-			<li><a class="btn-floating amber accent-2 modal-trigger" href="#modalAvaliacao"><i class="material-icons tooltipped" data-position="top" data-tooltip="Avaliar Estudio" data-delay="50">format_quote</i></a></li>
-		</ul>
-	</div>
 
-	<%-- Modal Div--%>
-	<div id="modalAgendamento" class="modal">
-		<div class="modal-content">
-			<h4>Modal Header</h4>
-			<p>A bunch of text</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-		</div>
-	</div>
-	<div id="modalAvaliacao" class="modal">
-		<div class="modal-content">
-			<h4>Avaliar Est&uacute;dio ${estudio.nome}</h4>
-			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
-				<select name="nota" id="nota" class="input-field">
-					<option value="">-- Selecione --</option>
-					<option value="1">1 Estrela</option>
-					<option value="2">2 Estrelas</option>
-					<option value="3">3 Estrelas</option>
-					<option value="4">4 Estrelas</option>
-					<option value="5">5 Estrelas</option>
-				</select>
-				<label for="nota">Selecione uma nota:</label>
-			</div>
-			<div class="input-field">
-				<textarea id="comentario" name="comentario" class="materialize-textarea"></textarea>
-				<label for="comentario">Deixe seu Coment&aacute;rio:</label>
-			</div>
-			<input type="hidden" id="estudioId" value="${estudio.id}">
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar Avalia&ccedil;&atilde;o</a>
-		</div>
-	</div>
 
 </customTags:painelTemplate>

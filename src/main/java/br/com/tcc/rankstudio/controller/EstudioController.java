@@ -34,7 +34,7 @@ public class EstudioController {
 	private Environment environment;
 
 	public EstudioController() {}
-	
+
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView info(HttpServletRequest request) {
 
@@ -183,18 +183,14 @@ public class EstudioController {
 
 	@RequestMapping(value = "/{id}/agendamento", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String salvaAgendamento(@PathVariable Long id, Avaliacao avaliacao, HttpServletRequest request) {
-
-		//TODO criar entidade Agendamento
+	public String salvaAgendamento(@PathVariable Long id, Agendamento agendamento, HttpServletRequest request) {
 
 		String retorno = "";
 
 		try {
 			Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
-			Estudio estudio = estudioService.buscaPorId(id);
-
-			//TODO salvar os dados do agendamento na tabela de agendamento
-
+			agendamento.setUsuarioId(authUser.getId());
+			estudioService.saveAgendamento(agendamento);
 			retorno = "{\"msg\":\"Agendamento realizado com sucesso!\"}";
 		} catch (Exception ex) {
 			ex.printStackTrace();

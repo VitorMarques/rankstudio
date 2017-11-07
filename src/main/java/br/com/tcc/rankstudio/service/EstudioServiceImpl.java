@@ -66,6 +66,10 @@ public class EstudioServiceImpl implements IEstudioService {
 		estudioDao.save(avaliacao);
 	}
 
+	public void saveAgendamento(Agendamento agendamento) {
+		estudioDao.save(agendamento);
+	}
+
 	@Override
 	public List<Estudio> buscaEstudios(String textoPesquisa) {
 

@@ -173,7 +173,7 @@
 						<option value="${agenda.horario}">${agenda.horario}</option>
 					</c:forEach>
 				</select>
-				<label for="dataAgendamento">Selecione um hor&aacute;rio:</label>
+				<label for="horarioAgendamento">Selecione um hor&aacute;rio:</label>
 			</div>
 			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
 				<select name="periodoAgendamento" id="periodoAgendamento" class="input-field" onchange="javascript:calculaValorAgendamento();">

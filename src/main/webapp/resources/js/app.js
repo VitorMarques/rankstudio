@@ -59,12 +59,54 @@ function enviaAvaliacao(pageContext) {
 }
 
 function realizarAgendamento(pageContext) {
-    //pegar todos os dados da tela
-    //pegar id do usuario logado
-    //validar se todos os campos estao preenchidos
-    //converter dados para JSON
-    //criar URL da requisicao
-    //fazer     chamada POST via ajax
+
+    var tipoAgendamento = $('#tipoAgendamento').val();
+    var salaAgendamento = $('#salaAgendamento').val();
+    var dataAgendamento = $('#dataAgendamento').val();
+    var horarioAgendamento = $('#horarioAgendamento').val();
+    var tipoAgendamento = $('#tipoAgendamento').val();
+    var periodoAgendamento = $('#periodoAgendamento').val();
+    var valorAgendamento = $('#valorAgendamento').val();
+    var estudioId = $('#estudioId').val();
+
+    var data = {
+      tipoAgendamento:tipoAgendamento,
+      salaAgendamento:salaAgendamento,
+      dataAgendamento:dataAgendamento,
+      horarioAgendamento:horarioAgendamento,
+      tipoAgendamento:tipoAgendamento,
+      periodoAgendamento:periodoAgendamento,
+      valorAgendamento:valorAgendamento,
+      estudioId:estudioId
+    }
+
+    var url = pageContext + "/estudio/" + estudioId + "/agendamento";
+
+    if(!validaDadosAgendamento(data)) {
+      alert('Favor preencher as informacoes necessarias!');
+    } else {
+      $.ajax({
+        type: 'POST'
+        url: url,
+        data: data,
+        success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
+        error: function (data) {
+            Materialize.toast(data.error, 4000);
+        }
+      });
+    }
+}
+
+function validaDadosAgendamento(data) {
+  if((data.tipoAgendamento==''||data.tipoAgendamento==undefined)
+    || (data.salaAgendamento==''||data.salaAgendamento==undefined)
+    || (data.dataAgendamento==''||data.dataAgendamento==undefined)
+    || (data.horarioAgendamento==''||data.horarioAgendamento==undefined)
+    || (data.tipoAgendamento==''||data.tipoAgendamento==undefined)
+    || (data.periodoAgendamento==''||data.periodoAgendamento==undefined)
+    || (data.valorAgendamento==''||data.valorAgendamento==undefined))
+    return false;
+  return true;
 }
 
 function calculaValorAgendamento() {

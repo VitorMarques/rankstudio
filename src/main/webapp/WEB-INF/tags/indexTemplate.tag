@@ -48,9 +48,7 @@
         $('select').material_select();
         $('.materialboxed').materialbox();
         $('#modalAvaliacao').modal({dismissible: false});
-        $('#modalAgendamento').modal({
-            complete: realizarAgendamento(),
-        });
+        $('#modalAgendamento').modal({dismissible: false});
     });
 </script>
 

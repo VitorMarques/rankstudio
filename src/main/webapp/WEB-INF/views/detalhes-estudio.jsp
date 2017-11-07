@@ -143,7 +143,7 @@
 				<select name="tipoAgendamento" id="tipoAgendamento" class="input-field" onchange="javascript:calculaValorAgendamento();">
 					<option value="">-- Selecione --</option>
 					<c:forEach var="condicao" items="${condicoesComerciais}">
-						<option value="${condicao.preco}">${condicao.tipoCondicao}</option>
+						<option value="${condicao.preco}">${condicao.tipoCondicao} - R$ ${condicao.preco}/Hora</option>
 					</c:forEach>
 				</select>
 				<label for="tipoAgendamento">Selecione um Tipo de Agendamento:</label>

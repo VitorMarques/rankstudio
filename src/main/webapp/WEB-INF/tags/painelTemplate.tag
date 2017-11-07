@@ -42,33 +42,12 @@
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/materialize.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery.maskedinput.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/Chart.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
 <script>
     $(document).ready(function() {
         $('select').material_select();
         $('.materialboxed').materialbox();
-        $('#modalAvaliacao').modal({
-            complete: function () {
-                var nota = $('#nota').val();
-                var comentario = $('#comentario').val();
-                var estudioId = $('#estudioId').val();
-                var data = {nota:nota, comentario:comentario};
-
-                $.ajax({
-                  type: 'POST',
-                  url: 'avaliacao',
-                  data: data,
-                  success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
-                  error: function (data) {
-                      Materialize.toast(data.error, 4000);
-                  }
-                });
-
-            },
-        });
-        $('#modalAgendamento').modal({
-            complete: realizarAgendamento(),
-        });
     });
 </script>
 

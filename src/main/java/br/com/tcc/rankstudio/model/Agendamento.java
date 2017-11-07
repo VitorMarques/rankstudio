@@ -15,25 +15,25 @@ public class Agendamento implements Serializable {
 	@Id @GeneratedValue
 	private Long id;
 
-	@Column
+	@Column(name="data_agendamento")
 	private String dataAgendamento;
 
-	@Column
+	@Column(name="horario_agendamento")
 	private String horarioAgendamento;
 
-	@Column
+	@Column(name="periodo_agendamento")
 	private String periodoAgendamento;
 
-	@Column
+	@Column(name="sala_agendamento")
 	private String salaAgendamento;
 
-	@Column
+	@Column(name="valor'_agendamento")
 	private Double valorAgendamento;
 
-	@Column
+	@Column(name="usuario_id")
 	private Long usuarioId;
 
-	@Column
+	@Column(name="estudio_id")
 	private Long estudioId;
 
 	public Long getId() {

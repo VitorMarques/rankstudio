@@ -9,9 +9,9 @@ import java.util.List;
 
 /**
  * Interface que define os contratos que devem ser implementados pelos servicos dos usuarios
- * 
+ *
  * @author Vitor Marques
- * 
+ *
  */
 public interface IEstudioService {
 
@@ -22,5 +22,6 @@ public interface IEstudioService {
 	void deleteAllFotos(Long idEstudio);
 	List<Estudio> listaEstudiosPorProprietario(Long idProprietario);
 	void saveAvaliacao(Avaliacao avaliacao);
+	void saveAgendamento(Agendamento agendamento);
     List<Estudio> buscaEstudios(String textoPesquisa);
 }

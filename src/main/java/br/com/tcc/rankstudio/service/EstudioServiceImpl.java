@@ -6,6 +6,7 @@ import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Empresa;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.model.FotoEstudio;
+import br.com.tcc.rankstudio.model.Agendamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

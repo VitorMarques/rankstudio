@@ -4,6 +4,7 @@ import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Empresa;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.model.FotoEstudio;
+import br.com.tcc.rankstudio.model.Agendamento;
 
 import java.util.List;
 

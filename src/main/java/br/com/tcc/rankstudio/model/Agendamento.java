@@ -76,7 +76,7 @@ public class Agendamento implements Serializable {
 		this.salaAgendamento = salaAgendamento;
 	}
 
-	public Long getValorAgendamento() {
+	public Double getValorAgendamento() {
 		return valorAgendamento;
 	}
 

@@ -11,6 +11,8 @@ $(document).ready(function() {
     $('#dataInicio').mask('99/99/9999');
     $('#dataFim').mask('99/99/9999');
     $('#numeroSerie').mask('9999999');
+    $('#data').mask('99/99/9999');
+    $('#horario').mask('99:99');
 });
 
 function definePaginaAtiva(nomeDaPagina) {
@@ -48,7 +50,7 @@ function enviaAvaliacao(pageContext) {
             type: 'POST',
             url: url,
             data: data,
-            success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(reloadAvaliacoes(), 4000)},
+            success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
             error: function (data) {
                 Materialize.toast(data.error, 4000);
             }
@@ -56,10 +58,21 @@ function enviaAvaliacao(pageContext) {
     }
 }
 
-function realizarAgendamento() {
-
+function realizarAgendamento(pageContext) {
+    //pegar todos os dados da tela
+    //pegar id do usuario logado
+    //validar se todos os campos estao preenchidos
+    //converter dados para JSON
+    //criar URL da requisicao
+    //fazer     chamada POST via ajax
 }
 
-function reloadAvaliacoes() {
+function calculaValorAgendamento() {
+    valorTotal = ($('#tipoAgendamento').val() * $('#periodoAgendamento').val());
+    $('#valorAgendamento').val(valorTotal);
+    $('#valor-total').text('Valor Total = R$ ' + valorTotal);
+}
+
+function locationReload() {
     window.location.reload();
 }

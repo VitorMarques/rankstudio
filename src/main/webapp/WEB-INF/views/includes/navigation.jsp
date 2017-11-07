@@ -2,7 +2,7 @@
     <nav class="cyan">
         <div class="nav-wrapper">
             <div class="col s12">
-                <a href="<c:url value="/app"/>" class="brand-logo tooltipped" data-position="right" data-tooltip="RankStudio Portal">
+                <a href="<c:url value="/"/>" class="brand-logo tooltipped" data-position="right" data-tooltip="RankStudio Portal">
                     <img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="rankstudio-logo">
                 </a>
 <%--                <div class="header-search-wrapper hide-on-med-and-down">
@@ -17,14 +17,12 @@
                         </a>
                     </li>--%>
 
-                    <c:if test="${authUser.perfil.id==1}">
-                        <li>
-                            <a href="<c:url value="/"/>" class="waves-effect waves-block waves-light tooltipped"
-                               data-position="bottom" data-tooltip="Voltar para o Site">
-                                <i class="material-icons">public</i>
-                            </a>
-                        </li>
-                    </c:if>
+                    <li>
+                        <a href="<c:url value="/"/>" class="waves-effect waves-block waves-light tooltipped"
+                           data-position="bottom" data-tooltip="Voltar para o Site">
+                            <i class="material-icons">public</i>
+                        </a>
+                    </li>
 
                     <li>
                         <a href="<c:url value="/logout"/>" class="waves-effect waves-block waves-light tooltipped"

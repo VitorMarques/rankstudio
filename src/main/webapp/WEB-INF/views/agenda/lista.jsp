@@ -19,8 +19,8 @@
 
 					<ul>
 						<h4 class="deep-purple-text caption-uppercase">${agenda.sala}</h4>
-						<li><strong>Data Inicio: </strong>${agenda.dataInicio}</li>
-						<li><strong>Data Fim: </strong>${agenda.dataFim}</li>
+						<li><strong>Data: </strong>${agenda.data}</li>
+						<li><strong>Hor&aacute;rio: </strong>${agenda.horario}</li>
 					</ul>
 
 					<div id="actions">

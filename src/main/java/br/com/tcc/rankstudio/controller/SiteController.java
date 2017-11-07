@@ -157,13 +157,13 @@ public class SiteController {
 		Estudio estudio = estudioService.buscaPorId(id);
 		List<Equipamento> equipamentos = estudio.getEquipamentos();
 		List<Agenda> agendas = estudio.getAgendas();
-		CondicaoComercial condicaoComercial = estudio.getCondicaoComercial();
+		List<CondicaoComercial> condicoesComerciais = estudio.getCondicoesComerciais();
 
 		ModelAndView modelAndView = new ModelAndView("detalhes-estudio");
 		modelAndView.addObject("estudio", estudio);
 		modelAndView.addObject("equipamentos", equipamentos);
 		modelAndView.addObject("agendas", agendas);
-		modelAndView.addObject("condicaoComercial", condicaoComercial);
+		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
 
 		return modelAndView;
 	}

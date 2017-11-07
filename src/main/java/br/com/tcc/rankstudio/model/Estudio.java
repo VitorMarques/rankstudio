@@ -22,6 +22,9 @@ public class Estudio implements Serializable {
 	@Column(nullable=false, length=40)
 	private String nome;
 
+	@Column(columnDefinition = "text")
+	private String descricao;
+
 	@Column(nullable=false, length=25)
 	private String cnpj;
 	
@@ -49,9 +52,9 @@ public class Estudio implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Agenda> agendas;
 
-	@OneToOne
-	@JoinColumn(name = "condicao_comercial_id")
-	private CondicaoComercial condicaoComercial;
+	@OneToMany(mappedBy = "estudio")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<CondicaoComercial> condicoesComerciais;
 
 	@OneToMany(mappedBy = "estudio", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -75,6 +78,14 @@ public class Estudio implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public String getCnpj() {
@@ -141,15 +152,15 @@ public class Estudio implements Serializable {
 		this.agendas = agendas;
 	}
 
-	public CondicaoComercial getCondicaoComercial() {
-		return condicaoComercial;
+	public List<CondicaoComercial> getCondicoesComerciais() {
+		return condicoesComerciais;
 	}
 
-	public void setCondicaoComercial(CondicaoComercial condicaoComercial) {
-		this.condicaoComercial = condicaoComercial;
+	public void setCondicoesComerciais(List<CondicaoComercial> condicoesComerciais) {
+		this.condicoesComerciais = condicoesComerciais;
 	}
 
-    public List<FotoEstudio> getFotosEstudio() {
+	public List<FotoEstudio> getFotosEstudio() {
         return fotosEstudio;
     }
 

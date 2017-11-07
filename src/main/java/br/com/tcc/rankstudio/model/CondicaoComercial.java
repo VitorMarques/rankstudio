@@ -21,6 +21,13 @@ public class CondicaoComercial implements Serializable {
 	@Column(nullable = false)
 	private String tipoPagamento;
 
+	@Column(nullable = false)
+	private String tipoCondicao;
+
+	@ManyToOne
+	@JoinColumn(name = "estudio_id")
+	private Estudio estudio;
+
 	public Long getId() {
 		return id;
 	}
@@ -44,4 +51,19 @@ public class CondicaoComercial implements Serializable {
 		this.tipoPagamento = tipoPagamento;
 	}
 
+	public String getTipoCondicao() {
+		return tipoCondicao;
+	}
+
+	public void setTipoCondicao(String tipoCondicao) {
+		this.tipoCondicao = tipoCondicao;
+	}
+
+	public Estudio getEstudio() {
+		return estudio;
+	}
+
+	public void setEstudio(Estudio estudio) {
+		this.estudio = estudio;
+	}
 }

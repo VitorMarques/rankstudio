@@ -58,7 +58,7 @@
                   type: 'POST',
                   url: 'avaliacao',
                   data: data,
-                  success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(reloadAvaliacoes(), 4000)},
+                  success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
                   error: function (data) {
                       Materialize.toast(data.error, 4000);
                   }

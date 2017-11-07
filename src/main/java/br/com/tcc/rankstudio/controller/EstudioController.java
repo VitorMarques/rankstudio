@@ -67,13 +67,13 @@ public class EstudioController {
 		Estudio estudio = estudioService.buscaPorId(id);
 		List<Equipamento> equipamentos = estudio.getEquipamentos();
 		List<Agenda> agendas = estudio.getAgendas();
-		CondicaoComercial condicaoComercial = estudio.getCondicaoComercial();
+		List<CondicaoComercial> condicoesComerciais = estudio.getCondicoesComerciais();
 
 		ModelAndView modelAndView = new ModelAndView("estudio/detalhes");
 		modelAndView.addObject("estudio", estudio);
 		modelAndView.addObject("equipamentos", equipamentos);
 		modelAndView.addObject("agendas", agendas);
-		modelAndView.addObject("condicaoComercial", condicaoComercial);
+		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
 
 		return modelAndView;
 	}
@@ -155,7 +155,7 @@ public class EstudioController {
 
 	@RequestMapping(value = "/{id}/avaliacao", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String salvaAvaliacao(@PathVariable Long id, Avaliacao avaliacao, HttpServletRequest request, HttpServletResponse response) {
+	public String salvaAvaliacao(@PathVariable Long id, Avaliacao avaliacao, HttpServletRequest request) {
 
 		String retorno = "";
 
@@ -181,19 +181,40 @@ public class EstudioController {
 		return retorno;
 	}
 
+	@RequestMapping(value = "/{id}/agendamento", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String salvaAgendamento(@PathVariable Long id, Avaliacao avaliacao, HttpServletRequest request) {
+
+		//TODO criar entidade Agendamento
+
+		String retorno = "";
+
+		try {
+			Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
+			Estudio estudio = estudioService.buscaPorId(id);
+
+			//TODO salvar os dados do agendamento na tabela de agendamento
+
+			retorno = "{\"msg\":\"Agendamento realizado com sucesso!\"}";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			retorno = "{\"error\":\"Erro ao realizar o agendamento: "+ex.getMessage()+"\"}";
+		}
+
+		return retorno;
+
+	}
+
 	private Double calculaRank(List<Avaliacao> avaliacoes) {
 
 		Double total = Double.valueOf(avaliacoes.size());
 		Double somaNotas = 0.0;
-		/*Double rank = 0.0;*/
 
-		BigDecimal rank = new BigDecimal(0.0);
-		/*rank.setScale(2);*/
+		BigDecimal rank;
 
 		for (Avaliacao avaliacao : avaliacoes)
 			somaNotas += avaliacao.getNota();
 
-		/*DecimalFormat decimalFormat = new DecimalFormat("#.##");*/
 		rank = BigDecimal.valueOf(somaNotas/total).setScale(2, BigDecimal.ROUND_CEILING);
 
 		return rank.doubleValue();

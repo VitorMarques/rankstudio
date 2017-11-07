@@ -31,14 +31,22 @@
 				<li><strong>Bairro: </strong>${estudio.bairro}</li>
 				<li><strong>Cidade: </strong>${estudio.cidade}</li>
 				<li><strong>Rank: </strong>${estudio.rank==null?0:estudio.rank}</li>
+				<li><strong>Descri&ccedil;&atilde;o: </strong>${estudio.descricao}</li>
 			</ul>
 		</div>
 		<div class="col s4 m4 l4">
 			<h4 class="deep-purple-text caption-uppercase">Condi&ccedil;&atilde;o Comercial</h4>
-			<ul>
-				<li><strong>Pre&ccedil;o: </strong>${condicaoComercial.preco}</li>
-				<li><strong>Tipo Pagamento: </strong>${condicaoComercial.tipoPagamento}</li>
-			</ul>
+			<c:forEach var="condicao" items="${condicoesComercias}">
+			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+				<div class="card-panel hoverable">
+					<ul>
+						<h5>Tipo: ${condicao.tipo}</h5>
+						<li><strong>Pre&ccedil;o: </strong>${condicao.preco}</li>
+						<li><strong>Tipo Pagamento: </strong>${condicao.tipoPagamento}</li>
+					</ul>
+				</div>
+			</div>
+			</c:forEach>
 		</div>
 		<div class="col s4 m4 l4">
 			<h4 class="deep-purple-text caption-uppercase">Agendas</h4>

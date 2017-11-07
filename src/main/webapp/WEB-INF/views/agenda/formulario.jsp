@@ -23,16 +23,16 @@
         <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">date_range</i>
-                <form:input path="dataInicio" required="required"/>
-                <label for="dataInicio" class="center-align">Data Inicio</label>
+                <form:input path="data" required="required"/>
+                <label for="data" class="center-align">Data</label>
             </div>
         </div>
 
         <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">date_range</i>
-                <form:input path="dataFim" required="required"/>
-                <label for="dataFim" class="center-align">Data Fim</label>
+                <form:input path="horario" required="required"/>
+                <label for="horario" class="center-align">Hor&aacute;rio</label>
             </div>
         </div>
 

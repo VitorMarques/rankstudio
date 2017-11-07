@@ -16,10 +16,10 @@ public class Agenda implements Serializable {
 	private Long id;	
 	
 	@Column(nullable=false)
-	private String dataInicio;
+	private String data;
 
 	@Column(nullable=false)
-	private String dataFim;
+	private String horario;
 
 	@Column(nullable=false)
 	private String sala;
@@ -36,20 +36,20 @@ public class Agenda implements Serializable {
 		this.id = id;
 	}
 
-	public String getDataInicio() {
-		return dataInicio;
+	public String getData() {
+		return data;
 	}
 
-	public void setDataInicio(String dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setData(String data) {
+		this.data = data;
 	}
 
-	public String getDataFim() {
-		return dataFim;
+	public String getHorario() {
+		return horario;
 	}
 
-	public void setDataFim(String dataFim) {
-		this.dataFim = dataFim;
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 
 	public String getSala() {

@@ -2,7 +2,7 @@
     <nav class="cyan">
         <div class="nav-wrapper">
             <div class="col s12">
-                <a href="<c:url value="/app"/>" class="brand-logo tooltipped" data-position="right" data-tooltip="RankStudio Portal">
+                <a href="<c:url value="/"/>" class="brand-logo tooltipped" data-position="right" data-tooltip="RankStudio Portal">
                     <img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="rankstudio-logo">
                 </a>
                 <ul class="right hide-on-med-and-down">

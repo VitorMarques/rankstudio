@@ -22,6 +22,14 @@
 
         <div class="row margin">
             <div class="input-field col s12">
+                <i class="material-icons prefix small">insert_comment</i>
+                <form:textarea path="descricao" class="materialize-textarea"/>
+                <label for="descricao" class="center-align">Descri&ccedil;&atilde;o</label>
+            </div>
+        </div>
+
+        <div class="row margin">
+            <div class="input-field col s12">
                 <i class="material-icons prefix small">assignment_ind</i>
                 <form:input path="cnpj" required="required"/>
                 <label for="cnpj" class="center-align">CNPJ</label>

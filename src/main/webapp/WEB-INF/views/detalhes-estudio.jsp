@@ -22,7 +22,7 @@
 	<br>
 
 	<div id="dados-estudio" class="col s12 m12 l12 card hoverable  grey lighten-5">
-		<div class="col s4 m4 l4 ">
+		<div class="col s6 m6 l6 ">
 			<ul>
 				<h4 class="deep-purple-text caption-uppercase">Informa&ccedil;&otilde;es</h4>
 				<li><strong>Nome: </strong>${estudio.nome}</li>
@@ -33,27 +33,45 @@
 				<li><strong>Rank: </strong>${estudio.rank==null?0:estudio.rank}</li>
 			</ul>
 		</div>
-		<div class="col s4 m4 l4">
-			<h4 class="deep-purple-text caption-uppercase">Condi&ccedil;&atilde;o Comercial</h4>
-			<ul>
-				<li><strong>Pre&ccedil;o: </strong>${condicaoComercial.preco}</li>
-				<li><strong>Tipo Pagamento: </strong>${condicaoComercial.tipoPagamento}</li>
-			</ul>
+		<div class="col s6 m6 l6">
+			<h6>${estudio.descricao}</h6>
 		</div>
-		<div class="col s4 m4 l4">
-			<h4 class="deep-purple-text caption-uppercase">Agendas</h4>
-			<c:forEach var="agenda" items="${agendas}">
-				<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
-					<div class="card-panel hoverable">
-						<ul>
-							<h5>${agenda.sala}</h5>
-							<li><strong>Data Inicio: </strong>${agenda.dataInicio}</li>
-							<li><strong>Data Fim: </strong>${agenda.dataFim}</li>
-						</ul>
-					</div>
+	</div>
+
+	<div class="divider"></div>
+
+	<div id="condicoes" class="col s12 m12 l12" style="margin-top: 40px">
+		<blockquote>Condi&ccedil;&otilde;es Comerciais</blockquote>
+
+		<c:forEach var="condicao" items="${condicoesComerciais}">
+			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+				<div class="card hoverable" style="padding: 20px">
+					<ul>
+						<h5>${condicao.tipoCondicao}</h5>
+						<li><strong>Pre&ccedil;o: </strong>${condicao.preco}</li>
+						<li><strong>Tipo Pagamento: </strong>${condicao.tipoPagamento}</li>
+					</ul>
 				</div>
-			</c:forEach>
-		</div>
+			</div>
+		</c:forEach>
+	</div>
+
+	<div class="divider"></div>
+
+	<div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
+		<blockquote>Agendas Dispon&iacute;veis</blockquote>
+
+		<c:forEach var="agenda" items="${agendas}">
+			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+				<div class="card hoverable" style="padding: 20px">
+					<ul>
+						<h5>${agenda.sala}</h5>
+						<li><strong>Data: </strong>${agenda.data}</li>
+						<li><strong>Horario: </strong>${agenda.horario}</li>
+					</ul>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 
 	<div class="divider"></div>
@@ -117,16 +135,71 @@
 		</a>
 	</div>
 
-	<%-- Modal Div--%>
+	<%--Agendamento Modal--%>
 	<div id="modalAgendamento" class="modal">
 		<div class="modal-content">
-			<h4>Modal Header</h4>
-			<p>A bunch of text</p>
+			<h4>Realizar Agendamento: </h4>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<select name="tipoAgendamento" id="tipoAgendamento" class="input-field" onchange="javascript:calculaValorAgendamento();">
+					<option value="">-- Selecione --</option>
+					<c:forEach var="condicao" items="${condicoesComerciais}">
+						<option value="${condicao.preco}">${condicao.tipoCondicao}</option>
+					</c:forEach>
+				</select>
+				<label for="tipoAgendamento">Selecione um Tipo de Agendamento:</label>
+			</div>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<select name="salaAgendamento" id="salaAgendamento" class="input-field">
+					<option value="">-- Selecione --</option>
+					<c:forEach var="agenda" items="${agendas}">
+						<option value="${agenda.sala}">${agenda.sala}</option>
+					</c:forEach>
+				</select>
+				<label for="salaAgendamento">Selecione uma sala:</label>
+			</div>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<select name="dataAgendamento" id="dataAgendamento" class="input-field">
+					<option value="">-- Selecione --</option>
+					<c:forEach var="agenda" items="${agendas}">
+						<option value="${agenda.data}">${agenda.data}</option>
+					</c:forEach>
+				</select>
+				<label for="dataAgendamento">Selecione uma data:</label>
+			</div>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<select name="horarioAgendamento" id="horarioAgendamento" class="input-field">
+					<option value="">-- Selecione --</option>
+					<c:forEach var="agenda" items="${agendas}">
+						<option value="${agenda.horario}">${agenda.horario}</option>
+					</c:forEach>
+				</select>
+				<label for="dataAgendamento">Selecione um hor&aacute;rio:</label>
+			</div>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<select name="periodoAgendamento" id="periodoAgendamento" class="input-field" onchange="javascript:calculaValorAgendamento();">
+					<option value="">-- Selecione --</option>
+					<option value="1">1 Hora</option>
+					<option value="2">2 Horas</option>
+					<option value="3">3 Horas</option>
+					<option value="4">4 Horas</option>
+					<option value="5">5 Horas</option>
+				</select>
+				<label for="periodoAgendamento">Durante quantas horas gostaria de utilizar o Est&uacute;dio?</label>
+			</div>
+			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
+				<h5 id="valor-total"></h5>
+			</div>
+			<input type="hidden" id="estudioId" value="${estudio.id}">
+			<input type="hidden" id="valorAgendamento" value="">
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="javascript:realizarAgendamento('${pageContext.request.contextPath}');">Agendar</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
 		</div>
 	</div>
+
+
+	<%--Avaliacao Modal--%>
 	<div id="modalAvaliacao" class="modal">
 		<div class="modal-content">
 			<h4>Avaliar Est&uacute;dio ${estudio.nome}</h4>

@@ -26,7 +26,6 @@ public class CondicaoComercialController {
 	private IEstudioService estudioService;
 	@Autowired
 	private ICondicaoComercialService condicaoComercialService;
-
 	@Autowired
 	private Environment environment;
 
@@ -36,11 +35,11 @@ public class CondicaoComercialController {
 	public ModelAndView detalhes(@PathVariable Long estudioId, HttpServletRequest request) {
 
 		Estudio estudio = estudioService.buscaPorId(estudioId);
-		CondicaoComercial condicaoComercial = estudio.getCondicaoComercial();
+		List<CondicaoComercial> condicoesComerciais = estudio.getCondicoesComerciais();
 
 		ModelAndView modelAndView = new ModelAndView("condicaocomercial/detalhes");
 		modelAndView.addObject("estudio", estudio);
-		modelAndView.addObject("condicaoComercial", condicaoComercial);
+		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
 
 		if(request.getSession().getAttribute("mensagem")!=null) {
 			modelAndView.addObject("mensagem", request.getSession().getAttribute("mensagem"));
@@ -73,10 +72,11 @@ public class CondicaoComercialController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
-			condicaoComercialService.save(condicaoComercial);
 			Estudio estudio = estudioService.buscaPorId(estudioId);
-			estudio.setCondicaoComercial(condicaoComercial);
-			estudioService.save(estudio);
+			condicaoComercial.setEstudio(estudio);
+			condicaoComercialService.save(condicaoComercial);
+/*			estudio.setCondicaoComercial(condicaoComercial);
+			estudioService.save(estudio);*/
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
 

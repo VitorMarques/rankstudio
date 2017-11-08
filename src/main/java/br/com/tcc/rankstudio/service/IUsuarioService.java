@@ -1,5 +1,6 @@
 package br.com.tcc.rankstudio.service;
 
+import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
@@ -21,4 +22,5 @@ public interface IUsuarioService {
 	Usuario buscaPorEmail(String email);
 	Perfil buscaPerfil(Usuario usuario);
     List<Avaliacao> buscaAvaliacoesPorUsuario(String nome);
+    List<Agendamento> buscaAgendamentosUsuario(Long idUsuario);
 }

@@ -1,10 +1,12 @@
 package br.com.tcc.rankstudio.dao;
 
+import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import sun.security.x509.AVA;
@@ -42,5 +44,19 @@ public class UsuarioDao extends AbstractDao implements IDao {
 		List<Avaliacao> avaliacaoList = criteria.add(Restrictions.ilike("nomeUsuario", nome, MatchMode.ANYWHERE)).list();
 
 		return avaliacaoList;
+	}
+
+	public List<Agendamento> buscaAgendamentosPorUsuario(Long idUsuario) {
+
+/*		String query = "SELECT * FROM tb_agendamento WHERE usuario_id = :usuarioId";*/
+
+		Criteria criteria = super.getSession().createCriteria(Agendamento.class);
+		List<Agendamento> agendamentoList =
+				criteria.add(Restrictions.eq("usuarioId", idUsuario))
+						.addOrder(Order.asc("estudioId"))
+						.list();
+
+
+		return agendamentoList;
 	}
 }

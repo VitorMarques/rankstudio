@@ -62,7 +62,7 @@ function realizarAgendamento(pageContext) {
 
     var tipoAgendamento = $('#tipoAgendamento').val();
     var salaAgendamento = $('#salaAgendamento').val();
-    var dataAgendamento = $('#dataAgendamento').val();
+    var dataAgendamento = convertStringToCalendar($('#dataAgendamento').val());
     var horarioAgendamento = $('#horarioAgendamento').val();
     var tipoAgendamento = $('#tipoAgendamento').val();
     var periodoAgendamento = $('#periodoAgendamento').val();
@@ -78,7 +78,7 @@ function realizarAgendamento(pageContext) {
       periodoAgendamento:periodoAgendamento,
       valorAgendamento:valorAgendamento,
       estudioId:estudioId
-    }
+    };
 
     var url = pageContext + "/estudio/" + estudioId + "/agendamento";
 
@@ -86,7 +86,7 @@ function realizarAgendamento(pageContext) {
       alert('Favor preencher as informacoes necessarias!');
     } else {
       $.ajax({
-        type: 'POST'
+        type: 'POST',
         url: url,
         data: data,
         success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
@@ -107,6 +107,12 @@ function validaDadosAgendamento(data) {
     || (data.valorAgendamento==''||data.valorAgendamento==undefined))
     return false;
   return true;
+}
+
+function convertStringToCalendar(data) {
+    var arrayData = data.split("/");
+    var dataCalendar = arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]; //formato yyyy-mm-dd
+    return dataCalendar;
 }
 
 function calculaValorAgendamento() {

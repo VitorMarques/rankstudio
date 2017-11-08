@@ -1,5 +1,6 @@
 package br.com.tcc.rankstudio.service;
 
+import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
@@ -50,6 +51,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	@Override
 	public List<Avaliacao> buscaAvaliacoesPorUsuario(String nome) {
 		return usuarioDao.buscaAvaliacoesPorUsuario(nome);
+	}
+
+	@Override
+	public List<Agendamento> buscaAgendamentosUsuario(Long idUsuario) {
+		return usuarioDao.buscaAgendamentosPorUsuario(idUsuario);
 	}
 
 }

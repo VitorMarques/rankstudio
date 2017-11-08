@@ -181,9 +181,9 @@ public class EstudioController {
 		return retorno;
 	}
 
-	@RequestMapping(value = "/{id}/agendamento", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{estudioId}/agendamento", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public String salvaAgendamento(@PathVariable Long id, Agendamento agendamento, HttpServletRequest request) {
+	public String salvaAgendamento(Agendamento agendamento, HttpServletRequest request) {
 
 		String retorno = "";
 

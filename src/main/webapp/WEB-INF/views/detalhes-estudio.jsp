@@ -8,6 +8,7 @@
 	<spring:eval expression="@environment.getProperty('amazons3context')" var="amazons3context" />
 
 	<c:set var="fotos" value="${estudio.fotosEstudio}" />
+	<input type="hidden" id="estudioId" value="${estudio.id}">
 
 	<div id="fotos-estudio" class="col s12 m12 l12">
 		<c:forEach var="foto" items="${fotos}">
@@ -189,7 +190,6 @@
 			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
 				<h5 id="valor-total"></h5>
 			</div>
-			<input type="hidden" id="estudioId" value="${estudio.id}">
 			<input type="hidden" id="valorAgendamento" value="">
 		</div>
 		<div class="modal-footer">
@@ -218,7 +218,6 @@
 				<textarea id="comentario" name="comentario" class="materialize-textarea"></textarea>
 				<label for="comentario">Deixe seu Coment&aacute;rio:</label>
 			</div>
-			<input type="hidden" id="estudioId" value="${estudio.id}">
 		</div>
 		<div class="modal-footer">
 			<a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="javascript:enviaAvaliacao('${pageContext.request.contextPath}');">Enviar Avalia&ccedil;&atilde;o</a>

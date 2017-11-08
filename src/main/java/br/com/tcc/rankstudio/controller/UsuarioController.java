@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.controller;
 
 import br.com.tcc.rankstudio.exception.UsuarioExistenteException;
+import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.service.IEmpresaService;
@@ -29,6 +30,8 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	@Autowired
+	private IEstudioService estudioService;
 	@Autowired
 	private Environment environment;
 
@@ -95,7 +98,20 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/usuario/{idUsuario}/agendamentos", method = RequestMethod.GET)
 	public ModelAndView agendamentosUsuario(@PathVariable Long idUsuario) {
-		return null;
+
+		ModelAndView modelAndView = new ModelAndView();
+		List<Agendamento> agendamentoList = usuarioService.buscaAgendamentosUsuario(idUsuario);
+		List<Estudio> estudioList = new ArrayList<Estudio>();
+
+		for (Agendamento agendamento : agendamentoList) {
+			estudioList.add(estudioService.buscaPorId(agendamento.getEstudioId()));
+		}
+
+		modelAndView.addObject("agendamentos", agendamentoList);
+		modelAndView.addObject("estudios", estudioList);
+		modelAndView.setViewName("usuario/agendamentos");
+
+		return modelAndView;
 	}
 
 }

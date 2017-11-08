@@ -5,18 +5,23 @@ package br.com.tcc.rankstudio.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table(name="tb_agendamento")
 public class Agendamento implements Serializable {
 
-	private static final long serialVersionUID = -8073046649171797385L;
+	private static final long serialVersionUID = -8073046649171797245L;
 
 	@Id @GeneratedValue
 	private Long id;
 
+	@Column(name = "tipo_agendamento")
+	private String tipoAgendamento;
+
 	@Column(name="data_agendamento")
-	private String dataAgendamento;
+	@Temporal(TemporalType.DATE)
+	private Calendar dataAgendamento;
 
 	@Column(name="horario_agendamento")
 	private String horarioAgendamento;
@@ -27,7 +32,7 @@ public class Agendamento implements Serializable {
 	@Column(name="sala_agendamento")
 	private String salaAgendamento;
 
-	@Column(name="valor'_agendamento")
+	@Column(name="valor_agendamento")
 	private Double valorAgendamento;
 
 	@Column(name="usuario_id")
@@ -44,11 +49,19 @@ public class Agendamento implements Serializable {
 		this.id = id;
 	}
 
-	public String getDataAgendamento() {
+	public String getTipoAgendamento() {
+		return tipoAgendamento;
+	}
+
+	public void setTipoAgendamento(String tipoAgendamento) {
+		this.tipoAgendamento = tipoAgendamento;
+	}
+
+	public Calendar getDataAgendamento() {
 		return dataAgendamento;
 	}
 
-	public void setDataAgendamento(String dataAgendamento) {
+	public void setDataAgendamento(Calendar dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
 	}
 

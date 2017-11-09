@@ -95,6 +95,34 @@ function realizarAgendamento(pageContext) {
     }
 }
 
+function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
+    var data = getData();
+    var url = getUrl(pageContext, nomeRelatorio)
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function(data) {},
+        error: function(data) {Materialize.toast(data.error, 4000);}
+    });
+}
+
+function getData() {
+    var esutdioId = $('#estudioId').val();
+    var dataIni = $('#dataIni').val();
+    var dataFim = $('#dataFim').val();
+
+    if(validaFiltrosRelatorio())
+        return {estudioId:estudioId, dataIni:dataIni, dataFim:dataFim};
+    else
+        alert('Filtro invalido!');
+}
+
+function getUrl(pageContext, nomeRelatorio) {
+    var resource = '/relatorios'
+    return pageContext + resource + '/' + nomeRelatorio;
+}
+
 function validaDadosAgendamento(data) {
   if((data.tipoAgendamento==''||data.tipoAgendamento==undefined)
     || (data.salaAgendamento==''||data.salaAgendamento==undefined)

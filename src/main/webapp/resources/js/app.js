@@ -60,11 +60,10 @@ function enviaAvaliacao(pageContext) {
 
 function realizarAgendamento(pageContext) {
 
-    var tipoAgendamento = $('#tipoAgendamento').val();
+    var tipoAgendamento = $( "#tipoAgendamento option:selected" ).text().split("-")[0].trim();
     var salaAgendamento = $('#salaAgendamento').val();
     var dataAgendamento = convertStringToCalendar($('#dataAgendamento').val());
     var horarioAgendamento = $('#horarioAgendamento').val();
-    var tipoAgendamento = $('#tipoAgendamento').val();
     var periodoAgendamento = $('#periodoAgendamento').val();
     var valorAgendamento = $('#valorAgendamento').val();
     var estudioId = $('#estudioId').val();
@@ -74,7 +73,6 @@ function realizarAgendamento(pageContext) {
       salaAgendamento:salaAgendamento,
       dataAgendamento:dataAgendamento,
       horarioAgendamento:horarioAgendamento,
-      tipoAgendamento:tipoAgendamento,
       periodoAgendamento:periodoAgendamento,
       valorAgendamento:valorAgendamento,
       estudioId:estudioId

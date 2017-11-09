@@ -2,6 +2,7 @@ package br.com.tcc.rankstudio.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "tb_avaliacao")
@@ -21,6 +22,10 @@ public class Avaliacao implements Serializable {
 
     @Column(columnDefinition = "TEXT")
     private String comentario;
+
+    @Column(name = "data_avaliacao")
+    @Temporal(TemporalType.DATE)
+    private Calendar dataAvaliacao;
 
     @ManyToOne
     @JoinColumn(name = "estudio_id")
@@ -48,6 +53,14 @@ public class Avaliacao implements Serializable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public Calendar getDataAvaliacao() {
+        return dataAvaliacao;
+    }
+
+    public void setDataAvaliacao(Calendar dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
     }
 
     public Estudio getEstudio() {

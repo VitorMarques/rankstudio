@@ -3,6 +3,7 @@
  */
 package br.com.tcc.rankstudio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -42,26 +43,32 @@ public class Estudio implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
+	@JsonIgnore
 	private Empresa empresa;
 
 	@OneToMany(mappedBy = "estudio")
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Equipamento> equipamentos;
 
 	@OneToMany(mappedBy = "estudio")
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<Agenda> agendas;
 
 	@OneToMany(mappedBy = "estudio")
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
 	private List<CondicaoComercial> condicoesComerciais;
 
 	@OneToMany(mappedBy = "estudio", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
     private List<FotoEstudio> fotosEstudio;
 
 	@OneToMany(mappedBy = "estudio")
     @LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
     private List<Avaliacao> avaliacoes;
 
 	public Long getId() {

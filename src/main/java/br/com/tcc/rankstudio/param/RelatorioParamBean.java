@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.param;
 
-import java.util.Calandar;
+import java.io.Serializable;
+import java.util.Calendar;
 
 public class RelatorioParamBean implements Serializable {
 
@@ -26,7 +27,7 @@ public class RelatorioParamBean implements Serializable {
         return dataIni;
     }
 
-    public void setDataFim(Calandar dataFim) {
+    public void setDataFim(Calendar dataFim) {
         this.dataFim = dataFim;
     }
 

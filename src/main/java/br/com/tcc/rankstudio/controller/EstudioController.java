@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -165,6 +166,7 @@ public class EstudioController {
 
 			avaliacao.setEstudio(estudio);
 			avaliacao.setNomeUsuario(authUser.getNome());
+			avaliacao.setDataAvaliacao(Calendar.getInstance());
 
 			estudioService.saveAvaliacao(avaliacao);
 

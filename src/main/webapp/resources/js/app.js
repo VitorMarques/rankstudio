@@ -9,7 +9,7 @@ $(document).ready(function() {
     $('#telefone').mask('(99)9999-9999?9');
     $('#dataAquisicao').mask('99/99/9999');
     $('#dataInicio').mask('99/99/9999');
-    $('#dataFim').mask('99/99/9999');
+    //$('#dataFim').mask('99/99/9999');
     $('#numeroSerie').mask('9999999');
     $('#data').mask('99/99/9999');
     $('#horario').mask('99:99');
@@ -101,19 +101,77 @@ function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
     $.ajax({
         type: 'POST',
         url: url,
+        dataType: 'json',
         data: data,
-        success: function(data) {},
+        success: function(data) {
+
+            $('#resultadoRelatorioGrafico').css('display', 'block');
+
+            var labels = [];
+            var meses = [];
+            var totais = [];
+            var movimentacoes = [];
+            var datasets = [];
+            var backgroundColor = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+            var borderColor = ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
+
+            $.each(data, function (index, value) {
+                labels[index] = value.mes;
+                totais[index] = value.total;
+                movimentacoes[index] = value.tipoAgendamento;
+            });
+
+            //remove os meses duplicados
+            $.each(labels, function(i, el){
+                if($.inArray(el, meses) === -1) meses.push(el);
+            });
+
+            $.each(movimentacoes, function (index, value) {
+                datasets[index] = {
+                    label: value,
+                    data: [totais[index]],
+                    backgroundColor: backgroundColor[index],
+                    borderColor: borderColor[index],
+                    borderWidth: 1
+                }
+            });
+
+            var ctx = $("#myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: meses,
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    },
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    legend: {position:'top'},
+                    title: {display:true, text:'Relatorio de Movimentacao dos Estudios'}
+                }
+            });
+
+        },
         error: function(data) {Materialize.toast(data.error, 4000);}
     });
 }
 
 function getData() {
-    var esutdioId = $('#estudioId').val();
+    var estudioId = $('#estudio').val();
     var dataIni = $('#dataIni').val();
     var dataFim = $('#dataFim').val();
 
-    if(validaFiltrosRelatorio())
-        return {estudioId:estudioId, dataIni:dataIni, dataFim:dataFim};
+    var data = {estudioId:estudioId, dataIni:dataIni, dataFim:dataFim};
+
+    if(validaFiltrosRelatorio(data))
+        return data;
     else
         alert('Filtro invalido!');
 }
@@ -121,6 +179,14 @@ function getData() {
 function getUrl(pageContext, nomeRelatorio) {
     var resource = '/relatorios'
     return pageContext + resource + '/' + nomeRelatorio;
+}
+
+function validaFiltrosRelatorio(data) {
+    if(/*(data.estudioId==''||data.estudioId==undefined)
+        || */(data.dataIni==''||data.dataIni==undefined)
+        || (data.dataFim==''||data.dataFim==undefined))
+        return false;
+    return true;
 }
 
 function validaDadosAgendamento(data) {

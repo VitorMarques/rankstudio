@@ -82,9 +82,21 @@
                             </a>
                         </li>
                         <li id="link-relatorio">
-                            <a href="#" class="cyan-text">
+                            <a href="<c:url value="/relatorios/movimentacoes"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
-                                <span>Relat&oacute;rios</span>
+                                <span>Relat&oacute;rio Movimenta&ccedil;&otilde;es</span>
+                            </a>
+                        </li>
+                        <li id="link-relatorio">
+                            <a href="<c:url value="/relatorios/clientes"/>" class="cyan-text">
+                                <i class="material-icons">assignment</i>
+                                <span>Relat&oacute;rio Visitas Clientes</span>
+                            </a>
+                        </li>
+                        <li id="link-relatorio">
+                            <a href="<c:url value="/relatorios/historiconotas"/>" class="cyan-text">
+                                <i class="material-icons">assignment</i>
+                                <span>Relat&oacute;rio Hist&oacute;rico Notas</span>
                             </a>
                         </li>
                     </c:if>

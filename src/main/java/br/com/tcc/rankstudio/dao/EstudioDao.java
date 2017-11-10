@@ -46,7 +46,7 @@ public class EstudioDao extends AbstractDao implements IDao {
     public List<Estudio> listaEstudiosPorProprietario(Long idProprietario) {
 
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM tb_usuario ");
+        query.append("SELECT tb_estudio.* FROM tb_usuario ");
         query.append("LEFT JOIN tb_empresa ON tb_usuario.id = tb_empresa.representante_id ");
         query.append("JOIN tb_estudio ON tb_empresa.id = tb_estudio.empresa_id ");
         query.append("AND tb_usuario.id = :representanteId");

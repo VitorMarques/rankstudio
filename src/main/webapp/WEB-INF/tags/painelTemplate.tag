@@ -42,7 +42,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-2.1.4.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/materialize.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery.maskedinput.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/Chart.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/lib/Chart.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
 <script>
     $(document).ready(function() {

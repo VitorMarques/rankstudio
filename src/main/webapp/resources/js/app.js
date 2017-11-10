@@ -200,8 +200,8 @@ function geraRelatorioLista(data) {
     var container = $('#resultadoRelatorioLista');
     container.css('display', 'block');
     var html = '<h5>Relatorio de Estudios Cadastrados</h5><ul>';
-    $.each(data, function() {
-        html += '<li>' + data.nome + '  ' + data.endereco + ' ' + data.bairro + ' ' + data.cidade + '</li>';
+    $.each(data, function(index, value) {
+        html += '<li>' + value.nome + '  ' + value.endereco + ' ' + value.bairro + ' ' + value.cidade + '</li>';
     });
     html += '</ul>';
     container.html(html);

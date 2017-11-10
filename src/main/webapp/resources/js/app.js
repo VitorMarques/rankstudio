@@ -198,13 +198,17 @@ function geraRelatorioGrafico(data) {
 
 function geraRelatorioLista(data) {
     var container = $('#resultadoRelatorioLista');
+    var tabela = $('#tabelaRelatorioLista');
     container.css('display', 'block');
-    var html = '<h5>Relatorio de Estudios Cadastrados</h5><ul>';
+    var html = '';
     $.each(data, function(index, value) {
-        html += '<li>' + value.nome + '  ' + value.endereco + ' ' + value.bairro + ' ' + value.cidade + '</li>';
+        html += '<tr>'
+        + '<td>'+value.nome+'</td>'
+        + '<td>'+value.endereco+'</td>'
+        + '<td>'+value.bairro+'</td>'
+        + '<td>'+value.cidade+'</td></tr>' ;
     });
-    html += '</ul>';
-    container.html(html);
+    tabela.html(html);
 }
 
 function validaDadosAgendamento(data) {

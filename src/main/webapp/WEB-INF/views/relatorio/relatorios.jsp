@@ -33,9 +33,7 @@
 		</div>
 	</div>
 	<div class="col s12 m12 l12" id="resultadoRelatorioLista" style="display:none">
-		<ul id="listaResultado">
-
-		</ul>
+		
 	</div>
 	<div class="col s12 m12 l12" id="resultadoRelatorioGrafico" style="display:none">
 		<canvas id="myChart" height="400"></canvas>

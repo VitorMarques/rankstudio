@@ -5,18 +5,7 @@
                 <a href="<c:url value="/"/>" class="brand-logo tooltipped" data-position="right" data-tooltip="RankStudio Portal">
                     <img src="<c:url value="/resources/images/rankstudio-logo.png"/>" alt="rankstudio-logo">
                 </a>
-<%--                <div class="header-search-wrapper hide-on-med-and-down">
-                    <i class="material-icons">search</i>
-                    <input id="input-busca-header" type="text" name="busca" class="header-search-input z-depth-2" placeholder="Pesquisar Est&uacute;dios">
-                </div>--%>
                 <ul class="right hide-on-med-and-down">
-<%--                    <li>
-                        <a href="#" class="waves-effect waves-block waves-light tooltipped"
-                           data-position="bottom" data-tooltip="Meus Dados">
-                            <i class="material-icons">account_circle</i>
-                        </a>
-                    </li>--%>
-
                     <li>
                         <a href="<c:url value="/"/>" class="waves-effect waves-block waves-light tooltipped"
                            data-position="bottom" data-tooltip="Voltar para o Site">
@@ -81,25 +70,41 @@
                                 <span>Est&uacute;dios</span>
                             </a>
                         </li>
-                        <li id="link-relatorio">
+                        <li>
                             <a href="<c:url value="/relatorios/movimentacoes"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
                                 <span>Relat&oacute;rio Movimenta&ccedil;&otilde;es</span>
                             </a>
                         </li>
-                        <li id="link-relatorio">
+                        <li>
                             <a href="<c:url value="/relatorios/clientes"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
                                 <span>Relat&oacute;rio Visitas Clientes</span>
                             </a>
                         </li>
-                        <li id="link-relatorio">
+                        <li>
                             <a href="<c:url value="/relatorios/historiconotas"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
                                 <span>Relat&oacute;rio Hist&oacute;rico Notas</span>
                             </a>
                         </li>
                     </c:if>
+
+                    <c:if test="${authUser.perfil.id==3}"> <%--Admin--%>
+                        <li>
+                            <a href="<c:url value="/relatorios/estudios"/>" class="cyan-text">
+                                <i class="material-icons">assignment</i>
+                                <span>Est&uacute;dios Cadastrados</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<c:url value="/relatorios/ranks"/>" class="cyan-text">
+                                <i class="material-icons">assignment</i>
+                                <span>Relat&oacute;rio TOP 10 Estudios</span>
+                            </a>
+                        </li>
+                    </c:if>
+
                 </ul>
             </div>
         </nav>

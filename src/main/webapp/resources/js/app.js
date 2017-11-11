@@ -16,15 +16,15 @@ $(document).ready(function() {
 });
 
 function definePaginaAtiva(nomeDaPagina) {
-    if(nomeDaPagina=='usuario') {
+    if(nomeDaPagina==='usuario') {
         $('#link-usuario').addClass('item-menu-ativo');
-    } else if(nomeDaPagina=='empresa') {
+    } else if(nomeDaPagina==='empresa') {
         $('#link-empresa').addClass('item-menu-ativo');
-    } else if(nomeDaPagina=='estudio') {
+    } else if(nomeDaPagina==='estudio') {
         $('#link-estudio').addClass('item-menu-ativo');
-    } else if(nomeDaPagina=='avaliacao') {
+    } else if(nomeDaPagina==='avaliacao') {
         $('#link-avaliacao').addClass('item-menu-ativo');
-    } else if(nomeDaPagina=='agendamento') {
+    } else if(nomeDaPagina==='agendamento') {
         $('#link-agendamento').addClass('item-menu-ativo');
     }
 }
@@ -43,7 +43,7 @@ function enviaAvaliacao(pageContext) {
     var data = {nota:nota, comentario:comentario};
     var url = pageContext + "/estudio/" + estudioId + "/avaliacao";
 
-    if((nota==undefined || nota=='' || nota==null) || (comentario==undefined || comentario=='' || comentario==null)) {
+    if((nota===undefined || nota==='' || nota===null) || (comentario===undefined || comentario==='' || comentario===null)) {
         alert('Favor preencher as informacoes necessarias!');
     } else {
         $.ajax({
@@ -60,7 +60,7 @@ function enviaAvaliacao(pageContext) {
 
 function realizarAgendamento(pageContext) {
 
-    var tipoAgendamento = $( "#tipoAgendamento option:selected" ).text().split("-")[0].trim();
+    var tipoAgendamento = $("#tipoAgendamento").find("option:selected").text().split("-")[0].trim();
     var salaAgendamento = $('#salaAgendamento').val();
     var dataAgendamento = convertStringToCalendar($('#dataAgendamento').val());
     var horarioAgendamento = $('#horarioAgendamento').val();
@@ -97,7 +97,7 @@ function realizarAgendamento(pageContext) {
 
 function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
     var data = getData();
-    var url = getUrl(pageContext, nomeRelatorio)
+    var url = getUrl(pageContext, nomeRelatorio);
     $.ajax({
         type: 'POST',
         url: url,
@@ -177,38 +177,34 @@ function getData() {
 }
 
 function getUrl(pageContext, nomeRelatorio) {
-    var resource = '/relatorios'
+    var resource = '/relatorios';
     return pageContext + resource + '/' + nomeRelatorio;
 }
 
 function validaFiltrosRelatorio(data) {
-    if(/*(data.estudioId==''||data.estudioId==undefined)
-        || */(data.dataIni==''||data.dataIni==undefined)
-        || (data.dataFim==''||data.dataFim==undefined))
-        return false;
-    return true;
+    return !((data.dataIni === '' || data.dataIni === undefined)
+        || (data.dataFim === '' || data.dataFim === undefined));
+
 }
 
 function validaDadosAgendamento(data) {
-  if((data.tipoAgendamento==''||data.tipoAgendamento==undefined)
-    || (data.salaAgendamento==''||data.salaAgendamento==undefined)
-    || (data.dataAgendamento==''||data.dataAgendamento==undefined)
-    || (data.horarioAgendamento==''||data.horarioAgendamento==undefined)
-    || (data.tipoAgendamento==''||data.tipoAgendamento==undefined)
-    || (data.periodoAgendamento==''||data.periodoAgendamento==undefined)
-    || (data.valorAgendamento==''||data.valorAgendamento==undefined))
-    return false;
-  return true;
+  return !((data.tipoAgendamento === '' || data.tipoAgendamento === undefined)
+      || (data.salaAgendamento === '' || data.salaAgendamento === undefined)
+      || (data.dataAgendamento === '' || data.dataAgendamento === undefined)
+      || (data.horarioAgendamento === '' || data.horarioAgendamento === undefined)
+      || (data.tipoAgendamento === '' || data.tipoAgendamento === undefined)
+      || (data.periodoAgendamento === '' || data.periodoAgendamento === undefined)
+      || (data.valorAgendamento === '' || data.valorAgendamento === undefined));
+
 }
 
 function convertStringToCalendar(data) {
     var arrayData = data.split("/");
-    var dataCalendar = arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]; //formato yyyy-mm-dd
-    return dataCalendar;
+    return arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0];
 }
 
 function calculaValorAgendamento() {
-    valorTotal = ($('#tipoAgendamento').val() * $('#periodoAgendamento').val());
+    var valorTotal = ($('#tipoAgendamento').val() * $('#periodoAgendamento').val());
     $('#valorAgendamento').val(valorTotal);
     $('#valor-total').text('Valor Total = R$ ' + valorTotal);
 }

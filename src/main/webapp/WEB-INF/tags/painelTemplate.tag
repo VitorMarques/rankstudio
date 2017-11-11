@@ -2,8 +2,9 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="text/html">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,7 +45,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery.maskedinput.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/lib/Chart.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('select').material_select();
         $('.materialboxed').materialbox();

@@ -1,3 +1,4 @@
+<%--suppress ELValidationInJSP --%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -37,6 +38,7 @@
 
 		</ul>
 	</div>
+
 	<div class="col s12 m12 l12" id="resultadoRelatorioGrafico" style="display:none">
 		<canvas id="myChart" height="400"></canvas>
 	</div>

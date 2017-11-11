@@ -23,13 +23,15 @@ public class RelatorioController {
 
     private static final String TIPO_RELATORIO_GRAFICO = "GRAFICO";
     private static final String TIPO_RELATORIO_LISTA = "LISTA";
+    
+    private final IRelatorioService relatorioService;
+    private final IEstudioService estudioService;
 
     @Autowired
-    private IRelatorioService relatorioService;
-    @Autowired
-    private IEstudioService estudioService;
-
-    public RelatorioController() { }
+    public RelatorioController(IRelatorioService relatorioService, IEstudioService estudioService) {
+        this.relatorioService = relatorioService;
+        this.estudioService = estudioService;
+    }
 
     @RequestMapping(value = "/{nomeRelatorio}")
     public ModelAndView getRelatorioPage(@PathVariable("nomeRelatorio") String nomeRelatorio, HttpServletRequest request) {
@@ -51,7 +53,7 @@ public class RelatorioController {
     @RequestMapping(value = "/movimentacoes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MovimentacaoEstudioDTO> relatorioMovimentacaoEstudio(RelatorioParamBean relatorioParamBean) {
 
-        List<MovimentacaoEstudioDTO> movimentacaoList = null;
+        List<MovimentacaoEstudioDTO> movimentacaoList;
         //List<MovimentacaoEstudioDataset> datasets = null;
 
         try {
@@ -73,7 +75,7 @@ public class RelatorioController {
     @RequestMapping(value = "/clientes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ClientesEstudioDTO> relatorioClientesEstudio(RelatorioParamBean relatorioParamBean) {
 
-        List<ClientesEstudioDTO> clienteList = null;
+        List<ClientesEstudioDTO> clienteList;
 
         try {
             clienteList = relatorioService.geraRelatorioClientesEstudio(relatorioParamBean.getEstudioId(), relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
@@ -88,7 +90,7 @@ public class RelatorioController {
     @RequestMapping(value = "/historiconotas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<HistoricoNotasEstudioDTO> relatorioHistoricoNotasEstudio(RelatorioParamBean relatorioParamBean) {
 
-        List<HistoricoNotasEstudioDTO> historicoNotasList = null;
+        List<HistoricoNotasEstudioDTO> historicoNotasList;
 
         try {
             historicoNotasList = relatorioService.geraRelatorioHistoricoNotasEstudio(relatorioParamBean.getEstudioId(), relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
@@ -103,7 +105,7 @@ public class RelatorioController {
     @RequestMapping(value = "/ranks", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RankEstudioDTO> relatorioRankEstudio(RelatorioParamBean relatorioParamBean) {
 
-        List<RankEstudioDTO> rankStudioList = null;
+        List<RankEstudioDTO> rankStudioList;
 
         try {
             rankStudioList = relatorioService.geraRelatorioRankEstudio(relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
@@ -118,7 +120,7 @@ public class RelatorioController {
     @RequestMapping(value = "/estudios", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Estudio> relatorioEstudios(RelatorioParamBean relatorioParamBean) {
 
-        List<Estudio> estudioList = null;
+        List<Estudio> estudioList;
 
         try {
             estudioList = relatorioService.geraRelatorioEstudiosCadastrados(relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());

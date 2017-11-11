@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "tb_avaliacao")
 public class Avaliacao implements Serializable {

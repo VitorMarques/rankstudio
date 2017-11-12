@@ -6,6 +6,8 @@
 
 <customTags:painelTemplate title="Relatorio de ${nomeRelatorio}" pagina="Relatorios" tamanhoColunas="s12">
 
+    <input type="hidden" id="nomeRelatorio" value="${nomeRelatorio}">
+
 	<div class="col s12 m12 l12">
 		<input type="hidden" name="estudioId" id="estudioId" value="${estudio.id}">
 		<h5>Selecione um per&iacute;odo para gera&ccedil;&atilde;o do Relat&oacute;rio:</h5>
@@ -17,7 +19,7 @@
 			<label for="dataFim">Selecione a Data Final</label>
 			<input type="date" name="dataFim" id="dataFim">
 		</div>
-		<div class="col m3 s3 l3">
+		<div class="col m3 s3 l3" id="selectEstudioRelatorio" style="display: none">
 			<label for="estudio">Selecione o Est&uacute;dio</label>
 			<select name="estudio" id="estudio">
 				<option value="">-- SELECIONE --</option>
@@ -34,20 +36,6 @@
 		</div>
 	</div>
 	<div class="col s12 m12 l12" id="resultadoRelatorioLista" style="display:none">
-		<h5>Relatorio de Estudios Cadastrados</h5>
-		<table class="table table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-					<th>Endereco</th>
-					<th>Bairro</th>
-					<th>Cidade</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaRelatorioLista">
-
-            </tbody>
-        </table>
 	</div>
 
 	<div class="col s12 m12 l12" id="resultadoRelatorioGrafico" style="display:none">

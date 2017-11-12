@@ -15,9 +15,13 @@ import java.util.List;
  */
 public abstract class AbstractDao {
 	
+	private final SessionFactory sessionFactory;
+
 	@Autowired
-	private SessionFactory sessionFactory;
-	
+	public AbstractDao(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}

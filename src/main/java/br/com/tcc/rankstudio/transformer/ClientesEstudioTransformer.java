@@ -18,6 +18,8 @@ public class ClientesEstudioTransformer implements ResultTransformer {
         clientesEstudioDTO.setBairro((String) objects[1]);
         clientesEstudioDTO.setDataAgendamento((Date) objects[2]);
         clientesEstudioDTO.setHorarioAgendamento((String) objects[3]);
+        clientesEstudioDTO.setTipoAgendamento((String) objects[4]);
+        clientesEstudioDTO.setNomeEstudio((String) objects[5]);
         return clientesEstudioDTO;
     }
 

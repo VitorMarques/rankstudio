@@ -17,7 +17,6 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 
     /**
      * Carrega as classes de configuracao da aplicacao
-     * @return
      */
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{ApplicationConfiguration.class, HibernateConfiguration.class};
@@ -30,7 +29,6 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
     /**
      * Define a partir de qual o URL o DispatcherServlet deve comecar a responder.
      * Neste caso deve responder para todas as requisicoes feitas a partir da raiz da aplicacao
-     * @return
      */
     protected String[] getServletMappings() {
         return new String[] {"/"};
@@ -42,7 +40,6 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
     }
 
     private MultipartConfigElement getMultipartConfigElement() {
-        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
-        return multipartConfigElement;
+        return new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
     }
 }

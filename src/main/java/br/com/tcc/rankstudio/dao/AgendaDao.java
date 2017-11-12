@@ -2,10 +2,15 @@ package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.Equipamento;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository("agendaDao")
 public class AgendaDao extends AbstractDao implements IDao {
+
+    public AgendaDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Agenda findById(Long id) {
         String query = "SELECT * FROM tb_agenda WHERE id = :id";

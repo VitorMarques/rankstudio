@@ -1,9 +1,7 @@
 package br.com.tcc.rankstudio.controller;
 
-import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.CondicaoComercial;
 import br.com.tcc.rankstudio.model.Estudio;
-import br.com.tcc.rankstudio.service.IAgendaService;
 import br.com.tcc.rankstudio.service.ICondicaoComercialService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +20,16 @@ import java.util.List;
 @RequestMapping(value = "/estudio/{estudioId}/condicao-comercial")
 public class CondicaoComercialController {
 
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private ICondicaoComercialService condicaoComercialService;
-	@Autowired
-	private Environment environment;
+	private final IEstudioService estudioService;
+	private final ICondicaoComercialService condicaoComercialService;
+	private final Environment environment;
 
-	public CondicaoComercialController() {}
+	@Autowired
+	public CondicaoComercialController(IEstudioService estudioService, ICondicaoComercialService condicaoComercialService, Environment environment) {
+		this.estudioService = estudioService;
+		this.condicaoComercialService = condicaoComercialService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView detalhes(@PathVariable Long estudioId, HttpServletRequest request) {

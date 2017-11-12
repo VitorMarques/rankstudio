@@ -1,7 +1,6 @@
 package br.com.tcc.rankstudio.controller;
 
 import br.com.tcc.rankstudio.model.*;
-import br.com.tcc.rankstudio.service.IEmpresaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import br.com.tcc.rankstudio.service.IUsuarioService;
 import br.com.tcc.rankstudio.util.AmazonS3FileUpload;
@@ -12,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -27,14 +23,16 @@ import java.util.List;
 @RequestMapping(value = "estudio")
 public class EstudioController {
 
-	@Autowired
-	private IUsuarioService usuarioService;
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private Environment environment;
+	private final IUsuarioService usuarioService;
+	private final IEstudioService estudioService;
+	private final Environment environment;
 
-	public EstudioController() {}
+	@Autowired
+	public EstudioController(IUsuarioService usuarioService, IEstudioService estudioService, Environment environment) {
+		this.usuarioService = usuarioService;
+		this.estudioService = estudioService;
+		this.environment = environment;
+	}
 
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView info(HttpServletRequest request) {
@@ -50,7 +48,7 @@ public class EstudioController {
 		ModelAndView modelAndView = new ModelAndView("estudio/lista");
 		modelAndView.addObject("empresa", empresa);
 
-		if(!estudios.isEmpty() && estudios.size() > 0) {
+		if(!estudios.isEmpty()) {
 			modelAndView.addObject("estudios", estudios);
 		}
 
@@ -63,7 +61,7 @@ public class EstudioController {
 	}
 
 	@RequestMapping(value = "/{id}/detalhes", method = RequestMethod.GET)
-	public ModelAndView detalhes(@PathVariable Long id,  HttpServletRequest request) {
+	public ModelAndView detalhes(@PathVariable Long id) {
 
 		Estudio estudio = estudioService.buscaPorId(id);
 		List<Equipamento> equipamentos = estudio.getEquipamentos();
@@ -100,14 +98,14 @@ public class EstudioController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ModelAndView adiciona(Estudio estudio, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+	public ModelAndView adiciona(Estudio estudio, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, boolean isUpdate) {
 
 		ModelAndView modelAndView = new ModelAndView();
-		List<MultipartFile> fileList = new ArrayList<MultipartFile>();
+		List<MultipartFile> fileList;
 
 		try {
 
-			if(files!=null) {
+			if(files!=null && files.length>0) {
 				if(files.length>4)
 					throw new Exception("Erro: Só é permitido o envio de até 4 arquivos.");
 
@@ -129,7 +127,7 @@ public class EstudioController {
 				}
 			}
 
-			estudio.setRank(0.0);
+			if(!isUpdate) estudio.setRank(0.0);
 			estudioService.save(estudio);
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
@@ -151,14 +149,14 @@ public class EstudioController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ModelAndView atualiza(Estudio estudio, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
-		return adiciona(estudio, files, request);
+		return adiciona(estudio, files, request, true);
 	}
 
 	@RequestMapping(value = "/{id}/avaliacao", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String salvaAvaliacao(@PathVariable Long id, Avaliacao avaliacao, HttpServletRequest request) {
 
-		String retorno = "";
+		String retorno;
 
 		try {
 			Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
@@ -187,7 +185,7 @@ public class EstudioController {
 	@ResponseBody
 	public String salvaAgendamento(Agendamento agendamento, HttpServletRequest request) {
 
-		String retorno = "";
+		String retorno;
 
 		try {
 			Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
@@ -205,7 +203,7 @@ public class EstudioController {
 
 	private Double calculaRank(List<Avaliacao> avaliacoes) {
 
-		Double total = Double.valueOf(avaliacoes.size());
+		Double total = (double) avaliacoes.size();
 		Double somaNotas = 0.0;
 
 		BigDecimal rank;

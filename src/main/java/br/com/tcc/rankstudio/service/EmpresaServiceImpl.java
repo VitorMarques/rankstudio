@@ -17,8 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EmpresaServiceImpl implements IEmpresaService {
 
+	private final EmpresaDao empresaDao;
+
 	@Autowired
-	private EmpresaDao empresaDao;
+	public EmpresaServiceImpl(EmpresaDao empresaDao) {
+		this.empresaDao = empresaDao;
+	}
 
 	@Override
 	public void save(Empresa empresa) {

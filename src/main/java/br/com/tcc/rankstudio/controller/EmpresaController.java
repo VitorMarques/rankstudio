@@ -19,14 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "empresa")
 public class EmpresaController {
 
-	@Autowired
-	private IEmpresaService empresaService;
-	@Autowired
-	private IUsuarioService usuarioService;
-	@Autowired
-	private Environment environment;
+	private final IEmpresaService empresaService;
+	private final IUsuarioService usuarioService;
+	private final Environment environment;
 
-	public EmpresaController() {}
+	@Autowired
+	public EmpresaController(IEmpresaService empresaService, IUsuarioService usuarioService, Environment environment) {
+		this.empresaService = empresaService;
+		this.usuarioService = usuarioService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView detalhes(HttpServletRequest request) {

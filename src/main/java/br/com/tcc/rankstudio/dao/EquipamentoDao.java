@@ -4,6 +4,7 @@ import br.com.tcc.rankstudio.model.Equipamento;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.model.FotoEquipamento;
 import br.com.tcc.rankstudio.model.TipoEquipamento;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +16,13 @@ import java.util.List;
  * @author Vitor Marques
  *
  */
+@SuppressWarnings("unchecked")
 @Repository("equipamentoDao")
 public class EquipamentoDao extends AbstractDao implements IDao {
+
+    public EquipamentoDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Equipamento findById(Long id) {
         String query = "SELECT * FROM tb_equipamento WHERE id = :id";

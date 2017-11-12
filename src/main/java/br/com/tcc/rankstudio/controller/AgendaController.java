@@ -1,10 +1,8 @@
 package br.com.tcc.rankstudio.controller;
 
 import br.com.tcc.rankstudio.model.Agenda;
-import br.com.tcc.rankstudio.model.Equipamento;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.service.IAgendaService;
-import br.com.tcc.rankstudio.service.IEquipamentoService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -22,15 +20,16 @@ import java.util.List;
 @RequestMapping(value = "/estudio/{estudioId}/agenda")
 public class AgendaController {
 
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private IAgendaService agendaService;
+	private final IEstudioService estudioService;
+	private final IAgendaService agendaService;
+	private final Environment environment;
 
 	@Autowired
-	private Environment environment;
-
-	public AgendaController() {}
+	public AgendaController(IEstudioService estudioService, IAgendaService agendaService, Environment environment) {
+		this.estudioService = estudioService;
+		this.agendaService = agendaService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView detalhes(@PathVariable Long estudioId, HttpServletRequest request) {
@@ -41,7 +40,7 @@ public class AgendaController {
 		ModelAndView modelAndView = new ModelAndView("agenda/lista");
 		modelAndView.addObject("estudio", estudio);
 
-		if(!agendas.isEmpty() && agendas.size() > 0) {
+		if(!agendas.isEmpty()) {
 			modelAndView.addObject("agendas", agendas);
 		}
 

@@ -21,8 +21,12 @@ import java.util.List;
 @Transactional
 public class UsuarioServiceImpl implements IUsuarioService {
 
+	private final UsuarioDao usuarioDao;
+
 	@Autowired
-	private UsuarioDao usuarioDao;
+	public UsuarioServiceImpl(UsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
 
 	@Override
 	public boolean login(Usuario usuario) {
@@ -36,12 +40,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Override
 	public Usuario buscaPorId(Long id) {
-		return (Usuario) usuarioDao.findById(id);
+		return usuarioDao.findById(id);
 	}
 
 	@Override
 	public Usuario buscaPorEmail(String email) {
-		return (Usuario) usuarioDao.findByEmail(email);
+		return usuarioDao.findByEmail(email);
 	}
 
 	public Perfil buscaPerfil(Usuario usuario) {

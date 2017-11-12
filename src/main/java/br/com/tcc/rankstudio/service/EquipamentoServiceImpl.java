@@ -21,8 +21,12 @@ import java.util.List;
 @Transactional
 public class EquipamentoServiceImpl implements IEquipamentoService {
 
+	private final EquipamentoDao equipamentoDao;
+
 	@Autowired
-	private EquipamentoDao equipamentoDao;
+	public EquipamentoServiceImpl(EquipamentoDao equipamentoDao) {
+		this.equipamentoDao = equipamentoDao;
+	}
 
 	@Override
 	public void save(Equipamento equipamento) {

@@ -18,20 +18,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class SiteController {
 
-	@Autowired
-	private IUsuarioService usuarioService;
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private Environment environment;
+	private final IUsuarioService usuarioService;
+	private final IEstudioService estudioService;
+	private final Environment environment;
 
-	public SiteController() {}
+	@Autowired
+	public SiteController(IUsuarioService usuarioService, IEstudioService estudioService, Environment environment) {
+		this.usuarioService = usuarioService;
+		this.estudioService = estudioService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -45,8 +46,7 @@ public class SiteController {
 
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public ModelAndView loginPage(Usuario usuario) {
-		ModelAndView modelAndView = new ModelAndView("login");
-		return modelAndView;
+		return new ModelAndView("login");
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -152,7 +152,7 @@ public class SiteController {
 	}
 
 	@RequestMapping(value = "site/estudio/{id}/detalhes", method = RequestMethod.GET)
-	public ModelAndView detalhes(@PathVariable Long id,  HttpServletRequest request) {
+	public ModelAndView detalhes(@PathVariable Long id) {
 
 		Estudio estudio = estudioService.buscaPorId(id);
 		List<Equipamento> equipamentos = estudio.getEquipamentos();

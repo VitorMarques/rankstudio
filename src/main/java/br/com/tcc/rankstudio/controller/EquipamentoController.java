@@ -1,14 +1,13 @@
 package br.com.tcc.rankstudio.controller;
 
-import br.com.tcc.rankstudio.model.*;
-import br.com.tcc.rankstudio.service.IEmpresaService;
+import br.com.tcc.rankstudio.model.Equipamento;
+import br.com.tcc.rankstudio.model.Estudio;
+import br.com.tcc.rankstudio.model.FotoEquipamento;
 import br.com.tcc.rankstudio.service.IEquipamentoService;
 import br.com.tcc.rankstudio.service.IEstudioService;
-import br.com.tcc.rankstudio.service.IUsuarioService;
 import br.com.tcc.rankstudio.util.AmazonS3FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +23,16 @@ import java.util.List;
 @RequestMapping(value = "/estudio/{estudioId}/equipamento")
 public class EquipamentoController {
 
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private IEquipamentoService equipamentoService;
+	private final IEstudioService estudioService;
+	private final IEquipamentoService equipamentoService;
+	private final Environment environment;
 
 	@Autowired
-	private Environment environment;
-
-	public EquipamentoController() {}
+	public EquipamentoController(IEstudioService estudioService, IEquipamentoService equipamentoService, Environment environment) {
+		this.estudioService = estudioService;
+		this.equipamentoService = equipamentoService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ModelAndView detalhes(@PathVariable Long estudioId, HttpServletRequest request) {
@@ -43,7 +43,7 @@ public class EquipamentoController {
 		ModelAndView modelAndView = new ModelAndView("equipamento/lista");
 		modelAndView.addObject("estudio", estudio);
 
-		if(!equipamentos.isEmpty() && equipamentos.size() > 0) {
+		if(!equipamentos.isEmpty()) {
 			modelAndView.addObject("equipamentos", equipamentos);
 		}
 
@@ -111,8 +111,6 @@ public class EquipamentoController {
 
 	@RequestMapping(value = "/{id}/excluir", method = RequestMethod.GET)
 	public ModelAndView excluir(@PathVariable Long estudioId, @PathVariable Long id, HttpServletRequest request) {
-
-		ModelAndView modelAndView = new ModelAndView();
 
 		try {
 			equipamentoService.delete(equipamentoService.buscaPorId(id));

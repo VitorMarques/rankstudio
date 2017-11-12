@@ -1,18 +1,15 @@
 package br.com.tcc.rankstudio.service;
 
-import br.com.tcc.rankstudio.dao.EmpresaDao;
 import br.com.tcc.rankstudio.dao.EstudioDao;
+import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.model.Avaliacao;
-import br.com.tcc.rankstudio.model.Empresa;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.model.FotoEstudio;
-import br.com.tcc.rankstudio.model.Agendamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +21,12 @@ import java.util.List;
 @Transactional
 public class EstudioServiceImpl implements IEstudioService {
 
+	private final EstudioDao estudioDao;
+
 	@Autowired
-	private EstudioDao estudioDao;
+	public EstudioServiceImpl(EstudioDao estudioDao) {
+		this.estudioDao = estudioDao;
+	}
 
 	@Override
 	public void save(Estudio estudio) {
@@ -34,12 +35,12 @@ public class EstudioServiceImpl implements IEstudioService {
 
 	@Override
 	public Estudio buscaPorId(Long id) {
-		return (Estudio) estudioDao.findById(id);
+		return estudioDao.findById(id);
 	}
 
 	@Override
 	public List<Estudio> listaTodos() {
-		return (List<Estudio>) estudioDao.listaTodos(Estudio.class);
+		return estudioDao.listaTodos(Estudio.class);
 	}
 
 	@Override
@@ -74,9 +75,7 @@ public class EstudioServiceImpl implements IEstudioService {
 	@Override
 	public List<Estudio> buscaEstudios(String textoPesquisa) {
 
-		List<Estudio> estudioList = estudioDao.pesquisaEstudios(textoPesquisa);
-
-		return estudioList;
+		return estudioDao.pesquisaEstudios(textoPesquisa);
 	}
 
 }

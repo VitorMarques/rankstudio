@@ -2,6 +2,7 @@ package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Estudio;
 import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,10 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 @Repository("estudioDao")
 public class EstudioDao extends AbstractDao implements IDao {
+
+    public EstudioDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Estudio findById(Long id) {
         String query = "SELECT * FROM tb_estudio WHERE id = :id";

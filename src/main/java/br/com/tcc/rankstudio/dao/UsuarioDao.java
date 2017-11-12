@@ -5,6 +5,7 @@ import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Perfil;
 import br.com.tcc.rankstudio.model.Usuario;
 import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -22,6 +23,10 @@ import java.util.List;
  */
 @Repository("usuarioDao")
 public class UsuarioDao extends AbstractDao implements IDao {
+
+	public UsuarioDao(SessionFactory sessionFactory) {
+		super(sessionFactory);
+	}
 
 	public Usuario findByEmail(String email) {
 		return (Usuario) super.getSession().createSQLQuery(" SELECT * FROM tb_usuario WHERE EMAIL = :email").addEntity(Usuario.class).setParameter("email", email).uniqueResult();

@@ -29,9 +29,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = {"classpath:datasource.properties"})
 public class HibernateConfiguration {
 
+	private final Environment environment;
+
 	@Autowired
-	private Environment environment;
-	
+	public HibernateConfiguration(Environment environment) {
+		this.environment = environment;
+	}
+
 	/**
 	 * Define um <code>@Bean</code> de uma SessionFactory que sera utilizado para realizar operacoes na base de dados 
 	 * Informa a SessionFactory onde procurar pelos objetos de modelo mapeados com as anotacoes da JPA
@@ -42,7 +46,7 @@ public class HibernateConfiguration {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] {"br.com.tcc.rankstudio.model"});
+		sessionFactory.setPackagesToScan("br.com.tcc.rankstudio.model");
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

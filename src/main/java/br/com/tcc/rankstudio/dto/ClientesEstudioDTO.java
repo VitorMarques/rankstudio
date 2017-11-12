@@ -14,6 +14,10 @@ public class ClientesEstudioDTO implements Serializable {
 
     private String horarioAgendamento;
 
+    private String tipoAgendamento;
+
+    private String nomeEstudio;
+
     public String getNome() {
         return nome;
     }
@@ -44,5 +48,21 @@ public class ClientesEstudioDTO implements Serializable {
 
     public void setHorarioAgendamento(String horarioAgendamento) {
         this.horarioAgendamento = horarioAgendamento;
+    }
+
+    public String getTipoAgendamento() {
+        return tipoAgendamento;
+    }
+
+    public void setTipoAgendamento(String tipoAgendamento) {
+        this.tipoAgendamento = tipoAgendamento;
+    }
+
+    public String getNomeEstudio() {
+        return nomeEstudio;
+    }
+
+    public void setNomeEstudio(String nomeEstudio) {
+        this.nomeEstudio = nomeEstudio;
     }
 }

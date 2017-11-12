@@ -28,14 +28,16 @@ import java.util.List;
 @Controller
 public class UsuarioController {
 	
-	@Autowired
-	private IUsuarioService usuarioService;
-	@Autowired
-	private IEstudioService estudioService;
-	@Autowired
-	private Environment environment;
+	private final IUsuarioService usuarioService;
+	private final IEstudioService estudioService;
+	private final Environment environment;
 
-	public UsuarioController() {}
+	@Autowired
+	public UsuarioController(IUsuarioService usuarioService, IEstudioService estudioService, Environment environment) {
+		this.usuarioService = usuarioService;
+		this.estudioService = estudioService;
+		this.environment = environment;
+	}
 	
 	@RequestMapping(value = "/usuario/info", method = RequestMethod.GET)
 	public ModelAndView mostra(Usuario usuario, HttpServletRequest request) {

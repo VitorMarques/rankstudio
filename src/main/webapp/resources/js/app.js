@@ -2,6 +2,13 @@ $(document).ready(function () {
     $('div.alert').delay(3000).slideUp(500);
 });
 
+$(document).ready(function () {
+    var nomeRelatorio = $('#nomeRelatorio').val();
+    if(nomeRelatorio==='movimentacoes'
+        ||nomeRelatorio==='historiconotas')
+        $('#selectEstudioRelatorio').css('display', 'block');
+});
+
 $(document).ready(function() {
     $('#cep').mask('99999-999');
     $('#cnpj').mask('99.999.999/9999');
@@ -105,10 +112,16 @@ function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
         data: data,
         success: function(data) {
 
-            if(tipoRelatorio=='GRAFICO')
-                geraRelatorioGrafico(data);
+            if(nomeRelatorio==='movimentacoes')
+                geraRelatorioMovimentacoes(data);
+            else if(nomeRelatorio==='clientes')
+                geraRelatorioClientes(data);
+            else if(nomeRelatorio==='historiconotas')
+                geraRelatorioHistoricoNotas(data);
+            else if(nomeRelatorio==='ranks')
+                geraRelatorioRanks(data);
             else
-                geraRelatorioLista(data);
+                geraRelatorioEstudios(data);
 
         },
         error: function(data) {Materialize.toast(data.error, 4000);}
@@ -136,38 +149,82 @@ function getUrl(pageContext, nomeRelatorio) {
 function validaFiltrosRelatorio(data) {
     return !((data.dataIni === '' || data.dataIni === undefined)
         || (data.dataFim === '' || data.dataFim === undefined));
-
 }
 
-function geraRelatorioGrafico(data) {
+function getBackgroundColors(index) {
+    var backgroundColorsArray = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ];
+    return backgroundColorsArray[index];
+}
+
+function getBorderColor(index) {
+    var borderColorsArray = [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
+    return borderColorsArray[index];
+}
+
+function geraRelatorioMovimentacoes(data) {
     $('#resultadoRelatorioGrafico').css('display', 'block');
 
-    var labels = [];
+    var movimentacoes = ['Ensaio', 'Gravacao'];
     var meses = [];
-    var totais = [];
-    var movimentacoes = [];
+    var totaisEnsaios = [];
+    var totaisGravacoes = [];
     var datasets = [];
-    var backgroundColor = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
-    var borderColor = ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
+    var indiceEnsaios = 0;
+    var indiceGravacoes = 0;
 
     $.each(data, function (index, value) {
-        labels[index] = value.mes;
-        totais[index] = value.total;
-        movimentacoes[index] = value.tipoAgendamento;
-    });
-
-    //remove os meses duplicados
-    $.each(labels, function(i, el){
-        if($.inArray(el, meses) === -1) meses.push(el);
+        if($.inArray(value.mes, meses) === -1) meses.push(value.mes);
+        if(value.tipoAgendamento==='Ensaio') {
+            totaisEnsaios[indiceEnsaios] = value.total;
+            indiceEnsaios++;
+        }
+        if(value.tipoAgendamento==='Gravacao') {
+            totaisGravacoes[indiceGravacoes] = value.total;
+            indiceGravacoes++;
+        }
     });
 
     $.each(movimentacoes, function (index, value) {
-        datasets[index] = {
-            label: value,
-            data: [totais[index]],
-            backgroundColor: backgroundColor[index],
-            borderColor: borderColor[index],
-            borderWidth: 1
+        if(meses.length===1) {
+            if(value==='Ensaio') {
+                datasets[index] = {
+                    label: movimentacoes[index],
+                    data: [totaisEnsaios],
+                    backgroundColor: getBackgroundColors([index]),
+                    borderColor: getBorderColor([index]),
+                    borderWidth: 1
+                }
+            } else if(value==='Gravacao') {
+                datasets[index] = {
+                    label: movimentacoes[index],
+                    data: [totaisGravacoes],
+                    backgroundColor: getBackgroundColors([index]),
+                    borderColor: getBorderColor([index]),
+                    borderWidth: 1
+                }
+            }
+        } else {
+            datasets[index] = {
+                label: movimentacoes[index],
+                data: [totaisEnsaios[index], totaisGravacoes[index]],
+                backgroundColor: getBackgroundColors([index]),
+                borderColor: getBorderColor([index]),
+                borderWidth: 1
+            }
         }
     });
 
@@ -194,11 +251,120 @@ function geraRelatorioGrafico(data) {
     });
 }
 
-function geraRelatorioLista(data) {
+function geraRelatorioClientes(data) {
     var container = $('#resultadoRelatorioLista');
-    var tabela = $('#tabelaRelatorioLista');
     container.css('display', 'block');
-    var html = '';
+    var html = '<h5>Relatorio Historico de Clientes</h5>' +
+        '<table class="table table-hover table-condensed">\n' +
+        '            <thead>\n' +
+        '                <tr>\n' +
+        '                    <th>Nome</th>\n' +
+        '\t\t\t\t\t<th>Bairro</th>\n' +
+        '\t\t\t\t\t<th>Servi&ccedil;o</th>\n' +
+        '\t\t\t\t\t<th>Horario Agendamento</th>\n' +
+        '\t\t\t\t\t<th>Data Agendamento</th>\n' +
+        '\t\t\t\t\t<th>Estudio</th>\n' +
+        '                </tr>\n' +
+        '            </thead>\n' +
+        '            <tbody id="tabelaRelatorioLista">';
+    $.each(data, function(index, value) {
+        html += '<tr>'
+            + '<td>'+value.nome+'</td>'
+            + '<td>'+value.bairro+'</td>'
+            + '<td>'+value.tipoAgendamento+'</td>'
+            + '<td>'+value.horarioAgendamento+'</td>'
+            + '<td>'+value.dataAgendamento+'</td>'
+            + '<td>'+value.nomeEstudio+'</td></tr>' ;
+    });
+    html += '</tbody></table>';
+    container.html(html);
+}
+
+function geraRelatorioHistoricoNotas(data) {
+    $('#resultadoRelatorioGrafico').css('display', 'block');
+
+    var meses = [];
+    var notas = [];
+
+    $.each(data, function (index, value) {
+        meses[index] = value.mes;
+        notas[index] = value.notaMedia;
+    });
+
+    var dataset = {
+        label: "Nota Media",
+        data: notas,
+        backgroundColor: getBackgroundColors(3),
+        borderColor: getBorderColor(0),
+        borderWidth: 3,
+        fill: true
+    };
+
+    var ctx = $("#myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: meses,
+            datasets: [dataset]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            },
+            tooltips: {
+              mode: 'index',
+              intersect: 'false'
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: 'true'
+            },
+            responsive:true,
+            maintainAspectRatio:false,
+            legend: {position:'top'},
+            title: {display:true, text:'Relatorio de Historico de Notas do Estudio'}
+        }
+    });
+}
+
+function geraRelatorioRanks(data) {
+    var container = $('#resultadoRelatorioLista');
+    container.css('display', 'block');
+    var html = '<h5>Relatorio dos Melhores Estudios</h5> ' +
+        '<table class="table table-hover table-condensed">\n' +
+        '            <thead>\n' +
+        '                <tr>\n' +
+        '                    <th>Nome</th>\n' +
+        '\t\t\t\t\t<th>Nota</th>\n' +
+        '                </tr>\n' +
+        '            </thead><tbody id="tabelaRelatorioLista">';
+    $.each(data, function(index, value) {
+        html += '<tr>'
+            + '<td>'+value.nome+'</td>'
+            + '<td>'+value.nota+'</td></tr>' ;
+    });
+    html += '</tbody></table>';
+    container.html(html);
+}
+
+function geraRelatorioEstudios(data) {
+    var container = $('#resultadoRelatorioLista');
+    container.css('display', 'block');
+    var html = '<h5>Relatorio de Estudios Cadastrados</h5>' +
+        '<table class="table table-hover table-condensed">\n' +
+        '            <thead>\n' +
+        '                <tr>\n' +
+        '                    <th>Nome</th>\n' +
+        '\t\t\t\t\t<th>Endereco</th>\n' +
+        '\t\t\t\t\t<th>Bairro</th>\n' +
+        '\t\t\t\t\t<th>Cidade</th>\n' +
+        '                </tr>\n' +
+        '            </thead>\n' +
+        '            <tbody id="tabelaRelatorioLista">';
     $.each(data, function(index, value) {
         html += '<tr>'
         + '<td>'+value.nome+'</td>'
@@ -206,7 +372,8 @@ function geraRelatorioLista(data) {
         + '<td>'+value.bairro+'</td>'
         + '<td>'+value.cidade+'</td></tr>' ;
     });
-    tabela.html(html);
+    html += '</tbody></table>';
+    container.html(html);
 }
 
 function validaDadosAgendamento(data) {

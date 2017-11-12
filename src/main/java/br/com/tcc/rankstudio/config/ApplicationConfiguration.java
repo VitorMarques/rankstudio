@@ -35,8 +35,12 @@ import java.awt.*;
 @PropertySource(value = {"classpath:messages.properties", "classpath:app.properties"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public ApplicationConfiguration(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {

@@ -54,17 +54,9 @@ public class RelatorioController {
     public List<MovimentacaoEstudioDTO> relatorioMovimentacaoEstudio(RelatorioParamBean relatorioParamBean) {
 
         List<MovimentacaoEstudioDTO> movimentacaoList;
-        //List<MovimentacaoEstudioDataset> datasets = null;
 
         try {
             movimentacaoList = relatorioService.geraRelatorioMovimentacaoEstudio(relatorioParamBean.getEstudioId(), relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
-/*            for (MovimentacaoEstudioDTO movimentacaoEstudioDTO : movimentacaoList) {
-                MovimentacaoEstudioDataset dataset = new MovimentacaoEstudioDataset();
-                dataset.setLabel(movimentacaoEstudioDTO.getTipoAgendamento());
-                dataset.getTotais().add(movimentacaoEstudioDTO.getTotal().longValue());
-                datasets.add(dataset);
-            }*/
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

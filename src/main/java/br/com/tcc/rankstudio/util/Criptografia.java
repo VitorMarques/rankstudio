@@ -16,10 +16,10 @@ public class Criptografia {
 	/**
 	 * Metodo responsavel por receber a senha do usuario em formato de String e realizar a criptografia da mesma
 	 * 
-	 * @param senha
+	 * @param senha a senha que sera criptografada
 	 * @return {@link String} a senha criptografada
-	 * @throws UnsupportedEncodingException 
-	 * @throws NoSuchAlgorithmException 
+	 * @throws UnsupportedEncodingException  encode nao suportado
+	 * @throws NoSuchAlgorithmException  algoritmo inexistente
 	 */
     public static String criptografarSenha( final String senha ) throws UnsupportedEncodingException, NoSuchAlgorithmException {
     	

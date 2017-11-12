@@ -2,6 +2,7 @@ package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Empresa;
 import br.com.tcc.rankstudio.model.Usuario;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("empresaDao")
 public class EmpresaDao extends AbstractDao implements IDao {
+
+    public EmpresaDao(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Empresa findById(Long id, Long representanteId) {
         String query = "SELECT * FROM tb_empresa WHERE id = :id AND representante_id = :representanteId";

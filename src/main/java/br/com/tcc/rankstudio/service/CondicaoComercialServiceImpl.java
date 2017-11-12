@@ -12,8 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CondicaoComercialServiceImpl implements ICondicaoComercialService {
 
+	private final CondicaoComercialDao condicaoComercialDao;
+
 	@Autowired
-	private CondicaoComercialDao condicaoComercialDao;
+	public CondicaoComercialServiceImpl(CondicaoComercialDao condicaoComercialDao) {
+		this.condicaoComercialDao = condicaoComercialDao;
+	}
 
 	@Override
 	public void save(CondicaoComercial condicaoComercial) {

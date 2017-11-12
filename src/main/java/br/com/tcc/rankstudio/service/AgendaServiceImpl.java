@@ -17,8 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AgendaServiceImpl implements IAgendaService {
 
+	private final AgendaDao agendaDao;
+
 	@Autowired
-	private AgendaDao agendaDao;
+	public AgendaServiceImpl(AgendaDao agendaDao) {
+		this.agendaDao = agendaDao;
+	}
 
 	@Override
 	public void save(Agenda agenda) {

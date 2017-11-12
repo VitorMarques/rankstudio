@@ -77,12 +77,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<c:url value="/relatorios/clientes"/>" class="cyan-text">
-                                <i class="material-icons">assignment</i>
-                                <span>Relat&oacute;rio Visitas Clientes</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="<c:url value="/relatorios/historiconotas"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
                                 <span>Relat&oacute;rio Hist&oacute;rico Notas</span>
@@ -95,6 +89,12 @@
                             <a href="<c:url value="/relatorios/estudios"/>" class="cyan-text">
                                 <i class="material-icons">assignment</i>
                                 <span>Est&uacute;dios Cadastrados</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<c:url value="/relatorios/clientes"/>" class="cyan-text">
+                                <i class="material-icons">assignment</i>
+                                <span>Relat&oacute;rio De Clientes</span>
                             </a>
                         </li>
                         <li>

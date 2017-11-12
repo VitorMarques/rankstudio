@@ -83,7 +83,7 @@ public class RelatorioDao extends AbstractDao implements IDao {
                 " JOIN tb_estudio te ON tav.estudio_id = te.id" +
                 " WHERE tav.data_avaliacao BETWEEN :dataIni AND :dataFim" +
                 " GROUP BY te.nome" +
-                " ORDER BY te.nome DESC ";
+                " ORDER BY nota DESC ";
 
         return (List<RankEstudioDTO>) getSession().createSQLQuery(query)
                 .setParameter("dataIni", dataIni)

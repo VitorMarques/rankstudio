@@ -1,5 +1,6 @@
 <%@taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
@@ -14,7 +15,7 @@
 							<li style="padding: 20px">
 								<h5>Est&uacute;dio:  <strong>${estudios[loop.index].nome} </strong></h5>
 								<h6>Sala: ${agendamento.salaAgendamento}</h6>
-								<h6>Data: ${agendamento.dataAgendamento}</h6>
+								<h6>Data: <fmt:formatDate value="${agendamento.dataAgendamento.getTime()}" type="DATE" pattern="dd/MM/yyyy" /></h6>
 								<h6>Hor&aacute;rio: ${agendamento.horarioAgendamento}</h6>
 								<h6>Horas: ${agendamento.periodoAgendamento}</h6>
 								<h6>Valor: R$ ${agendamento.valorAgendamento}</h6>

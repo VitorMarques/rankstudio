@@ -9,14 +9,16 @@
                     <li>
                         <a href="<c:url value="/"/>" class="waves-effect waves-block waves-light tooltipped"
                            data-position="bottom" data-tooltip="Voltar para o Site">
-                            <i class="material-icons">public</i>
+                            <%--<i class="material-icons">public</i>--%>
+                            Voltar para o site
                         </a>
                     </li>
 
                     <li>
                         <a href="<c:url value="/logout"/>" class="waves-effect waves-block waves-light tooltipped"
                             data-position="bottom" data-tooltip="Sair">
-                            <i class="material-icons">exit_to_app</i>
+                            <%--<i class="material-icons">exit_to_app</i>--%>
+                            Sair
                         </a>
                     </li>
                 </ul>

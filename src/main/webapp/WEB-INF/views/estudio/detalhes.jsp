@@ -34,35 +34,42 @@
 				<li><strong>Descri&ccedil;&atilde;o: </strong>${estudio.descricao}</li>
 			</ul>
 		</div>
-		<div class="col s4 m4 l4">
-			<h4 class="deep-purple-text caption-uppercase">Condi&ccedil;&atilde;o Comercial</h4>
-			<c:forEach var="condicao" items="${condicoesComercias}">
-			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
-				<div class="card-panel hoverable">
-					<ul>
-						<h5>Tipo: ${condicao.tipo}</h5>
-						<li><strong>Pre&ccedil;o: </strong>${condicao.preco}</li>
-						<li><strong>Tipo Pagamento: </strong>${condicao.tipoPagamento}</li>
-					</ul>
-				</div>
-			</div>
-			</c:forEach>
-		</div>
-		<div class="col s4 m4 l4">
-			<h4 class="deep-purple-text caption-uppercase">Agendas</h4>
-			<c:forEach var="agenda" items="${agendas}">
-				<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
-					<div class="card-panel hoverable">
-						<ul>
-							<h5>${agenda.sala}</h5>
-							<li><strong>Data Inicio: </strong>${agenda.dataInicio}</li>
-							<li><strong>Data Fim: </strong>${agenda.dataFim}</li>
-						</ul>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
+
+        <div class="divider"></div>
+
+        <div id="condicoes" class="col s12 m12 l12" style="margin-top: 40px">
+            <blockquote>Condi&ccedil;&otilde;es Comerciais</blockquote>
+
+            <c:forEach var="condicao" items="${condicoesComerciais}">
+                <div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+                    <div class="card hoverable" style="padding: 20px">
+                        <ul>
+                            <h5>${condicao.tipoCondicao}</h5>
+                            <li><strong>Pre&ccedil;o: </strong>${condicao.preco}</li>
+                            <li><strong>Tipo Pagamento: </strong>${condicao.tipoPagamento}</li>
+                        </ul>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
+            <blockquote>Agendas Dispon&iacute;veis</blockquote>
+            <c:forEach var="agenda" items="${agendas}">
+                <div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+                    <div class="card hoverable" style="padding: 20px">
+                        <ul>
+                            <h5>${agenda.sala}</h5>
+                            <li><strong>Data: </strong>${agenda.data}</li>
+                            <li><strong>Horario: </strong>${agenda.horario}</li>
+                        </ul>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
 
 	<div class="divider"></div>
 

@@ -13,13 +13,15 @@
                         <li>
                             <a href="<c:url value="/app"/>" class="waves-effect waves-block waves-light tooltipped"
                                data-position="bottom" data-tooltip="Painel de Controle">
-                                <i class="material-icons">dashboard</i>
+                                <%--<i class="material-icons">dashboard</i>--%>
+                                Painel de Controle
                             </a>
                         </li>
                         <li>
                             <a href="<c:url value="/logout"/>" class="waves-effect waves-block waves-light tooltipped"
                                data-position="bottom" data-tooltip="Sair">
-                                <i class="material-icons">exit_to_app</i>
+                                <%--<i class="material-icons">exit_to_app</i>--%>
+                                Sair
                             </a>
                         </li>
                     </c:if>

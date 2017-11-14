@@ -14,7 +14,10 @@
         <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">art_track</i>
-                <form:input path="tipoCondicao" required="required"/>
+                <form:select path="tipoCondicao" required="required">
+                    <form:option value="Ensaio">Ensaio</form:option>
+                    <form:option value="Gravacao">Grava&ccedil;&atilde;o</form:option>
+                </form:select>
                 <label for="tipoCondicao" class="center-align">Tipo de Condi&ccedil;&atilde;o</label>
             </div>
         </div>

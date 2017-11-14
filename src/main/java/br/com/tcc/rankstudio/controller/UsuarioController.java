@@ -6,6 +6,7 @@ import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.service.IEmpresaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
+import br.com.tcc.rankstudio.util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;

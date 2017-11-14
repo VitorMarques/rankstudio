@@ -70,4 +70,10 @@ public class DataUtils {
         return date;
     }
 
+    public static String calendarToStringDate(Calendar data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setCalendar(data);
+        return sdf.format(data.getTime());
+    }
+
 }

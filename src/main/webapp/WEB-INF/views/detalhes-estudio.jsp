@@ -61,7 +61,11 @@
 
 	<div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Agendas Dispon&iacute;veis</blockquote>
-
+		<div class="col s12">
+            <a class="btn blue modal-trigger" href="#modalAgendamento">
+                Agendar Agora
+            </a>
+		</div>
 		<c:forEach var="agenda" items="${agendas}">
 			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
 				<div class="card hoverable" style="padding: 20px">
@@ -104,8 +108,13 @@
 
 	<div id="avaliacoes" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Avalia&ccedil;&otilde;es </blockquote>
+        <div class="col s12">
+            <a class="btn blue modal-trigger" href="#modalAvaliacao">
+                Avaliar Agora
+            </a>
+        </div>
 		<c:if test="${! empty avaliacoes}">
-			<ul id="lista-avaliacoes">
+			<ul id="lista-avaliacoes" style="margin-top: calc(4vw);">
 				<c:forEach var="avaliacao" items="${avaliacoes}">
 					<div class="card hoverable">
 						<li style="padding: 20px"><strong>${avaliacao.nomeUsuario} </strong>
@@ -118,15 +127,15 @@
 
 	<%-- Action Buttons--%>
 	<c:if test="${authUser!=null}">
-		<div class="fixed-action-btn horizontal" style="bottom: 90px">
+<%--		<div class="fixed-action-btn horizontal" style="bottom: 90px">
 			<a class="btn-floating btn-large deep-purple">
 				<i class="large material-icons">menu</i>
 			</a>
 			<ul>
-				<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>
+				&lt;%&ndash;<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>&ndash;%&gt;
 				<li><a class="btn-floating amber accent-2 modal-trigger" href="#modalAvaliacao"><i class="material-icons tooltipped" data-position="top" data-tooltip="Avaliar Estudio" data-delay="50">format_quote</i></a></li>
 			</ul>
-		</div>
+		</div>--%>
 	</c:if>
 
 	<div class="fixed-action-btn horizontal">

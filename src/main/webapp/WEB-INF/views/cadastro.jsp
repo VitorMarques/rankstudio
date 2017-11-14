@@ -33,6 +33,13 @@
 				<label for="email" class="center-align">E-Mail</label>
 			</div>
 		</div>
+        <div class="row margin">
+            <div class="input-field col s12">
+                <i class="material-icons prefix small">email</i>
+                <input id="confirmar-email" name="confirmar-email" type="email" required>
+                <label for="confirmar-email" class="center-align">Confirmar E-Mail</label>
+            </div>
+        </div>
 
 		<div class="row margin">
 			<div class="input-field col s12">
@@ -93,19 +100,31 @@
 		</div>
 	</div>
 
-	<script>
+	<script type="text/javascript">
         var senha = document.getElementById("senha");
-		var confirmarSenha = document.getElementById("confirmar-senha");
+        var confirmarSenha = document.getElementById("confirmar-senha");
+        var email = document.getElementById("email");
+        var confirmarEmail = document.getElementById("confirmar-email");
 
         function validatePassword() {
-            if(senha.value != confirmarSenha.value) {
+            if(senha.value !== confirmarSenha.value) {
                 confirmarSenha.setCustomValidity("As senhas devem ser iguais.");
             } else {
                 confirmarSenha.setCustomValidity('');
             }
         }
 
+        function validateEmail() {
+            if(email.value !== confirmarEmail.value) {
+                confirmarEmail.setCustomValidity("Os e-mais informados devem ser iguais.");
+            } else {
+                confirmarEmail.setCustomValidity('');
+            }
+        }
+
         senha.onchange = validatePassword;
         confirmarSenha.onkeyup = validatePassword;
+        email.onchange = validateEmail;
+        confirmarEmail.onkeyup = validateEmail;
 	</script>
 </customTags:siteTemplate>

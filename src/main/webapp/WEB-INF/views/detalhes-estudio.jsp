@@ -61,11 +61,13 @@
 
 	<div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Agendas Dispon&iacute;veis</blockquote>
-		<div class="col s12">
-            <a class="btn blue modal-trigger" href="#modalAgendamento">
-                Agendar Agora
-            </a>
-		</div>
+		<c:if test="${authUser!=null}">
+			<div class="col s12">
+				<a class="btn blue modal-trigger" href="#modalAgendamento">
+					Agendar Agora
+				</a>
+			</div>
+		</c:if>
 		<c:forEach var="agenda" items="${agendas}">
 			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
 				<div class="card hoverable" style="padding: 20px">
@@ -108,11 +110,13 @@
 
 	<div id="avaliacoes" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Avalia&ccedil;&otilde;es </blockquote>
-        <div class="col s12">
-            <a class="btn blue modal-trigger" href="#modalAvaliacao">
-                Avaliar Agora
-            </a>
-        </div>
+        <c:if test="${authUser!=null}">
+            <div class="col s12">
+                <a class="btn blue modal-trigger" href="#modalAvaliacao">
+                    Avaliar Agora
+                </a>
+            </div>
+        </c:if>
 		<c:if test="${! empty avaliacoes}">
 			<ul id="lista-avaliacoes" style="margin-top: calc(4vw);">
 				<c:forEach var="avaliacao" items="${avaliacoes}">

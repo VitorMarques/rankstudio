@@ -26,6 +26,7 @@
 					<div id="actions">
 
 						<c:url var="urlEditarAgenda" value="/estudio/${estudio.id}/agenda/${agenda.id}"/>
+						<c:url var="urlExcluirAgenda" value="/estudio/${estudio.id}/agenda/${agenda.id}/excluir"/>
 
 						<ul>
 							<li class="inline">
@@ -33,6 +34,11 @@
 									<i class="material-icons large">edit</i>
 								</a>
 							</li>
+                            <li class="inline">
+                                <a href="${urlExcluirAgenda}" class="btn btn-floating btn-medium red lighten-1 tooltipped hoverable" data-position="top" data-tooltip="Excluir Agenda" data-delay="50">
+                                    <i class="material-icons large">delete</i>
+                                </a>
+                            </li>
 						</ul>
 					</div>
 				

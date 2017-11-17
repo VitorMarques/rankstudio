@@ -6,5 +6,5 @@ public interface IAgendaService {
 
 	void save(Agenda agenda);
 	Agenda buscaPorId(Long id);
-	
+    void delete(Agenda agenda);
 }

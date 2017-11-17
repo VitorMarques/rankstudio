@@ -4,6 +4,7 @@ import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.service.IAgendaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
+import br.com.tcc.rankstudio.util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -71,18 +73,22 @@ public class AgendaController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ModelAndView adiciona(@PathVariable Long estudioId, Agenda agenda, HttpServletRequest request) {
-
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
-			agendaService.save(agenda);
+            Date dataAgenda = DataUtils.converteStringParaDate(agenda.getData());
+            if(dataAgenda.before(new Date())) {
+                throw new Exception("Data de agendamento nao pode ser anterior a data atual.");
+            }
+            agendaService.save(agenda);
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
 
 			modelAndView.addObject("mensagem", ex.getMessage());
 			modelAndView.addObject("agenda", agenda);
+			modelAndView.addObject("estudio", estudioService.buscaPorId(estudioId));
 			modelAndView.setViewName("agenda/formulario");
-
+            return modelAndView;
 		}
 
 		return detalhes(estudioId, request);
@@ -96,6 +102,28 @@ public class AgendaController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ModelAndView atualiza(@PathVariable Long estudioId, Agenda agenda, HttpServletRequest request) {
 		return adiciona(estudioId, agenda, request);
+	}
+
+	@RequestMapping(value = "/{id}/excluir", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable Long estudioId, @PathVariable Long id, HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView("agenda/lista");
+        modelAndView.addObject("estudio", estudioService.buscaPorId(estudioId));
+
+        Agenda agenda = agendaService.buscaPorId(id);
+
+        if(agenda!=null) {
+            try {
+                agendaService.delete(agenda);
+                request.getSession().setAttribute("mensagem", "Agenda removida com sucesso.");
+            } catch (Exception ex) {
+                modelAndView.addObject("mensagem", ex.getMessage());
+            }
+        } else {
+            modelAndView.addObject("mensagem", "Nao foi possivel encontrar uma agenda com o ID informado. ID=" + id);
+        }
+
+        return modelAndView;
 	}
 
 }

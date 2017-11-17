@@ -59,10 +59,10 @@ public class DataUtils {
             return null;
         }
 
-        Date date = null;
+        Date date;
 
         try {
-            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             date = formatter.parse(data);
         } catch (ParseException e) {
             throw e;

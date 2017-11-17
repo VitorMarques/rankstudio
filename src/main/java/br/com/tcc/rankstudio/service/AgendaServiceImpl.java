@@ -1,9 +1,7 @@
 package br.com.tcc.rankstudio.service;
 
 import br.com.tcc.rankstudio.dao.AgendaDao;
-import br.com.tcc.rankstudio.dao.EquipamentoDao;
 import br.com.tcc.rankstudio.model.Agenda;
-import br.com.tcc.rankstudio.model.Equipamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +30,11 @@ public class AgendaServiceImpl implements IAgendaService {
 	@Override
 	public Agenda buscaPorId(Long id) {
 		return (Agenda) agendaDao.findById(id);
+	}
+
+	@Override
+	public void delete(Agenda agenda) {
+		agendaDao.delete(agenda);
 	}
 
 }

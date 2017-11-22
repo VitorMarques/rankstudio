@@ -117,6 +117,8 @@ function montaSubCombosAgenda(pageContext, agenda) {
         type: 'GET',
         url: url,
         success: function (data) {
+            $('#dataAgendamento').empty();
+            $('#horarioAgendamento').empty();
             $.each(data, function (i, e) {
                 $('#dataAgendamento').append($('<option>', {
                     value: e.data,

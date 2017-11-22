@@ -1,9 +1,10 @@
 package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Agenda;
-import br.com.tcc.rankstudio.model.Equipamento;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("agendaDao")
 public class AgendaDao extends AbstractDao implements IDao {
@@ -19,5 +20,23 @@ public class AgendaDao extends AbstractDao implements IDao {
                 .addEntity(Agenda.class)
                 .setParameter("id", id)
                 .uniqueResult();
+    }
+
+    public List findAll(Long estudioId) {
+        String query = "SELECT * FROM tb_agenda WHERE estudio_id = :estudioId";
+        return super.getSession()
+                .createSQLQuery(query)
+                .addEntity(Agenda.class)
+                .setParameter("estudioId", estudioId)
+                .list();
+    }
+
+    public List findByNomeSala(String nomeSala) {
+        String query = "SELECT * FROM tb_agenda WHERE sala = :sala";
+        return super.getSession()
+                .createSQLQuery(query)
+                .addEntity(Agenda.class)
+                .setParameter("sala", nomeSala)
+                .list();
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,14 +109,16 @@ public class AgendaController {
 	public ModelAndView delete(@PathVariable Long estudioId, @PathVariable Long id, HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView("agenda/lista");
-        modelAndView.addObject("estudio", estudioService.buscaPorId(estudioId));
 
         Agenda agenda = agendaService.buscaPorId(id);
 
         if(agenda!=null) {
             try {
                 agendaService.delete(agenda);
-                request.getSession().setAttribute("mensagem", "Agenda removida com sucesso.");
+                Estudio estudio = estudioService.buscaPorId(estudioId);
+                modelAndView.addObject("mensagem", "Agenda removida com sucesso.");
+                modelAndView.addObject("estudio", estudioService.buscaPorId(estudioId));
+                modelAndView.addObject("agendas", agendaService.findByEstudioId(estudioId));
             } catch (Exception ex) {
                 modelAndView.addObject("mensagem", ex.getMessage());
             }
@@ -125,5 +128,10 @@ public class AgendaController {
 
         return modelAndView;
 	}
+
+	@RequestMapping(value = "/{nomeSala}/lista", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Agenda> listAgendasByName(@PathVariable(value = "nomeSala") String nomeSala) {
+        return agendaService.findByNomeSala(nomeSala);
+    }
 
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  *
  * @author Vitor Marques
@@ -35,6 +37,16 @@ public class AgendaServiceImpl implements IAgendaService {
 	@Override
 	public void delete(Agenda agenda) {
 		agendaDao.delete(agenda);
+	}
+
+    @Override
+    public List<Agenda> findByEstudioId(Long estudioId) {
+        return agendaDao.findAll(estudioId);
+    }
+
+	@Override
+	public List<Agenda> findByNomeSala(String nomeSala) {
+		return agendaDao.findByNomeSala(nomeSala);
 	}
 
 }

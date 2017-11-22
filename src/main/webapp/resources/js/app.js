@@ -1,5 +1,11 @@
 $(document).ready(function () {
     $('div.alert').delay(3000).slideUp(500);
+    $('#dataAgendamento').on('contentChanged', function() {
+        $(this).material_select();
+    });
+    $('#horarioAgendamento').on('contentChanged', function() {
+        $(this).material_select();
+    });
 });
 
 $(document).ready(function () {
@@ -100,6 +106,35 @@ function realizarAgendamento(pageContext) {
         }
       });
     }
+}
+
+function montaSubCombosAgenda(pageContext, agenda) {
+
+    var estudioId = $('#estudioId').val();
+    var url = pageContext + "/estudio/" + estudioId + "/agenda/" + agenda + "/lista";
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (data) {
+            $.each(data, function (i, e) {
+                $('#dataAgendamento').append($('<option>', {
+                    value: e.data,
+                    text : e.data
+                }));
+                $('#horarioAgendamento').append($('<option>', {
+                    value: e.horario,
+                    text : e.horario
+                }));
+            });
+            $('#dataAgendamento').trigger('contentChanged');
+            $('#horarioAgendamento').trigger('contentChanged');
+        },
+        error: function (data) {
+            Materialize.toast(data.error, 4000);
+        }
+    });
+
 }
 
 function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {

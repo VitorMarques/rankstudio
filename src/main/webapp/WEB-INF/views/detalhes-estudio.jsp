@@ -61,7 +61,7 @@
 
 	<div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Agendas Dispon&iacute;veis</blockquote>
-		<c:if test="${authUser!=null}">
+		<c:if test="${authUser!=null && authUser.id==1}">
 			<div class="col s12">
 				<a class="btn blue modal-trigger" href="#modalAgendamento">
 					Agendar Agora
@@ -110,7 +110,7 @@
 
 	<div id="avaliacoes" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Avalia&ccedil;&otilde;es </blockquote>
-        <c:if test="${authUser!=null}">
+        <c:if test="${authUser!=null && authUser.id==1}">
             <div class="col s12">
                 <a class="btn blue modal-trigger" href="#modalAvaliacao">
                     Avaliar Agora
@@ -128,19 +128,6 @@
 			</ul>
 		</c:if>
 	</div>
-
-	<%-- Action Buttons--%>
-	<c:if test="${authUser!=null}">
-<%--		<div class="fixed-action-btn horizontal" style="bottom: 90px">
-			<a class="btn-floating btn-large deep-purple">
-				<i class="large material-icons">menu</i>
-			</a>
-			<ul>
-				&lt;%&ndash;<li><a class="btn-floating blue modal-trigger" href="#modalAgendamento"><i class="material-icons tooltipped" data-position="top" data-tooltip="Realizar Agendamento" data-delay="50">access_time</i></a></li>&ndash;%&gt;
-				<li><a class="btn-floating amber accent-2 modal-trigger" href="#modalAvaliacao"><i class="material-icons tooltipped" data-position="top" data-tooltip="Avaliar Estudio" data-delay="50">format_quote</i></a></li>
-			</ul>
-		</div>--%>
-	</c:if>
 
 	<div class="fixed-action-btn horizontal">
 		<a class="btn btn-large white black-text">
@@ -163,7 +150,7 @@
 				<label for="tipoAgendamento">Selecione um Tipo de Agendamento:</label>
 			</div>
 			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
-				<select name="salaAgendamento" id="salaAgendamento" class="input-field">
+				<select name="salaAgendamento" id="salaAgendamento" class="input-field" onchange="montaSubCombosAgenda('${pageContext.request.contextPath}', this.value)">
 					<option value="">-- Selecione --</option>
 					<c:forEach var="agenda" items="${agendas}">
 						<option value="${agenda.sala}">${agenda.sala}</option>
@@ -174,18 +161,18 @@
 			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
 				<select name="dataAgendamento" id="dataAgendamento" class="input-field">
 					<option value="">-- Selecione --</option>
-					<c:forEach var="agenda" items="${agendas}">
+<%--					<c:forEach var="agenda" items="${agendas}">
 						<option value="${agenda.data}">${agenda.data}</option>
-					</c:forEach>
+					</c:forEach>--%>
 				</select>
 				<label for="dataAgendamento">Selecione uma data:</label>
 			</div>
 			<div class="input-field" style="margin-top: 50px;margin-bottom: 50px;">
 				<select name="horarioAgendamento" id="horarioAgendamento" class="input-field">
 					<option value="">-- Selecione --</option>
-					<c:forEach var="agenda" items="${agendas}">
+<%--					<c:forEach var="agenda" items="${agendas}">
 						<option value="${agenda.horario}">${agenda.horario}</option>
-					</c:forEach>
+					</c:forEach>--%>
 				</select>
 				<label for="horarioAgendamento">Selecione um hor&aacute;rio:</label>
 			</div>

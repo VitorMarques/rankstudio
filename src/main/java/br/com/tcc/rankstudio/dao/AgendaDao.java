@@ -1,6 +1,8 @@
 package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Agenda;
+import br.com.tcc.rankstudio.model.Agendamento;
+import br.com.tcc.rankstudio.util.DataUtils;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
@@ -31,12 +33,25 @@ public class AgendaDao extends AbstractDao implements IDao {
                 .list();
     }
 
-    public List findByNomeSala(String nomeSala) {
-        String query = "SELECT * FROM tb_agenda WHERE sala = :sala";
+    public List findByNomeSala(String nomeSala, Long estudioId) {
+        String query = "SELECT * FROM tb_agenda WHERE sala = :sala AND estudio_id = :estudioId AND disponivel = true";
         return super.getSession()
                 .createSQLQuery(query)
                 .addEntity(Agenda.class)
                 .setParameter("sala", nomeSala)
+                .setParameter("estudioId", estudioId)
                 .list();
+    }
+
+    public Agenda findByAgendamento(Agendamento agendamento) {
+        String query = "SELECT * FROM tb_agenda agenda WHERE agenda.sala = :sala AND agenda.data = :data AND agenda.horario = :horario AND agenda.estudio_id = :estudioId";
+        return (Agenda) super.getSession()
+                .createSQLQuery(query)
+                .addEntity(Agenda.class)
+                .setParameter("sala", agendamento.getSalaAgendamento())
+                .setParameter("data", DataUtils.calendarToStringDate(agendamento.getDataAgendamento()))
+                .setParameter("horario", agendamento.getHorarioAgendamento())
+                .setParameter("estudioId", agendamento.getEstudioId())
+                .uniqueResult();
     }
 }

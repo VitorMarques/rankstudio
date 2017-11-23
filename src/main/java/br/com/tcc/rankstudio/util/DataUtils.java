@@ -76,4 +76,9 @@ public class DataUtils {
         return sdf.format(data.getTime());
     }
 
+    public static String calendarToSqlDate(Calendar data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setCalendar(data);
+        return sdf.format(data.getTime());
+    }
 }

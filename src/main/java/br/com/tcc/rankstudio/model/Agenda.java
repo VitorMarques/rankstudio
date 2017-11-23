@@ -24,6 +24,9 @@ public class Agenda implements Serializable {
 	@Column(nullable=false)
 	private String sala;
 
+	@Column(nullable = false)
+	private Boolean disponivel = Boolean.TRUE;
+
 	@ManyToOne
 	@JoinColumn(name = "estudio_id")
 	private Estudio estudio;
@@ -69,4 +72,11 @@ public class Agenda implements Serializable {
 	}
 
 
+	public Boolean getDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(Boolean disponivel) {
+		this.disponivel = disponivel;
+	}
 }

@@ -61,24 +61,31 @@
 
 	<div id="agendas" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Agendas Dispon&iacute;veis</blockquote>
-		<c:if test="${authUser!=null && authUser.id==1}">
-			<div class="col s12">
-				<a class="btn blue modal-trigger" href="#modalAgendamento">
-					Agendar Agora
-				</a>
-			</div>
-		</c:if>
-		<c:forEach var="agenda" items="${agendas}">
-			<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
-				<div class="card hoverable" style="padding: 20px">
-					<ul>
-						<h5>${agenda.sala}</h5>
-						<li><strong>Data: </strong>${agenda.data}</li>
-						<li><strong>Horario: </strong>${agenda.horario}</li>
-					</ul>
-				</div>
-			</div>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${empty agendas}">
+				<h5>Este Est&uacute;dio n&atilde;o possui agendas dispon&iacute;veis no momento.</h5>
+			</c:when>
+			<c:otherwise>
+				<c:if test="${authUser!=null && authUser.id==1}">
+					<div class="col s12">
+						<a class="btn blue modal-trigger" href="#modalAgendamento">
+							Agendar Agora
+						</a>
+					</div>
+				</c:if>
+				<c:forEach var="agenda" items="${agendas}">
+					<div class="col s2 m2 l2" style="margin-bottom: 10px !important;">
+						<div class="card hoverable" style="padding: 20px">
+							<ul>
+								<h5>${agenda.sala}</h5>
+								<li><strong>Data: </strong>${agenda.data}</li>
+								<li><strong>Horario: </strong>${agenda.horario}</li>
+							</ul>
+						</div>
+					</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<div class="divider"></div>

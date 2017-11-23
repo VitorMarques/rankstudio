@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SiteController {
@@ -162,7 +163,7 @@ public class SiteController {
 		ModelAndView modelAndView = new ModelAndView("detalhes-estudio");
 		modelAndView.addObject("estudio", estudio);
 		modelAndView.addObject("equipamentos", equipamentos);
-		modelAndView.addObject("agendas", agendas);
+		modelAndView.addObject("agendas", agendas.stream().filter(Agenda::getDisponivel).collect(Collectors.toList()));
 		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
 
 		return modelAndView;

@@ -130,8 +130,8 @@ public class AgendaController {
 	}
 
 	@RequestMapping(value = "/{nomeSala}/lista", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Agenda> listAgendasByName(@PathVariable(value = "nomeSala") String nomeSala) {
-        return agendaService.findByNomeSala(nomeSala);
+    public @ResponseBody List<Agenda> listAgendasByName(@PathVariable(value = "estudioId") Long estudioId, @PathVariable(value = "nomeSala") String nomeSala) {
+        return agendaService.findByNomeSala(nomeSala, estudioId);
     }
 
 }

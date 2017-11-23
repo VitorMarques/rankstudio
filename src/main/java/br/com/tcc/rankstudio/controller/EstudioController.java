@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.controller;
 
 import br.com.tcc.rankstudio.model.*;
+import br.com.tcc.rankstudio.service.IAgendaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import br.com.tcc.rankstudio.service.IUsuarioService;
 import br.com.tcc.rankstudio.util.AmazonS3FileUpload;
@@ -25,12 +26,17 @@ public class EstudioController {
 
 	private final IUsuarioService usuarioService;
 	private final IEstudioService estudioService;
+	private final IAgendaService agendaService;
 	private final Environment environment;
 
 	@Autowired
-	public EstudioController(IUsuarioService usuarioService, IEstudioService estudioService, Environment environment) {
+	public EstudioController(IUsuarioService usuarioService,
+							 IEstudioService estudioService,
+							 IAgendaService agendaService,
+							 Environment environment) {
 		this.usuarioService = usuarioService;
 		this.estudioService = estudioService;
+		this.agendaService = agendaService;
 		this.environment = environment;
 	}
 
@@ -191,6 +197,11 @@ public class EstudioController {
 			Usuario authUser = (Usuario) request.getSession().getAttribute("authUser");
 			agendamento.setUsuarioId(authUser.getId());
 			estudioService.saveAgendamento(agendamento);
+
+			Agenda agenda = agendaService.findByAgendamento(agendamento);
+			agenda.setDisponivel(false);
+			agendaService.save(agenda);
+
 			retorno = "{\"msg\":\"Agendamento realizado com sucesso!\"}";
 		} catch (Exception ex) {
 			ex.printStackTrace();

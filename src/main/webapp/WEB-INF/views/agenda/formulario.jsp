@@ -37,6 +37,16 @@
         </div>
 
         <c:if test="${edita}">
+
+            <div class="row margin">
+                <p>Agenda disponivel? </p>
+                <input name="disponivel" type="radio" id="sim" />
+                <label for="sim">Sim</label>
+
+                <input name="disponivel" type="radio" id="nao" />
+                <label for="nao">Nao</label>
+            </div>
+
             <div class="row">
                 <div class="input-field col s12">
                     <button type="submit" class="btn deep-purple waves-effect waves-light col s12">Atualizar Dados da Agenda</button>

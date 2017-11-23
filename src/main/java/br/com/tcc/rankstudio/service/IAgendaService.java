@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.service;
 
 import br.com.tcc.rankstudio.model.Agenda;
+import br.com.tcc.rankstudio.model.Agendamento;
 
 import java.util.List;
 
@@ -10,5 +11,7 @@ public interface IAgendaService {
 	Agenda buscaPorId(Long id);
     void delete(Agenda agenda);
 	List<Agenda> findByEstudioId(Long estudioId);
-    List<Agenda> findByNomeSala(String nomeSala);
+    List<Agenda> findByNomeSala(String nomeSala, Long estudioId);
+    Agenda findByAgendamento(Agendamento agendamento);
+
 }

@@ -100,7 +100,7 @@ function realizarAgendamento(pageContext) {
         type: 'POST',
         url: url,
         data: data,
-        success: function () {Materialize.toast('Seus agendamentos foram atualizados. Clique em seu painel de controle para mais informacoes!', 5000, '', function reload(){window.location.reload();})},
+        success: function () {Materialize.toast('Seus agendamentos foram atualizados. Clique em seu painel de controle para mais informacoes!', 3500, '', function reload(){window.location.reload();})},
         error: function (data) {
             Materialize.toast(data.error, 4000);
         }

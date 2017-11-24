@@ -25,7 +25,7 @@
 					</div>
 
 					<div class="card-content">
-						<ul>
+						<ul style="white-space: nowrap;">
 							<h4 class="deep-purple-text caption-uppercase" style="font-size: 0.8em !important;">${estudio.nome}
 								<span class="red-text" style="padding-left: 60px"><small>rank: </small>${estudio.rank}</span>
 								<span class="black-text" style="font-size: 20px"> / 5.0</span>

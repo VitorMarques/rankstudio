@@ -66,7 +66,7 @@
 				<h5>Este Est&uacute;dio n&atilde;o possui agendas dispon&iacute;veis no momento.</h5>
 			</c:when>
 			<c:otherwise>
-				<c:if test="${authUser!=null && authUser.perfil_id==1}">
+				<c:if test="${authUser!=null && authUser.perfil.id==1}">
 					<div class="col s12">
 						<a class="btn blue modal-trigger" href="#modalAgendamento">
 							Agendar Agora
@@ -117,7 +117,7 @@
 
 	<div id="avaliacoes" class="col s12 m12 l12" style="margin-top: 40px">
 		<blockquote>Avalia&ccedil;&otilde;es </blockquote>
-        <c:if test="${authUser!=null && authUser.perfil_id==1}">
+        <c:if test="${authUser!=null && authUser.perfil.id==1}">
             <div class="col s12">
                 <a class="btn blue modal-trigger" href="#modalAvaliacao">
                     Avaliar Agora

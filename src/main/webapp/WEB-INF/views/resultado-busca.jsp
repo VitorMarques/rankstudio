@@ -43,7 +43,12 @@
 
 							<ul>
 								<li class="inline">
-									<a href="${urlDetalhesEstudio}" class="waves-effect waves-light btn btn-medium blue tooltipped hoverable" data-position="top" data-tooltip="Ver Detalhes" data-delay="50" style="width: 100%">
+									<a href="${urlDetalhesEstudio}"
+									   class="waves-effect waves-light btn btn-medium blue tooltipped hoverable"
+									   data-position="top"
+									   data-tooltip="Ver Detalhes"
+									   data-delay="50"
+									   style="width: 100%">
 										<%--<i class="material-icons large">search</i>--%> Detalhes
 									</a>
 								</li>

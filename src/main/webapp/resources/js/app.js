@@ -6,6 +6,13 @@ $(document).ready(function () {
     $('#horarioAgendamento').on('contentChanged', function() {
         $(this).material_select();
     });
+
+    $('.slider').slider({
+        indicators: false,
+        height: 450,
+        interval: 4000
+    });
+
 });
 
 $(document).ready(function () {

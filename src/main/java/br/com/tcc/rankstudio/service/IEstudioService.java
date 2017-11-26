@@ -25,4 +25,5 @@ public interface IEstudioService {
 	void saveAvaliacao(Avaliacao avaliacao);
 	void saveAgendamento(Agendamento agendamento);
     List<Estudio> buscaEstudios(String textoPesquisa);
+    List<Estudio> buscaTop5();
 }

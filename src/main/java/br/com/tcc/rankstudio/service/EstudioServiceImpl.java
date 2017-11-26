@@ -74,8 +74,12 @@ public class EstudioServiceImpl implements IEstudioService {
 
 	@Override
 	public List<Estudio> buscaEstudios(String textoPesquisa) {
-
 		return estudioDao.pesquisaEstudios(textoPesquisa);
+	}
+
+	@Override
+	public List<Estudio> buscaTop5() {
+		return estudioDao.buscaTop5();
 	}
 
 }

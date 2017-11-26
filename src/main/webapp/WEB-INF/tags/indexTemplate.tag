@@ -28,7 +28,23 @@
 
     <%@include file="/WEB-INF/views/includes/navigation-site.jsp" %>
 
-    <div class="container white card-panel" style="margin-top: 104px">
+    <spring:eval expression="@environment.getProperty('amazons3context')" var="amazons3context" />
+
+    <div class="slider">
+        <ul class="slides">
+            <c:forEach var="topEstudio" items="${melhoresEstudios}">
+                <li>
+                    <img src="${amazons3context}${topEstudio.fotosEstudio[0].nomeArquivo}" style="max-height: 450px">
+                    <div class="caption right-align">
+                        <h3>${topEstudio.nome}</h3>
+                        <h5 class="light grey-text text-lighten-3">${topEstudio.descricao}</h5>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+    <div class="container white card-panel" style="margin-top: 20px">
         <div class="row">
             <div class="col ${tamanhoColunas}" style="padding: 25px">
                 <blockquote>${title}</blockquote>

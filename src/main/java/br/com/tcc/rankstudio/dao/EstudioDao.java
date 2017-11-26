@@ -1,9 +1,11 @@
 package br.com.tcc.rankstudio.dao;
 
 import br.com.tcc.rankstudio.model.Estudio;
+import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -71,4 +73,14 @@ public class EstudioDao extends AbstractDao implements IDao {
 
     }
 
+    public List<Estudio> buscaTop5() {
+
+        Criteria criteria = super.getSession().createCriteria(Estudio.class);
+        criteria.addOrder(Order.desc("rank"));
+        criteria.setCacheable(Boolean.TRUE);
+        criteria.setCacheMode(CacheMode.NORMAL);
+        criteria.setFetchSize(5);
+
+        return criteria.list();
+    }
 }

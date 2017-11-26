@@ -12,7 +12,7 @@
 
 	<title>RankStudio</title>
 
-	<link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>">
+	<%--<link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>">--%>
 	<link rel="stylesheet" href="<c:url value="/resources/css/materialize.min.css"/>">
 	<link rel="stylesheet" href="<c:url value="/resources/css/style.min.css"/>">
 	<link rel="stylesheet" href="<c:url value="/resources/css/page-center.css"/>">

@@ -3,7 +3,13 @@
 html {
 	position: relative;
 	min-height: 100%;
+	background-color: #dedede;
 }
+
+div#app {
+	background-color: #dedede;
+}
+
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 100px !important;

@@ -39,6 +39,7 @@ public class SiteController {
 	public ModelAndView index() {
 
 		ModelAndView modelAndView = new ModelAndView("index");
+		modelAndView.addObject("melhoresEstudios", estudioService.buscaTop5());
 		modelAndView.addObject("estudios", estudioService.listaTodos());
 
 		return modelAndView;
@@ -162,6 +163,7 @@ public class SiteController {
 
 		ModelAndView modelAndView = new ModelAndView("detalhes-estudio");
 		modelAndView.addObject("estudio", estudio);
+		modelAndView.addObject("melhoresEstudios", estudioService.buscaTop5());
 		modelAndView.addObject("equipamentos", equipamentos);
 		modelAndView.addObject("agendas", agendas.stream().filter(Agenda::getDisponivel).collect(Collectors.toList()));
 		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
@@ -177,6 +179,7 @@ public class SiteController {
 		try {
 			List<Estudio> estudioList = estudioService.buscaEstudios(textoPesquisa);
 			modelAndView.addObject("estudios", estudioList);
+			modelAndView.addObject("melhoresEstudios", estudioService.buscaTop5());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

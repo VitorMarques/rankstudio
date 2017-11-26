@@ -36,8 +36,8 @@
                 <li>
                     <img src="${amazons3context}${topEstudio.fotosEstudio[0].nomeArquivo}" style="max-height: 450px">
                     <div class="caption right-align">
-                        <h3>${topEstudio.nome}</h3>
-                        <h5 class="light grey-text text-lighten-3">${topEstudio.descricao}</h5>
+                        <h3 style="background-color:rgba(0, 0, 0, 0.5)">${topEstudio.nome}</h3>
+                        <h5 class="light grey-text text-lighten-3" style="background-color:rgba(0, 0, 0, 0.5)">${topEstudio.descricao}</h5>
                     </div>
                 </li>
             </c:forEach>

@@ -9,6 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.CacheRetrieveMode;
+import javax.persistence.Cacheable;
 import java.util.List;
 
 /**
@@ -43,8 +45,12 @@ public class EstudioDao extends AbstractDao implements IDao {
     @Override
     public List<Estudio> listaTodos(Class classz) {
 
-        String query = "SELECT distinct tb_estudio.* FROM tb_estudio;";
-        return super.getSession().createSQLQuery(query).addEntity(Estudio.class).list();
+        Criteria criteria = super.getSession().createCriteria(Estudio.class);
+        criteria.setCacheable(Boolean.TRUE);
+        criteria.setCacheMode(CacheMode.NORMAL);
+
+        /*String query = "SELECT distinct tb_estudio.* FROM tb_estudio;";*/
+        return criteria.list();
 
     }
 
@@ -79,7 +85,7 @@ public class EstudioDao extends AbstractDao implements IDao {
         criteria.addOrder(Order.desc("rank"));
         criteria.setCacheable(Boolean.TRUE);
         criteria.setCacheMode(CacheMode.NORMAL);
-        criteria.setFetchSize(5);
+        criteria.setMaxResults(5);
 
         return criteria.list();
     }

@@ -70,7 +70,7 @@ function enviaAvaliacao(pageContext) {
             type: 'POST',
             url: url,
             data: data,
-            success: function (data) {Materialize.toast(data.msg, 4000);setTimeout(locationReload(), 4000)},
+            success: function (data) {$('#modalAvaliacao').modal('close');Materialize.toast(data.msg, 3500, '', function reload(){window.location.reload();})},
             error: function (data) {
                 Materialize.toast(data.error, 4000);
             }
@@ -126,32 +126,38 @@ function limpaFormAgendamento() {
 
 function montaSubCombosAgenda(pageContext, agenda) {
 
-    var estudioId = $('#estudioId').val();
-    var url = pageContext + "/estudio/" + estudioId + "/agenda/" + agenda + "/lista";
+    if(agenda==='')
+        alert('Favor preencher todos os campos.');
+    else {
 
-    $.ajax({
-        type: 'GET',
-        url: url,
-        success: function (data) {
-            $('#dataAgendamento').empty();
-            $('#horarioAgendamento').empty();
-            $.each(data, function (i, e) {
-                $('#dataAgendamento').append($('<option>', {
-                    value: e.data,
-                    text : e.data
-                }));
-                $('#horarioAgendamento').append($('<option>', {
-                    value: e.horario,
-                    text : e.horario
-                }));
-            });
-            $('#dataAgendamento').trigger('contentChanged');
-            $('#horarioAgendamento').trigger('contentChanged');
-        },
-        error: function (data) {
-            Materialize.toast(data.error, 4000);
-        }
-    });
+        var estudioId = $('#estudioId').val();
+        var url = pageContext + "/estudio/" + estudioId + "/agenda/" + agenda + "/lista";
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#dataAgendamento').empty();
+                $('#horarioAgendamento').empty();
+                $.each(data, function (i, e) {
+                    $('#dataAgendamento').append($('<option>', {
+                        value: e.data,
+                        text : e.data
+                    }));
+                    $('#horarioAgendamento').append($('<option>', {
+                        value: e.horario,
+                        text : e.horario
+                    }));
+                });
+                $('#dataAgendamento').trigger('contentChanged');
+                $('#horarioAgendamento').trigger('contentChanged');
+            },
+            error: function (data) {
+                Materialize.toast(data.error, 4000);
+            }
+        });
+
+    }
 
 }
 

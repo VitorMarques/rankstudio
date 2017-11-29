@@ -19,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Controller
@@ -165,7 +169,7 @@ public class SiteController {
 		modelAndView.addObject("estudio", estudio);
 		modelAndView.addObject("melhoresEstudios", estudioService.buscaTop5());
 		modelAndView.addObject("equipamentos", equipamentos);
-		modelAndView.addObject("agendas", agendas.stream().filter(Agenda::getDisponivel).collect(Collectors.toList()));
+		modelAndView.addObject("agendas", agendas.stream().filter(Agenda::getDisponivel).filter(distinctByKey(Agenda::getSala)).collect(Collectors.toList()));
 		modelAndView.addObject("condicoesComerciais", condicoesComerciais);
 
 		return modelAndView;
@@ -187,4 +191,9 @@ public class SiteController {
 		return modelAndView;
 	}
 
+
+	public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+		Set<Object> seen = ConcurrentHashMap.newKeySet();
+		return t -> seen.add(keyExtractor.apply(t));
+	}
 }

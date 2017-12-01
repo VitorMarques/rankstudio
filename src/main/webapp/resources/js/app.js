@@ -162,13 +162,13 @@ function montaSubCombosAgenda(pageContext, agenda) {
 }
 
 function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
-    var data = getData();
+    var dados = getData();
     var url = getUrl(pageContext, nomeRelatorio);
     $.ajax({
         type: 'POST',
         url: url,
         dataType: 'json',
-        data: data,
+        data: dados,
         success: function(data) {
 
             if(nomeRelatorio==='movimentacoes')
@@ -176,7 +176,7 @@ function geraRelatorio(pageContext, nomeRelatorio, tipoRelatorio) {
             else if(nomeRelatorio==='clientes')
                 geraRelatorioClientes(data);
             else if(nomeRelatorio==='historiconotas')
-                geraRelatorioHistoricoNotas(data);
+                geraRelatorioHistoricoNotas(data, pageContext, dados.estudioId);
             else if(nomeRelatorio==='ranks')
                 geraRelatorioRanks(data);
             else
@@ -244,15 +244,19 @@ function geraRelatorioMovimentacoes(data) {
     var datasets = [];
     var indiceEnsaios = 0;
     var indiceGravacoes = 0;
+    var lucroEnsaios = 0;
+    var lucroGravacoes = 0;
 
     $.each(data, function (index, value) {
         if($.inArray(value.mes, meses) === -1) meses.push(value.mes);
         if(value.tipoAgendamento==='Ensaio') {
             totaisEnsaios[indiceEnsaios] = value.total;
+            lucroEnsaios += value.lucro;
             indiceEnsaios++;
         }
         if(value.tipoAgendamento==='Gravacao') {
             totaisGravacoes[indiceGravacoes] = value.total;
+            lucroGravacoes += value.lucro;
             indiceGravacoes++;
         }
     });
@@ -287,6 +291,10 @@ function geraRelatorioMovimentacoes(data) {
         }
     });
 
+    totaisEnsaios.sort(compare);
+    totaisGravacoes.sort(compare);
+    meses.sort(compare);
+
     var ctx = $("#myChart");
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -305,7 +313,7 @@ function geraRelatorioMovimentacoes(data) {
             responsive:true,
             maintainAspectRatio:false,
             legend: {position:'top'},
-            title: {display:true, text:'Relatorio de Movimentacao dos Estudios'}
+            title: {display:true, text:'Relatorio de Movimentacao dos Estudios. Lucro Ensaios = R$ ' + lucroEnsaios + ' | Lucro Gravacoes = R$ ' + lucroGravacoes }
         }
     });
 }
@@ -339,7 +347,8 @@ function geraRelatorioClientes(data) {
     container.html(html);
 }
 
-function geraRelatorioHistoricoNotas(data) {
+function geraRelatorioHistoricoNotas(data, pageContext, estudioId) {
+
     $('#resultadoRelatorioGrafico').css('display', 'block');
 
     var meses = [];
@@ -388,6 +397,28 @@ function geraRelatorioHistoricoNotas(data) {
             title: {display:true, text:'Relatorio de Historico de Notas do Estudio'}
         }
     });
+
+    geraListaAvaliacoesEstudio(estudioId, pageContext);
+
+}
+
+function geraListaAvaliacoesEstudio(estudioId, pageContext) {
+
+    var container = $('#relatorioNotasLista');
+    var url = pageContext + '/relatorios/estudio/'+estudioId+'/avaliacoes';
+
+    $.ajax({
+       method:'GET',
+       url: url,
+       success: function (data) {
+           container.css('display', 'block');
+           container.html(getHtmlListaAvaliacoes(data));
+       },
+       error: function (error, status) {
+           alert(error);
+       }
+    });
+
 }
 
 function geraRelatorioRanks(data) {
@@ -408,6 +439,29 @@ function geraRelatorioRanks(data) {
     });
     html += '</tbody></table>';
     container.html(html);
+}
+
+function getHtmlListaAvaliacoes(data) {
+
+    var html = '<h5>Avaliacoes: </h5>' +
+        '<table class="table table-hover table-condensed">\n' +
+        '            <thead>\n' +
+        '                <tr>\n' +
+        '                    <th>Usuario</th>\n' +
+        '\t\t\t\t\t<th>Nota</th>\n' +
+        '\t\t\t\t\t<th>Comentario</th>\n' +
+        '                </tr>\n' +
+        '            </thead><tbody id="tabelaRelatorioLista">';
+    $.each(data, function(index, value) {
+        html += '<tr>'
+            + '<td>'+value.nomeUsuario+'</td>'
+            + '<td>'+value.nota+'</td>'
+            + '<td>'+value.comentario+'</td>' +
+            '</tr>' ;
+    });
+    html += '</tbody></table>';
+
+    return html;
 }
 
 function geraRelatorioEstudios(data) {
@@ -459,4 +513,14 @@ function calculaValorAgendamento() {
 
 function locationReload() {
     window.location.reload();
+}
+
+
+/*Compara dois objetos do array de dados pela propriedade y que representa o valor total de vendas*/
+function compare(a,b) {
+    if (a.y < b.y)
+        return -1;
+    if (a.y > b.y)
+        return 1;
+    return 0;
 }

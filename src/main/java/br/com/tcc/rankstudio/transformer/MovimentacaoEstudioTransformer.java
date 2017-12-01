@@ -12,8 +12,9 @@ public class MovimentacaoEstudioTransformer implements ResultTransformer {
     public Object transformTuple(Object[] objects, String[] strings) {
         MovimentacaoEstudioDTO movimentacaoEstudioDTO = new MovimentacaoEstudioDTO();
         movimentacaoEstudioDTO.setTotal((BigInteger) objects[0]);
-        movimentacaoEstudioDTO.setTipoAgendamento((String) objects[1]);
-        movimentacaoEstudioDTO.setMes((String) objects[2]);
+        movimentacaoEstudioDTO.setLucro((Double) objects[1]);
+        movimentacaoEstudioDTO.setTipoAgendamento((String) objects[2]);
+        movimentacaoEstudioDTO.setMes((String) objects[3]);
         return movimentacaoEstudioDTO;
     }
 

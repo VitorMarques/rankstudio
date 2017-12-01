@@ -42,4 +42,8 @@
 		<canvas id="myChart" height="400"></canvas>
 	</div>
 
+	<div class="col s12 m12 l12" id="relatorioNotasLista" style="display:none; margin-top: 40px">
+
+	</div>
+
 </customTags:painelTemplate>

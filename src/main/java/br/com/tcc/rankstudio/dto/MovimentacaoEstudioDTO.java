@@ -7,6 +7,8 @@ public class MovimentacaoEstudioDTO implements Serializable {
 
     private BigInteger total;
 
+    private double lucro;
+
     private String tipoAgendamento;
 
     private String mes;
@@ -33,5 +35,13 @@ public class MovimentacaoEstudioDTO implements Serializable {
 
     public void setMes(String mes) {
         this.mes = mes;
+    }
+
+    public double getLucro() {
+        return lucro;
+    }
+
+    public void setLucro(double lucro) {
+        this.lucro = lucro;
     }
 }

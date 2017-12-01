@@ -27,7 +27,7 @@ public class RelatorioDao extends AbstractDao implements IDao {
 
     public List<MovimentacaoEstudioDTO> geraRelatorioMovimentacaoEstudio(Long estudioId, Calendar dataIni, Calendar dataFim) {
 
-        String query = "SELECT count(tipo_agendamento) as total, tipo_agendamento as tipoAgendamento, monthname(data_agendamento) as mes" +
+        String query = "SELECT count(tipo_agendamento) as total, sum(valor_agendamento) as lucro, tipo_agendamento as tipoAgendamento, monthname(data_agendamento) as mes" +
                 " FROM tb_agendamento" +
                 " WHERE estudio_id = :estudioId" +
                 " AND data_agendamento BETWEEN :dataIni AND :dataFim" +
@@ -60,12 +60,12 @@ public class RelatorioDao extends AbstractDao implements IDao {
 
     public List<HistoricoNotasEstudioDTO> geraRelatorioHistoricoNotasEstudio(Long estudioId, Calendar dataIni, Calendar dataFim) {
 
-        String query = "SELECT round(avg(tav.nota), 2) as nota_media, monthname(tav.data_avaliacao) as mes" +
+        String query = "SELECT avg(tav.nota) as notas, monthname(tav.data_avaliacao) as mes" +
                 " FROM tb_avaliacao tav" +
-                " WHERE estudio_id = :estudioId" +
-                " AND data_avaliacao BETWEEN :dataIni AND :dataFim" +
-                " GROUP BY mes, tav.data_avaliacao" +
-                " ORDER BY tav.data_avaliacao asc";
+                " WHERE tav.estudio_id = :estudioId" +
+                " AND tav.data_avaliacao BETWEEN :dataIni AND :dataFim" +
+                " GROUP BY mes, month(tav.data_avaliacao)" +
+                " ORDER BY month(tav.data_avaliacao) asc";
 
         return (List<HistoricoNotasEstudioDTO>) getSession().createSQLQuery(query)
                 .setParameter("estudioId", estudioId)
@@ -83,7 +83,7 @@ public class RelatorioDao extends AbstractDao implements IDao {
                 " JOIN tb_estudio te ON tav.estudio_id = te.id" +
                 " WHERE tav.data_avaliacao BETWEEN :dataIni AND :dataFim" +
                 " GROUP BY te.nome" +
-                " ORDER BY nota DESC ";
+                " ORDER BY nota DESC LIMIT 10";
 
         return (List<RankEstudioDTO>) getSession().createSQLQuery(query)
                 .setParameter("dataIni", dataIni)

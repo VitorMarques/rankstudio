@@ -1,6 +1,7 @@
 package br.com.tcc.rankstudio.controller;
 
 import br.com.tcc.rankstudio.dto.*;
+import br.com.tcc.rankstudio.model.Avaliacao;
 import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.model.Usuario;
 import br.com.tcc.rankstudio.param.RelatorioParamBean;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import sun.security.x509.AVA;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -86,12 +88,26 @@ public class RelatorioController {
 
         try {
             historicoNotasList = relatorioService.geraRelatorioHistoricoNotasEstudio(relatorioParamBean.getEstudioId(), relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
+
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
 
         return historicoNotasList;
 
+    }
+
+    @RequestMapping(value = "/estudio/{id}/avaliacoes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Avaliacao> getAvaliacoes(@PathVariable("id") Long id) throws Exception {
+
+        Estudio estudio = estudioService.buscaPorId(id);
+
+        if(estudio==null)
+            throw new Exception("Estudio nao encontrado");
+
+        List<Avaliacao> avaliacoes = estudio.getAvaliacoes();
+
+        return estudio.getAvaliacoes();
     }
 
     @RequestMapping(value = "/ranks", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

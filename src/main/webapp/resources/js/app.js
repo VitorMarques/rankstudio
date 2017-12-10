@@ -269,7 +269,8 @@ function geraRelatorioMovimentacoes(data) {
                     data: [totaisEnsaios],
                     backgroundColor: getBackgroundColors([index]),
                     borderColor: getBorderColor([index]),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                 }
             } else if(value==='Gravacao') {
                 datasets[index] = {
@@ -277,7 +278,8 @@ function geraRelatorioMovimentacoes(data) {
                     data: [totaisGravacoes],
                     backgroundColor: getBackgroundColors([index]),
                     borderColor: getBorderColor([index]),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                 }
             }
         } else {
@@ -286,7 +288,8 @@ function geraRelatorioMovimentacoes(data) {
                 data: [totaisEnsaios[index], totaisGravacoes[index]],
                 backgroundColor: getBackgroundColors([index]),
                 borderColor: getBorderColor([index]),
-                borderWidth: 1
+                borderWidth: 1,
+                fill: false
             }
         }
     });
@@ -297,7 +300,7 @@ function geraRelatorioMovimentacoes(data) {
 
     var ctx = $("#myChart");
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: meses,
             datasets: datasets

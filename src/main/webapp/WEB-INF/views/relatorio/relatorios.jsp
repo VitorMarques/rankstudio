@@ -46,4 +46,6 @@
 
 	</div>
 
+	<div id="chartContainer" style="height: 400px; width: 100%;"></div>
+
 </customTags:painelTemplate>

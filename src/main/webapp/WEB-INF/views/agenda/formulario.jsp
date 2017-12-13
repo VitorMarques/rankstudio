@@ -15,7 +15,13 @@
         <div class="row margin">
             <div class="input-field col s12">
                 <i class="material-icons prefix small">room</i>
-                <form:input path="sala" required="required"/>
+                <form:select path="sala" required="required">
+                    <form:option value="Sala A">Sala A</form:option>
+                    <form:option value="Sala B">Sala B</form:option>
+                    <form:option value="Sala C">Sala C</form:option>
+                    <form:option value="Sala D">Sala D</form:option>
+                    <form:option value="Sala E">Sala E</form:option>
+                </form:select>
                 <label for="sala" class="center-align">Sala</label>
             </div>
         </div>

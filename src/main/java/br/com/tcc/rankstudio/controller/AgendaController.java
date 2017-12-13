@@ -5,6 +5,8 @@ import br.com.tcc.rankstudio.model.Estudio;
 import br.com.tcc.rankstudio.service.IAgendaService;
 import br.com.tcc.rankstudio.service.IEstudioService;
 import br.com.tcc.rankstudio.util.DataUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.NonUniqueResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -81,7 +83,19 @@ public class AgendaController {
             if(dataAgenda.before(new Date())) {
                 throw new Exception("Data de agendamento nao pode ser anterior a data atual.");
             }
-            agendaService.save(agenda);
+
+            try {
+
+                Agenda agendaExistente = agendaService.findByNomeSalaEHorario(agenda.getSala(), agenda.getHorario(), estudioId);
+
+                if (agendaExistente!=null)
+                    throw new Exception("Ja existe uma agenda cadastrada para a mesma sala e horario.");
+
+            } catch (HibernateException he) {
+                throw new Exception(he.getMessage());
+            }
+
+			agendaService.save(agenda);
 			request.getSession().setAttribute("mensagem", environment.getProperty("cadastro.realizado.sucesso"));
 		} catch (Exception ex) {
 

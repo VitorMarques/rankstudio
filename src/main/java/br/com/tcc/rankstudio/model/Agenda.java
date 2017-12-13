@@ -31,6 +31,9 @@ public class Agenda implements Serializable {
 	@JoinColumn(name = "estudio_id")
 	private Estudio estudio;
 
+	@Column(name = "estudio_id", insertable = false, updatable = false)
+	private Long estudioId;
+
 	public Long getId() {
 		return id;
 	}
@@ -78,5 +81,13 @@ public class Agenda implements Serializable {
 
 	public void setDisponivel(Boolean disponivel) {
 		this.disponivel = disponivel;
+	}
+
+	public Long getEstudioId() {
+		return estudioId;
+	}
+
+	public void setEstudioId(Long estudioId) {
+		this.estudioId = estudioId;
 	}
 }

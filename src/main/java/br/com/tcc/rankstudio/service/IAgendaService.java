@@ -13,5 +13,5 @@ public interface IAgendaService {
 	List<Agenda> findByEstudioId(Long estudioId);
     List<Agenda> findByNomeSala(String nomeSala, Long estudioId);
     Agenda findByAgendamento(Agendamento agendamento);
-
+    Agenda findByNomeSalaEHorario(String sala, String horario, Long estudioId);
 }

@@ -3,7 +3,10 @@ package br.com.tcc.rankstudio.dao;
 import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.Agendamento;
 import br.com.tcc.rankstudio.util.DataUtils;
+import org.hibernate.Criteria;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -53,5 +56,16 @@ public class AgendaDao extends AbstractDao implements IDao {
                 .setParameter("horario", agendamento.getHorarioAgendamento())
                 .setParameter("estudioId", agendamento.getEstudioId())
                 .uniqueResult();
+    }
+
+    public Agenda findByNomeSalaEHorario(String sala, String horario, Long estudioId) throws NonUniqueResultException {
+
+        Criteria criteria = super.getSession().createCriteria(Agenda.class);
+        criteria
+                .add(Restrictions.eq("sala", sala))
+                .add(Restrictions.eq("horario", horario))
+                .add((Restrictions.eq("estudioId", estudioId)));
+
+        return (Agenda) criteria.uniqueResult();
     }
 }

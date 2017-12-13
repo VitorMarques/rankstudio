@@ -3,6 +3,7 @@ package br.com.tcc.rankstudio.service;
 import br.com.tcc.rankstudio.dao.AgendaDao;
 import br.com.tcc.rankstudio.model.Agenda;
 import br.com.tcc.rankstudio.model.Agendamento;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,11 @@ public class AgendaServiceImpl implements IAgendaService {
 	@Override
 	public Agenda findByAgendamento(Agendamento agendamento) {
 		return agendaDao.findByAgendamento(agendamento);
+	}
+
+	@Override
+	public Agenda findByNomeSalaEHorario(String sala, String horario, Long estudioId) throws HibernateException {
+		return agendaDao.findByNomeSalaEHorario(sala, horario, estudioId);
 	}
 
 }

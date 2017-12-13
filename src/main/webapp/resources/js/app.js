@@ -283,7 +283,8 @@ function geraRelatorioMovimentacoes(data) {
         },
         legend:{
             cursor: "pointer",
-            fontSize: 16
+            fontSize: 16,
+            itemclick: toggleDataSeries
         },
         toolTip:{
             shared: true
@@ -291,18 +292,39 @@ function geraRelatorioMovimentacoes(data) {
         data: [
             {
                 name: "Ensaio",
-                type: "spline",
+                type: "line",
                 showInLegend: true,
                 dataPoints: dataPointEnsaio
             },
             {
                 name: "Gravacao",
-                type: "spline",
+                type: "line",
                 showInLegend: true,
                 dataPoints: dataPointGravacao
             }
             ]
     });
+    chart.render();
+
+    function toggleDataSeries(e){
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else{
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+
+}
+
+function toggleDataSeries(e){
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    }
+    else{
+        e.dataSeries.visible = true;
+    }
     chart.render();
 }
 

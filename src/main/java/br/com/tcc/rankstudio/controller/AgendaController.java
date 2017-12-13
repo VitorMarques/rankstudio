@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +47,9 @@ public class AgendaController {
 		modelAndView.addObject("estudio", estudio);
 
 		if(!agendas.isEmpty()) {
+
+		    agendas.sort(Comparator.comparing(Agenda::getSala).thenComparing(Agenda::getData).thenComparing(Agenda::getHorario));
+
 			modelAndView.addObject("agendas", agendas);
 		}
 

@@ -15,8 +15,6 @@ public class MovimentacaoEstudioDTO implements Serializable {
 
     private Integer mes;
 
-    private String nomeMes;
-
     public BigInteger getTotal() {
         return total;
     }
@@ -31,14 +29,6 @@ public class MovimentacaoEstudioDTO implements Serializable {
 
     public void setTipoAgendamento(String tipoAgendamento) {
         this.tipoAgendamento = tipoAgendamento;
-    }
-
-    public String getNomeMes() {
-        return nomeMes;
-    }
-
-    public void setNomeMes(String nomeMes) {
-        this.nomeMes = nomeMes;
     }
 
     public double getLucro() {
@@ -64,4 +54,5 @@ public class MovimentacaoEstudioDTO implements Serializable {
     public void setMes(Integer mes) {
         this.mes = mes;
     }
+
 }

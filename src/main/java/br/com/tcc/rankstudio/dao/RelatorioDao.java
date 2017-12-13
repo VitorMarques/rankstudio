@@ -29,12 +29,12 @@ public class RelatorioDao extends AbstractDao implements IDao {
 
         String query = "SELECT count(tipo_agendamento) as total, " +
                 "sum(valor_agendamento) as lucro, tipo_agendamento as tipoAgendamento, " +
-                "year(data_agendamento) AS ano, month(data_agendamento) as mes, " +
-                "monthname(data_agendamento) as nomeMes" +
+                "year(data_agendamento) AS ano, " +
+                "month(data_agendamento) as mes " +
                 " FROM tb_agendamento" +
                 " WHERE estudio_id = :estudioId" +
                 " AND data_agendamento BETWEEN :dataIni AND :dataFim" +
-                " GROUP BY tipo_agendamento, ano, nomeMes, mes ORDER BY ano, mes desc";
+                " GROUP BY tipo_agendamento, ano, mes ORDER BY ano, mes desc";
 
         return (List<MovimentacaoEstudioDTO>) getSession().createSQLQuery(query)
                 .setParameter("estudioId", estudioId)

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sun.security.x509.AVA;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/relatorios")
@@ -58,7 +58,11 @@ public class RelatorioController {
         List<MovimentacaoEstudioDTO> movimentacaoList;
 
         try {
+
             movimentacaoList = relatorioService.geraRelatorioMovimentacaoEstudio(relatorioParamBean.getEstudioId(), relatorioParamBean.getDataIni(), relatorioParamBean.getDataFim());
+
+            movimentacaoList.sort(Comparator.comparing(MovimentacaoEstudioDTO::getAno).thenComparing(MovimentacaoEstudioDTO::getMes));
+
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

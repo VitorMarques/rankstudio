@@ -292,13 +292,13 @@ function geraRelatorioMovimentacoes(data) {
         data: [
             {
                 name: "Ensaio",
-                type: "line",
+                type: "spline",
                 showInLegend: true,
                 dataPoints: dataPointEnsaio
             },
             {
                 name: "Gravacao",
-                type: "line",
+                type: "spline",
                 showInLegend: true,
                 dataPoints: dataPointGravacao
             }

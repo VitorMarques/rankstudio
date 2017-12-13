@@ -34,6 +34,11 @@
 					name="button"
 					onclick="geraRelatorio('${pageContext.request.contextPath}', '${nomeRelatorio}', '${tipoRelatorio}')"> Gerar Relatorio </button>
 		</div>
+
+        <div id="chartContainerDiv" class="col s12 m12 l12" style="margin-top: 50px; display: none">
+		    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+        </div>
+
 	</div>
 	<div class="col s12 m12 l12" id="resultadoRelatorioLista" style="display:none">
 	</div>
@@ -46,6 +51,5 @@
 
 	</div>
 
-	<div id="chartContainer" style="height: 400px; width: 100%;"></div>
 
 </customTags:painelTemplate>

@@ -14,7 +14,9 @@ public class MovimentacaoEstudioTransformer implements ResultTransformer {
         movimentacaoEstudioDTO.setTotal((BigInteger) objects[0]);
         movimentacaoEstudioDTO.setLucro((Double) objects[1]);
         movimentacaoEstudioDTO.setTipoAgendamento((String) objects[2]);
-        movimentacaoEstudioDTO.setMes((String) objects[3]);
+        movimentacaoEstudioDTO.setAno((Integer) objects[3]);
+        movimentacaoEstudioDTO.setMes((Integer) objects[4]);
+        movimentacaoEstudioDTO.setNomeMes((String) objects[5]);
         return movimentacaoEstudioDTO;
     }
 

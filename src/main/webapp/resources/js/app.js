@@ -235,90 +235,75 @@ function getBorderColor(index) {
 }
 
 function geraRelatorioMovimentacoes(data) {
-    $('#resultadoRelatorioGrafico').css('display', 'block');
 
-    var movimentacoes = ['Ensaio', 'Gravacao'];
-    var meses = [];
-    var totaisEnsaios = [];
-    var totaisGravacoes = [];
-    var datasets = [];
-    var indiceEnsaios = 0;
-    var indiceGravacoes = 0;
-    var lucroEnsaios = 0;
-    var lucroGravacoes = 0;
+    $('#chartContainerDiv').css('display', 'block');
 
-    $.each(data, function (index, value) {
-        if($.inArray(value.mes, meses) === -1) meses.push(value.mes);
-        if(value.tipoAgendamento==='Ensaio') {
-            totaisEnsaios[indiceEnsaios] = value.total;
-            lucroEnsaios += value.lucro;
-            indiceEnsaios++;
-        }
-        if(value.tipoAgendamento==='Gravacao') {
-            totaisGravacoes[indiceGravacoes] = value.total;
-            lucroGravacoes += value.lucro;
-            indiceGravacoes++;
-        }
+    var dataPointEnsaio = [];
+    var dataPointGravacao = [];
+    var indiceArrayEnsaio = 0;
+    var indiceArrayGravacao = 0;
+    var lucroTotalEnsaio = 0;
+    var lucroTotalGravacao = 0;
+
+    $.each(data, function (k, v) {
+       console.log(data);
+       if(v.tipoAgendamento==='Ensaio') {
+           dataPointEnsaio[indiceArrayEnsaio] = {
+               x: new Date(v.ano,v.mes-1,01), y: v.total
+           };
+           lucroTotalEnsaio += v.lucro;
+           indiceArrayEnsaio++;
+       } else if(v.tipoAgendamento==='Gravacao') {
+           dataPointGravacao[indiceArrayGravacao] = {
+               x: new Date(v.ano,v.mes-1,01), y: v.total
+           };
+           lucroTotalGravacao += v.lucro;
+           indiceArrayGravacao++;
+       } else {
+           alert('Tipo de movimentacao invalido');
+       }
     });
 
-    $.each(movimentacoes, function (index, value) {
-        if(meses.length===1) {
-            if(value==='Ensaio') {
-                datasets[index] = {
-                    label: movimentacoes[index],
-                    data: [totaisEnsaios],
-                    backgroundColor: getBackgroundColors([index]),
-                    borderColor: getBorderColor([index]),
-                    borderWidth: 1,
-                    fill: false
-                }
-            } else if(value==='Gravacao') {
-                datasets[index] = {
-                    label: movimentacoes[index],
-                    data: [totaisGravacoes],
-                    backgroundColor: getBackgroundColors([index]),
-                    borderColor: getBorderColor([index]),
-                    borderWidth: 1,
-                    fill: false
-                }
-            }
-        } else {
-            datasets[index] = {
-                label: movimentacoes[index],
-                data: [totaisEnsaios[index], totaisGravacoes[index]],
-                backgroundColor: getBackgroundColors([index]),
-                borderColor: getBorderColor([index]),
-                borderWidth: 1,
-                fill: false
-            }
-        }
-    });
-
-    totaisEnsaios.sort(compare);
-    totaisGravacoes.sort(compare);
-    meses.sort(compare);
-
-    var ctx = $("#myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: meses,
-            datasets: datasets
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Relatorio de Movimentacao Mensal Por Estudio"
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
+        subtitles:[
+            {
+                text: "Lucro Ensaios: R$ " + lucroTotalEnsaio + " | Lucro Gravacoes: R$ " + lucroTotalGravacao
+            }
+        ],
+        axisX: {
+            valueFormatString: "MMM,YY"
+        },
+        axisY: {
+            title: "Quantidade de Movimentacoes",
+            includeZero: false
+        },
+        legend:{
+            cursor: "pointer",
+            fontSize: 16
+        },
+        toolTip:{
+            shared: true
+        },
+        data: [
+            {
+                name: "Ensaio",
+                type: "spline",
+                showInLegend: true,
+                dataPoints: dataPointEnsaio
             },
-            responsive:true,
-            maintainAspectRatio:false,
-            legend: {position:'top'},
-            title: {display:true, text:'Relatorio de Movimentacao dos Estudios. Lucro Ensaios = R$ ' + lucroEnsaios + ' | Lucro Gravacoes = R$ ' + lucroGravacoes }
-        }
+            {
+                name: "Gravacao",
+                type: "spline",
+                showInLegend: true,
+                dataPoints: dataPointGravacao
+            }
+            ]
     });
+    chart.render();
 }
 
 function geraRelatorioClientes(data) {
